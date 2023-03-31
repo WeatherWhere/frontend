@@ -16,7 +16,7 @@ export const client = (token) => {
   }
 
   return axios.create({
-    baseURL: "weather",
+    baseURL: "/",
     headers,
   });
 };
