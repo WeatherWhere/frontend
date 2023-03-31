@@ -17,7 +17,7 @@ export default function WeatherMid() {
   console.log(midData);
 
   const handleGetAPI = () => {
-    getMidData(`forecast/week?regionCode=${mockRegionCode}`);
+    getMidData(`weather/forecast/week?regionCode=${mockRegionCode}`);
   };
 
   return (
