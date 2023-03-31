@@ -8,6 +8,7 @@ export default function WeatherMid() {
   const getMidData = async (key, token) => {
     try {
       const data = await getWeatherMidForecast(key);
+      console.log(data);
       setMidData([...data.data]);
     } catch (e) {
       console.log(e);
@@ -16,7 +17,7 @@ export default function WeatherMid() {
   console.log(midData);
 
   const handleGetAPI = () => {
-    getMidData(`/forecast/week?regionCode=${mockRegionCode}`);
+    getMidData(`forecast/week?regionCode=${mockRegionCode}`);
   };
 
   return (
