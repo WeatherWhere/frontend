@@ -11,3 +11,7 @@ export const getWeatherShortMain = (key, token) => {
 export const getAirRealtime = (key, token) => {
   return client(token).get(key);
 };
+
+export const getAirForecast = (key, token) => {
+  return client(token).get(key);
+};
