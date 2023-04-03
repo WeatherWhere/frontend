@@ -12,15 +12,14 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@master
 
-- name: Cache node modules
-  uses: actions/cache@v1
-  with:
-    path: node_modules
-    key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
-    restore-keys: |
-      ${{ runner.OS }}-build-
-      ${{ runner.OS }}-
-
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
 
       - name: Install Dependencies
         run: yarn install
@@ -36,4 +35,4 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            build s3://weatherwhere.com 
+            build s3://weatherwhere.com
