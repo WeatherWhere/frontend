@@ -34,12 +34,9 @@ jobs:
           AWS_REGION: ap-northeast-2
           DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
         run: |
-          # Invalidate CloudFront cache
           aws cloudfront create-invalidation \
             --distribution-id $DISTRIBUTION_ID \
             --paths "/*"
-
-          # Copy build files to S3
           aws s3 cp \
             --recursive \
             --region $AWS_REGION \
