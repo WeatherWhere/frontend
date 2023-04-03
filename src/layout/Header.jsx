@@ -12,7 +12,7 @@ const Container = styled.header`
 `;
 
 const Logo = styled.img`
-  height: 3.5rem;
+  height: 4.3rem;
   margin-left: auto;
   margin-right: auto;
 `;

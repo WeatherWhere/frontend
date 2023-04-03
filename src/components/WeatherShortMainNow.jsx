@@ -10,6 +10,7 @@ display: flex;
 align-items: center;
 margin-top:${(props) => props.marginTop};
 padding:${(props) => props.padding}
+padding-left:${(props) => props.paddingLeft}
 height:10%;
 `
 
@@ -30,20 +31,21 @@ color: white;
 display: flex;
 justify-content: center;
 align-items: center;
-padding:${(props) => props.padding}
+padding:${(props) => props.padding};
+margin-left:${(props) => props.marginLeft};
+margin-right:${(props) => props.marginRight};
 
 `;
 
 
 //수평정렬
 const IconContainer = styled(Container)`
-
 `;
 
 //최저 최고기온 수직정렬
 const MinMaxText = styled.div`
 color: white;
-font-size: 1.4rem;
+font-size: 1.1rem;
 padding:${(props) => props.padding}
 
 
@@ -122,21 +124,21 @@ export default function WeatherShortMainNow() {
       <GlobalStyle />
       <Container marginTop="0.8rem" padding="1rem">
         <StyledIcon name="ri:map-pin-2-line" size="1.7rem" />
-        <Text fontSize="1.6rem" padding="0.8rem">서초구 서초동</Text>
+        <Text fontSize="1.4rem" padding="0.8rem">서초구 서초동</Text>
         <StyledIcon name="ic:baseline-search" size="1.7rem" />
       </Container>
       {shortMainNowData ? (
         <>
           <Container marginTop="0.1rem" padding="0.1rem">
-            <Text fontSize="3.2rem">
+            <Text fontSize="3.2rem" marginLeft="5rem" marginRight="auto">
               {shortMainNowData.tmp}°
               <MinMaxText>
                 <IconContainer>
-                  <StyledIcon name="ph:arrow-circle-up" size="1.4rem" />
+                  <StyledIcon name="ph:arrow-circle-up" size="1rem" />
                   {shortMainNowData.tmn}°
                 </IconContainer>
                 <IconContainer>
-                  <StyledIcon name="ph:arrow-circle-down" size="1.4rem" />
+                  <StyledIcon name="ph:arrow-circle-down" size="1rem" />
                   {shortMainNowData.tmx}°
                 </IconContainer>
               </MinMaxText>
