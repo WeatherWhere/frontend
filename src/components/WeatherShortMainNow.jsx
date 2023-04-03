@@ -10,6 +10,7 @@ display: flex;
 align-items: center;
 margin-top:${(props) => props.marginTop};
 padding:${(props) => props.padding}
+height:10%;
 `
 
 const Background = styled.div`
@@ -29,6 +30,7 @@ color: white;
 display: flex;
 justify-content: center;
 align-items: center;
+padding:${(props) => props.padding}
 
 `;
 
@@ -118,15 +120,15 @@ export default function WeatherShortMainNow() {
   return (
     <Background>
       <GlobalStyle />
-      <Container marginTop="1.4rem" padding="1rem">
+      <Container marginTop="0.8rem" padding="1rem">
         <StyledIcon name="ri:map-pin-2-line" size="1.7rem" />
-        <Text fontSize="1.6rem">서초구 서초동</Text>
+        <Text fontSize="1.6rem" padding="0.8rem">서초구 서초동</Text>
         <StyledIcon name="ic:baseline-search" size="1.7rem" />
       </Container>
       {shortMainNowData ? (
         <>
           <Container marginTop="0.1rem" padding="0.1rem">
-            <Text fontSize="3.5rem">
+            <Text fontSize="3.2rem">
               {shortMainNowData.tmp}°
               <MinMaxText>
                 <IconContainer>
@@ -140,24 +142,24 @@ export default function WeatherShortMainNow() {
               </MinMaxText>
             </Text>
           </Container>
-          <Text fontSize="1rem">어제보다 ?° 낮아요</Text>
+          <Text fontSize="1rem" padding="0.5rem">어제보다 ?° 낮아요</Text>
           <Container padding="1rem">
-            <StyledIcon name={getSkyStatu(shortMainNowData.sky)} size="17rem" />
+            <StyledIcon name={getSkyStatu(shortMainNowData.sky)} size="14rem" />
           </Container>
           <Container padding="1rem">
             <MinMaxText padding="0.1rem">
-              <StyledIcon name="iwwa:humidity" size="4rem" />
-              <Text fontSize="1.3rem">{shortMainNowData.reh}%</Text>
+              <StyledIcon name="iwwa:humidity" size="3rem" />
+              <Text fontSize="1.1rem">{shortMainNowData.reh}%</Text>
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
-              <StyledIcon name="wi:umbrella" size="4rem" />
-              <Text fontSize="1.3rem">{shortMainNowData.pop}%</Text>
+              <StyledIcon name="wi:umbrella" size="3rem" />
+              <Text fontSize="1.1rem">{shortMainNowData.pop}%</Text>
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
-              <StyledIcon name="fluent:weather-squalls-20-regular" size="4rem" />
-              <Text fontSize="1.3rem">{getWsdStatus(shortMainNowData.wsd)}</Text>
+              <StyledIcon name="fluent:weather-squalls-20-regular" size="3rem" />
+              <Text fontSize="1.1rem">{getWsdStatus(shortMainNowData.wsd)}</Text>
             </MinMaxText>
           </Container>
         </>

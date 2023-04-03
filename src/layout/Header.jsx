@@ -6,13 +6,13 @@ const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.3rem;
   background-color: #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 `;
 
 const Logo = styled.img`
-  height: 4rem;
+  height: 3.5rem;
   margin-left: auto;
   margin-right: auto;
 `;
