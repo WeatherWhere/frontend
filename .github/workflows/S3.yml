@@ -3,7 +3,7 @@ name: Deploy to Production
 on:
   push:
     branches:
-      - feat/CI/CD-githubaction
+      - main
 
 jobs:
   deploy:
