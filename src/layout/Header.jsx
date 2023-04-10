@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import logotest from '../styles/img/logotest.png'
-import GlobalStyle from '../styles/fonts/fonts';
 
 const Container = styled.header`
   display: flex;

@@ -5,8 +5,6 @@ import AirRealtime from "../pages/AirRealtime";
 import WeatherMid from "../pages/WeatherMid";
 import WeatherShortSub from "../pages/WeatherShortSub";
 import WeatherShortMainPage from "../pages/WeatherShortMainPage";
-import WeatherShortMain from "./WeatherShortMain";
-import WeatherShortMainNow from "./WeatherShortMainNow";
 
 export default function Router() {
   return (

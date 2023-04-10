@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getWeatherShortMain } from "../utils/lib/api";
-import styled, { ThemeProvider } from "styled-components";
+import { getWeatherShortMain } from "../../utils/lib/api";
+import styled from "styled-components";
 import { Icon } from '@iconify/react';
-import PlaceOutlinedIcon from '@mui/icons-material';
-import GlobalStyle from "../styles/fonts/fonts";
+import GlobalStyle from "../../styles/fonts/fonts";
+import AddressIconText from "./AddressIconText";
+import ThreeSubData from "./ThreeSubData";
+import useGeolocation from "react-hook-geolocation";
+import axios from "axios";
 
-const Container = styled.div`
+export const Container = styled.div`
 display: flex;
 align-items: center;
 margin-top:${(props) => props.marginTop};
@@ -25,7 +28,7 @@ align-items: center;
 `;
 
 
-const Text = styled(Container)`
+export const Text = styled(Container)`
 font-size: ${(props) => props.fontSize};
 color: white;
 display: flex;
@@ -43,7 +46,7 @@ const IconContainer = styled(Container)`
 `;
 
 //최저 최고기온 수직정렬
-const MinMaxText = styled.div`
+export const MinMaxText = styled.div`
 color: white;
 font-size: 1.1rem;
 padding:${(props) => props.padding}
@@ -52,7 +55,7 @@ padding:${(props) => props.padding}
 `;
 
 //아이콘 컴포넌트
-const StyledIcon = styled(Icon).attrs(props => ({
+export const StyledIcon = styled(Icon).attrs(props => ({
   icon: props.name,
   style: {
     fontSize: props.size,
@@ -66,18 +69,15 @@ justify-content: center;
 align-items: center;
 `;
 
-const Line = styled.div`
-  border: 1px solid white;
-  width: 2rem;
-  transform: rotate(90deg);
-
-`;
 
 
 export default function WeatherShortMainNow() {
   const locationX = "37.489325";
   const locationY = "126.554234";
+
   const [shortMainNowData, setShortMainNowData] = useState(null);
+
+  const location = useGeolocation();
 
   const getShortMainData = async (key, token) => {
     try {
@@ -90,9 +90,31 @@ export default function WeatherShortMainNow() {
     }
   };
 
+  const [region, setRegion] = useState(null);
+  const [city, setCity] = useState(null);
+
+  const kakaoAddress = () => {
+    if(location.latitude && location.longitude){
+      //kakao REST API에 get 요청을 보낸다.
+      //파라미터 x,y에 lon,lat을 넣어주고 API_KEY를 Authorization헤더에 넣어준다.
+      axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${location.latitude}&y=${location.longitude}&input_coord=WGS84`
+          , { headers: { Authorization: `KakaoAK ddf617232a0fd602e925eb2a96c61c74` } }
+      )
+          .then(res => {
+            console.log("뜨냐?")
+              console.log(res.data.documents)
+              setRegion(res.data.documents.address);
+              // setCity(res.data.documents.region_2depth_name);
+          }
+          ).catch(e => console.log(e))
+        }
+  }
+
+
   useEffect(() => {
     getShortMainData(`/weather/forecast/short/main/now?locationX=${locationX}&locationY=${locationY}`);
-  }, []);
+    kakaoAddress();
+  }, [location]);
 
   const getSkyStatu = (sky) => {
     if (sky === 1) {
@@ -106,27 +128,11 @@ export default function WeatherShortMainNow() {
     }
   }
 
-  const getWsdStatus = (wsd) => {
-    if (wsd < 4) {
-      return "약함";
-    } else if (wsd < 9) {
-      return "약간 강함";
-    } else if (wsd < 14) {
-      return "강함";
-    } else {
-      return "매우 강함";
-    }
-  }
-
 
   return (
     <Background>
       <GlobalStyle />
-      <Container marginTop="0.8rem" padding="1rem">
-        <StyledIcon name="ri:map-pin-2-line" size="1.7rem" />
-        <Text fontSize="1.4rem" padding="0.8rem">서초구 서초동</Text>
-        <StyledIcon name="ic:baseline-search" size="1.7rem" />
-      </Container>
+      <AddressIconText latitude={location.latitude} longitude={location.longitude}/>
       {shortMainNowData ? (
         <>
           <Container marginTop="0.1rem" padding="0.1rem">
@@ -144,26 +150,12 @@ export default function WeatherShortMainNow() {
               </MinMaxText>
             </Text>
           </Container>
-          <Text fontSize="1rem" padding="0.5rem">어제보다 ?° 낮아요</Text>
+          <Text fontSize="1rem" padding="0.5rem">어제보다 ?° 낮아요 {region}</Text>
           <Container padding="1rem">
             <StyledIcon name={getSkyStatu(shortMainNowData.sky)} size="14rem" />
           </Container>
-          <Container padding="1rem">
-            <MinMaxText padding="0.1rem">
-              <StyledIcon name="iwwa:humidity" size="3rem" />
-              <Text fontSize="1.1rem">{shortMainNowData.reh}%</Text>
-            </MinMaxText>
-            <Line />
-            <MinMaxText padding="0.1rem">
-              <StyledIcon name="wi:umbrella" size="3rem" />
-              <Text fontSize="1.1rem">{shortMainNowData.pop}%</Text>
-            </MinMaxText>
-            <Line />
-            <MinMaxText padding="0.1rem">
-              <StyledIcon name="fluent:weather-squalls-20-regular" size="3rem" />
-              <Text fontSize="1.1rem">{getWsdStatus(shortMainNowData.wsd)}</Text>
-            </MinMaxText>
-          </Container>
+          <ThreeSubData shortMainNowData={shortMainNowData}/>
+
         </>
 
       ) :
