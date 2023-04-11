@@ -8,7 +8,6 @@ const Line = styled.div`
 border: 1px solid white;
 width: 2rem;
 transform: rotate(90deg);
-
 `;
 
 export default function ThreeSubData(props) {
@@ -27,7 +26,7 @@ export default function ThreeSubData(props) {
 
     return (
 
-        <Container padding="1rem">
+        <Container padding="1rem" marginBottom="1.6rem">
             <MinMaxText padding="0.1rem">
                 <StyledIcon name="iwwa:humidity" size="3rem" />
                 <Text fontSize="1.1rem">{props.shortMainNowData.reh}%</Text>
