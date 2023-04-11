@@ -1,7 +1,6 @@
 import React from "react";
-import WeatherShortMainNow from "../components/WeatherShortMainNow";
-import WeatherShortMain from "../components/WeatherShortMain";
 import Header from "../layout/Header";
+import WeatherShortMainNow from "../components/weatherShortMainNow/WeatherShortMainNow";
 
 export default function WeatherShortMainPage() {
 
