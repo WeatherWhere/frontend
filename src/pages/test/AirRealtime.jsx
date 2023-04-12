@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getAirRealtime } from "../utils/lib/api";
+import { getAirRealtime } from "../../utils/lib/api";
 
 export default function AirRealtime() {
   const locationX = 133;

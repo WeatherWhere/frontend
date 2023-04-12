@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getWeatherMidForecast } from "../utils/lib/api";
+import { getWeatherMidForecast } from "../../utils/lib/api";
 
 export default function WeatherMid() {
   const mockRegionCode = "11B10101";

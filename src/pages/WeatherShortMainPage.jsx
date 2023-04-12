@@ -3,10 +3,9 @@ import Header from "../layout/Header";
 import WeatherShortMainNow from "../components/weatherShortMainNow/WeatherShortMainNow";
 
 export default function WeatherShortMainPage() {
-
   return (
     <div>
-      <Header/>
+      <Header />
       <WeatherShortMainNow />
     </div>
   );
