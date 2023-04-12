@@ -5,8 +5,19 @@ import { Icon } from '@iconify/react';
 import GlobalStyle from "../../styles/fonts/fonts";
 import AddressIconText from "./AddressIconText";
 import ThreeSubData from "./ThreeSubData";
-import useGeolocation from "react-hook-geolocation";
 import axios from "axios";
+
+
+const Background = styled.div`
+background-color: #A4DCF2;
+flex-direction: column;
+height: 72%;
+flex-wrap: wrap;
+display: flex;
+align-items: center;
+
+`;
+
 
 export const Container = styled.div`
 display: flex;
@@ -18,16 +29,6 @@ padding-left:${(props) => props.paddingLeft}
 height:10%;
 flex-grow:1;
 `
-
-const Background = styled.div`
-background-color: #A4DCF2;
-flex-direction: column;
-height: 65vh;
-flex-wrap: wrap;
-display: flex;
-align-items: center;
-
-`;
 
 
 export const Text = styled(Container)`
@@ -130,7 +131,7 @@ export default function WeatherShortMainNow() {
 
 
   useEffect(() => {
-
+    //사용자의 현재 위치 받아오기
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLocation({

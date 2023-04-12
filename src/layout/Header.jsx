@@ -8,10 +8,11 @@ const Container = styled.header`
   padding: 0.3rem;
   background-color: #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  height: 4.4rem;
 `;
 
 const Logo = styled.img`
-  height: 4.3rem;
+  height: 95%;
   margin-left: auto;
   margin-right: auto;
 `;
