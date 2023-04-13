@@ -29,17 +29,17 @@ export default function ThreeSubData(props) {
         <Container padding="1rem" marginBottom="1.6rem">
             <MinMaxText padding="0.1rem">
                 <StyledIcon name="iwwa:humidity" size="3rem" />
-                <Text fontSize="1.1rem">{props.shortMainNowData.reh}%</Text>
+                <Text fontSize="0.7rem">{props.value.reh}%</Text>
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
                 <StyledIcon name="wi:umbrella" size="3rem" />
-                <Text fontSize="1.1rem">{props.shortMainNowData.pop}%</Text>
+                <Text fontSize="0.7rem">{props.value.pop}%</Text>
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
                 <StyledIcon name="fluent:weather-squalls-20-regular" size="3rem" />
-                <Text fontSize="1.1rem">{getWsdStatus(props.shortMainNowData.wsd)}</Text>
+                <Text fontSize="0.7rem">{getWsdStatus(props.value.wsd)}</Text>
             </MinMaxText>
         </Container>
 

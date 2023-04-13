@@ -5,6 +5,7 @@ import AirRealtime from "../pages/AirRealtime";
 import WeatherMid from "../pages/WeatherMid";
 import WeatherShortSub from "../pages/WeatherShortSub";
 import WeatherShortMainPage from "../pages/WeatherShortMainPage";
+import AirPage from "../pages/AirPage";
 
 export default function Router() {
   return (
@@ -13,7 +14,7 @@ export default function Router() {
         <Route path="/weathermid" element={<WeatherMid />} />
         <Route path="/weathershortmain" element={<WeatherShortMainPage />} />
         <Route path="/weathershortsub" element={<WeatherShortSub/>} />
-        <Route path="/airrealtime" element={<AirRealtime />} />
+        <Route path="/airrealtime" element={< AirPage/>} />
         <Route path="/airforecast" element={<AirForecast />} />
       </Routes>
     </BrowserRouter>
