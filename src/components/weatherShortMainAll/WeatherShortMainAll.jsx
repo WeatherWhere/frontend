@@ -9,7 +9,6 @@ import GlobalStyle from "../../styles/fonts/fonts";
 const Background = styled.div`
 background-color: #FFFFF;
 flex-direction: column;
-height: 20%;
 flex-wrap: wrap;
 display: flex;
 align-items: center;

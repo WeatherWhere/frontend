@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Container } from "./WeatherShortMainNow";
-import { StyledIcon } from "./WeatherShortMainNow";
-import { Text } from "./WeatherShortMainNow";
+import { Container } from "../weatherShortMainNow/WeatherShortMainNow";
+import { StyledIcon } from "../weatherShortMainNow/WeatherShortMainNow";
+import { Text } from "../weatherShortMainNow/WeatherShortMainNow";
 import axios from "axios";
 
 
@@ -33,7 +33,7 @@ export default function AddressIconText(props) {
         <>
         <Container marginTop="0.8rem" padding="1rem">
             <StyledIcon name="ri:map-pin-2-line" size="1.7rem" />
-            <Text fontSize="1.4rem" padding="0.8rem">{props.address.region2 + ` ` + props.address.region3} </Text>
+            <Text fontSize="1.2rem" padding="0.8rem">{props.address.region2 + ` ` + props.address.region3} </Text>
             <StyledIcon name="ic:baseline-search" size="1.7rem" />
         </Container>
         </>

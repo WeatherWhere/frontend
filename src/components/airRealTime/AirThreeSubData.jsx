@@ -29,7 +29,7 @@ export default function AirThreeSubData(props) {
 
     return (
 
-        <Container padding="1rem" marginBottom="1.6rem">
+        <Container >
             <MinMaxText padding="0.1rem">
                 <StyledIcon name="fa-solid:virus" size="2rem" />
                 <Text fontSize="0.7rem">{props.airRealtimeData.pm10Value}㎍/㎥</Text>

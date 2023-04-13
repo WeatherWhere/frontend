@@ -26,7 +26,7 @@ export default function ThreeSubData(props) {
 
     return (
 
-        <Container padding="1rem" marginBottom="1.6rem">
+        <Container marginBottom="0.8rem">
             <MinMaxText padding="0.1rem">
                 <StyledIcon name="iwwa:humidity" size="3rem" />
                 <Text fontSize="0.7rem">{props.value.reh}%</Text>

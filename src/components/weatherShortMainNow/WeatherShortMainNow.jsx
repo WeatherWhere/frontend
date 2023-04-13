@@ -3,15 +3,19 @@ import { getWeatherShortMain } from "../../utils/lib/api";
 import styled from "styled-components";
 import { Icon } from '@iconify/react';
 import GlobalStyle from "../../styles/fonts/fonts";
-import AddressIconText from "./AddressIconText";
+import AddressIconText from "../common/AddressIconText";
 import ThreeSubData from "./ThreeSubData";
 import axios from "axios";
 
 
 const Background = styled.div`
-background-color: #A4DCF2;
+background-color: ${(props) => {
+    const color = getSkyStatus(props.sky, props.pty = 0)[1];
+    return color;
+  }};
+
 flex-direction: column;
-height: 72%;
+height: 66%;
 flex-wrap: wrap;
 display: flex;
 align-items: center;
@@ -24,10 +28,10 @@ display: flex;
 align-items: center;
 margin-top:${(props) => props.marginTop};
 margin-bottom:${(props) => props.marginBottom};
-padding:${(props) => props.padding}
+padding:${(props) => props.paddingLeft};
 padding-left:${(props) => props.paddingLeft}
 height:10%;
-flex-grow:1;
+flex-grow:0.15;
 `
 
 
@@ -66,13 +70,49 @@ export const StyledIcon = styled(Icon).attrs(props => ({
 }))`
   /* 공통 스타일 요소 */
   color: white;
-  padding:0.2rem;
+  padding:0.1rem;
   display: flex;
-justify-content: center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
+
 `;
 
+const getSkyStatus = (sky, pty) => {
+  //강수상태가 0인 경우
+  if (pty === 0) {
 
+    switch (sky) {
+      case 1:
+        //맑음
+        return ["wi:day-sunny", "#A4DCF2"];
+      case 3:
+        //구름 많음
+        return ["ion:partly-sunny-outline", "#9eb5c5"];
+      default:
+        //흐림
+        return ["fluent:weather-cloudy-20-regular", "#7d8da8"];
+    }
+
+    //강수상태가 있을 경우
+  } else {
+
+    switch (pty) {
+      case 1:
+        //비
+        return ["fluent:weather-drizzle-20-regular", "#b7bfc6"];
+      case 2:
+        //비/눈
+        return ["fluent:weather-rain-snow-20-regular", "#94a8b8"]
+      case 3:
+        //눈
+        return ["fluent:weather-snow-20-regular", "#d9e3ec"]
+      default:
+        //소나기
+        return ["fluent:weather-drizzle-20-regular", "#b7bfc6"]
+    }
+
+  }
+}
 
 export default function WeatherShortMainNow() {
 
@@ -149,24 +189,14 @@ export default function WeatherShortMainNow() {
   }, []);
 
 
-  const getSkyStatu = (sky) => {
-    if (sky === 1) {
-      return "wi:day-sunny";
-    } else if (sky === 3) {
-      return "ion:partly-sunny-outline";
-    } else if (sky === 4) {
-      return "fluent:weather-cloudy-20-regular";
-    } else {
-      return "약간 흐림";
-    }
-  }
 
 
   return (
-    <Background>
-      <GlobalStyle />
+    <>
+
       {shortMainNowData ? (
-        <>
+        <Background sky={shortMainNowData.sky} pty={shortMainNowData.pty}>
+          <GlobalStyle />
           <AddressIconText address={address} />
 
           <Container marginTop="0.1rem" padding="0.1rem">
@@ -184,18 +214,23 @@ export default function WeatherShortMainNow() {
               </MinMaxText>
             </Text>
           </Container>
-          <Text fontSize="1rem" padding="0.5rem">어제보다 ?° 낮아요</Text>
-          <Container padding="1rem">
-            <StyledIcon name={getSkyStatu(shortMainNowData.sky)} size="14rem" />
+          <Text fontSize="1rem">어제보다 ?° 낮아요</Text>
+          <Container>
+            <StyledIcon name={getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[0]} size="14rem" />
           </Container>
           <ThreeSubData value={shortMainNowData} />
+        </Background>
 
-        </>
 
       ) :
-        ((<Text>Loading...</Text>))
+        (
+        <Background>
+          <GlobalStyle />
+          <Text>Loading...</Text>
+        </Background>
+        )
       }
+    </>
 
-    </Background>
   );
 }

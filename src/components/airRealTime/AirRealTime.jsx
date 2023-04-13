@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { getAirRealtime } from "../../utils/lib/api";
 import styled from "styled-components";
-import { Icon } from '@iconify/react';
 import GlobalStyle from "../../styles/fonts/fonts";
 import axios from "axios";
-import AddressIconText from "../weatherShortMainNow/AddressIconText";
+import AddressIconText from "../common/AddressIconText";
 import AirThreeSubData from "./AirThreeSubData";
 import { StyledIcon } from "../weatherShortMainNow/WeatherShortMainNow";
 
-
 const Background = styled.div`
-background-color: #9B9B9B;
+background-color: ${(props) => {
+    const color = getPm10Grade(props.pm10Grade)[3];
+    return color;
+  }};
+
 flex-direction: column;
-height: 72%;
+height: 66%;
 flex-wrap: wrap;
 display: flex;
 align-items: center;
@@ -26,7 +28,7 @@ margin-bottom:${(props) => props.marginBottom};
 padding:${(props) => props.padding}
 padding-left:${(props) => props.paddingLeft}
 height:10%;
-flex-grow:1;
+flex-grow:0.15;
 `
 
 export const Text = styled(Container)`
@@ -41,6 +43,24 @@ margin-right:${(props) => props.marginRight};
 `;
 
 
+
+const getPm10Grade = (pm10Grade) => {
+
+  switch (pm10Grade) {
+    case 1:
+      return ["좋음", "야외 활동하기 좋은 날씨네요!", "ri:emotion-happy-line", "#273BBC"];
+    case 2:
+      return ["보통", "적당한 날에요~", "ri:emotion-normal-line", "#179501"];
+    case 3:
+      return ["나쁨", "밖에 나가지 마세요!", "mdi:emoticon-dead-outline", "#6E6E6E"];
+    case 4:
+      return ["매우 나쁨", "야외 활동을 삼가하세요!", "mdi:emoticon-devil-outline", "#D73C3F"];
+    default:
+      return ["알수없음", "", "", "#6E6E6E"];
+  }
+}
+
+
 export default function AirRealTime() {
 
   const [airRealtimeData, setAirRealtimeData] = useState(null);
@@ -48,7 +68,7 @@ export default function AirRealTime() {
   const getAirRealtimeData = async (key, token) => {
     try {
       const data = await getAirRealtime(key);
-      console.log("data.data"+ data.data);
+      console.log("data.data" + data.data);
       setAirRealtimeData(data.data.data[0]);
     } catch (e) {
       console.log(e);
@@ -118,47 +138,32 @@ export default function AirRealTime() {
   }, []);
 
 
-  const getPm10Grade = (pm10Grade) => {
-
-    switch(pm10Grade){
-      case 1:
-        return ["좋음", "야외 활동하기 좋은 날씨네요!"];
-      case 2:
-        return ["보통", "적당한 날에요~"];
-      case 3:
-        return ["나쁨","밖에 나가지 마세요!"];
-      case 4:
-        return ["매우 나쁨", "야외 활동을 삼가하세요!"];
-      default:
-        return "알수없음";
-    }
-
-}
-
-
   return (
-    <Background>
-      <GlobalStyle />
+    <>
+
       {airRealtimeData ? (
-        <>
+        <Background pm10Grade={airRealtimeData.pm10Grade}>
+          <GlobalStyle />
           <AddressIconText address={address} />
           <Container marginTop="0.1rem" padding="0.1rem">
             <Text fontSize="2.4rem">
-            {getPm10Grade(airRealtimeData.pm10Grade)[0]}
+              {getPm10Grade(airRealtimeData.pm10Grade)[0]}
             </Text>
           </Container>
           <Text fontSize="1rem" padding="0.5rem">{getPm10Grade(airRealtimeData.pm10Grade)[1]}</Text>
           <Container padding="1rem">
-            <StyledIcon name="fluent:weather-cloudy-20-regular" size="14rem" />
+            <StyledIcon name={getPm10Grade(airRealtimeData.pm10Grade)[2]} size="12rem" />
           </Container>
           <AirThreeSubData airRealtimeData={airRealtimeData} />
-
-        </>
+        </Background>
 
       ) :
-        ((<Text>Loading...</Text>))
+        <Background>
+          <GlobalStyle />
+          <Text>Loading...</Text>
+        </Background>
       }
 
-    </Background>
+    </>
   );
 }
