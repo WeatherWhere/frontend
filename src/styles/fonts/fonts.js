@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     font-family: 'Pretendard Variable';
-  }
+   }
 
   button:hover {
     cursor: pointer;

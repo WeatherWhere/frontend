@@ -1,0 +1,4 @@
+export const KAKAO_MAP_DATA = {
+  CENTER_LAT: 36.5519,
+  CENTER_LNG: 127.8,
+};
