@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { KAKAO_MAP_DATA } from "../../utils/const/position";
-import logotest from "../../styles/img/logotest.png";
-
-const { kakao } = window;
+import WeatherWhereLogo from "../../styles/img/WeatherWhereLogo.svg";
+import {
+  CustomOverlayMap,
+  Map,
+  MapMarker,
+  MarkerClusterer,
+  ZoomControl,
+} from "react-kakao-maps-sdk";
 
 export default function KakaoMap() {
+  const [level, setLevel] = useState(13);
   const [tourPositions, setTourPositions] = useState([]);
 
-  const markerImgSrc = logotest;
-  const markerImgSize = new kakao.maps.Size(64, 69);
-  const markerOption = { offset: new kakao.maps.Point(27, 69) };
+  const mapRef = useRef();
 
-  const markerImg = new kakao.maps.MarkerImage(
-    markerImgSrc,
-    markerImgSize,
-    markerOption
-  );
+  const onClusterclick = (_target, cluster) => {
+    const map = mapRef.current;
+    // 현재 지도 레벨에서 1레벨 확대한 레벨
+    const level = map.getLevel() - 1;
+
+    // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
+    map.setLevel(level, { anchor: cluster.getCenter() });
+  };
 
   useEffect(() => {
     fetch("/mock/tour_data.json")
@@ -27,70 +34,38 @@ export default function KakaoMap() {
       });
   }, []);
 
-  useEffect(() => {
-    const map = new kakao.maps.Map(document.getElementById("map"), {
-      center: new kakao.maps.LatLng(
-        KAKAO_MAP_DATA.CENTER_LAT,
-        KAKAO_MAP_DATA.CENTER_LNG
-      ),
-      level: 13,
-    });
-
-    const clusterer = new kakao.maps.MarkerClusterer({
-      map: map,
-      averageCenter: true,
-      minLevel: 10,
-      // disableClickZoom: true,
-    });
-
-    const markers = tourPositions.map((tourPosition, idx) => {
-      const marker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(tourPosition.mapy, tourPosition.mapx),
-        image: markerImg,
-      });
-
-      const closeOverlay = () => {
-        overlay.setMap(null);
-      };
-
-      const content = `<div className="wrap">
-          <div className="info">
-            <div className="title">
-              ${tourPosition.title}
-              <div
-                class="close"
-                onClick={handleCloseOverlay}
-                title="닫기"
-              ></div>
-            </div>
-            <div className="body">
-              <div className="img">
-                <img src=${logotest} alt="logo" width=${73} height=${70} />
-              </div>
-            </div>
-          </div>
-        </div>`;
-
-      const overlay = new kakao.maps.CustomOverlay({
-        content: content,
-        position: marker.getPosition(),
-      });
-
-      kakao.maps.event.addListener(marker, "click", function () {
-        overlay.setMap(map);
-      });
-
-      return marker;
-    });
-
-    clusterer.addMarkers(markers);
-  }, [tourPositions]);
-
-  return <StMapWrapper id="map">hi</StMapWrapper>;
+  return (
+    <Map
+      center={{
+        lat: KAKAO_MAP_DATA.CENTER_LAT,
+        lng: KAKAO_MAP_DATA.CENTER_LNG,
+      }}
+      style={{ width: "100%", height: "72%" }}
+      level={level}
+      ref={mapRef}
+      onZoomChanged={(map) => setLevel(map.getLevel())}
+    >
+      <MarkerClusterer
+        averageCenter={true}
+        minLevel={10}
+        disableClickZoom={true}
+        onClusterclick={onClusterclick}
+      >
+        {tourPositions.map((pos) => (
+          <MapMarker
+            key={`${pos.mapy}-${pos.mapx}`}
+            position={{ lat: pos.mapy, lng: pos.mapx }}
+            image={{
+              src: WeatherWhereLogo,
+              size: {
+                width: 40,
+                height: 45,
+              },
+            }}
+          />
+        ))}
+      </MarkerClusterer>
+      {/* <ZoomControl /> */}
+    </Map>
+  );
 }
-
-const StMapWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  height: 72%;
-`;
