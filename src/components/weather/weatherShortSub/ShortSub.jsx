@@ -6,8 +6,7 @@ import GlobalStyle from "../../../styles/fonts/fonts";
 import { getWeatherShortMain } from "../../../utils/lib/api";
 import { getSkyStatus } from "../weatherShortMainNow/WeatherShortMainNow";
 import { Icon } from '@iconify/react';
-
-export default function WeatherShortMainAll() {
+export default function ShortSub(props) {
 
 
     const [shortMainData, setShortMainData] = useState([]);
@@ -33,64 +32,27 @@ export default function WeatherShortMainAll() {
         longitude: null,
     });
 
+    console.log(props.value)
 
 
-    const getShortMainData = async (key, token) => {
-        await getWeatherShortMain(key).then((res) => {
-            if (res.data.statusCode === 200) {
-                const data = res.data.data;
-                setShortMainData([...data]);
-            }
-        }).catch((e) => {
-            console.log(e);
-        });
+    // const getShortMainData = async (key, token) => {
+    //     await getWeatherShortMain(key).then((res) => {
+    //         if (res.data.statusCode === 200) {
+    //             const data = res.data.data;
+    //             setShortMainData([...data]);
+    //         }
+    //     }).catch((e) => {
+    //         console.log(e);
+    //     });
 
-    };
+    // };
 
-    console.log(shortMainData)
+    // console.log(shortMainData)
 
     useEffect(() => {
-        //사용자의 현재 위치 받아오기
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                setLocation({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                });
-                getShortMainData(`/weather/forecast/short/main?locationX=${position.coords.latitude}&locationY=${position.coords.longitude}`);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-
+        setShortMainData(props);
+        console.log(shortMainData)
     }, []);
-
-
-    const getSkyStatu = (sky) => {
-        if (sky === 1) {
-            return "맑음";
-        } else if (sky === 3) {
-            return "구름 많음";
-        } else if (sky === 4) {
-            return "흐림";
-        } else {
-            return "약간 흐림";
-        }
-    }
-
-    const getWsdStatus = (wsd) => {
-        if (wsd < 4) {
-            return "약함";
-        } else if (wsd < 9) {
-            return "약간 강함";
-        } else if (wsd < 14) {
-            return "강함";
-        } else {
-            return "매우 강함";
-        }
-    }
-
 
     return (
         <>
@@ -124,7 +86,7 @@ export default function WeatherShortMainAll() {
                             <TD borderLeft="0" />
                             <TD colSpan="12" >
                                 <ChartContainer>
-                                    <LineChart data={data} width={900} height={50}>
+                                    <LineChart data={data.tmp} width={900} height={50}>
                                         <Line type="linear" dataKey="tmp" stroke="#A4DCF2" strokeWidth={2} 
                                         curve="linear" legendType="none" dot={{ r: 5 }}/>
                                     </LineChart>

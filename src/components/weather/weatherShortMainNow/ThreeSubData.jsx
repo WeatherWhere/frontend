@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Container } from "./WeatherShortMainNow";
 import { StyledIcon } from "./WeatherShortMainNow";
 import { Text } from "./WeatherShortMainNow";
@@ -24,22 +25,32 @@ export default function ThreeSubData(props) {
         }
     }
 
+    const navigate = useNavigate();
+
+    const handleDetailClick=()=>{
+        navigate("/weather2/short/main/sub", { state: props.value });
+    }
+
     return (
 
-        <Container marginBottom="0.8rem">
+        <Container marginBottom="0.8rem" onClick={handleDetailClick}>
             <MinMaxText padding="0.1rem">
                 <StyledIcon name="iwwa:humidity" size="3rem" />
                 <Text fontSize="0.7rem">{props.value.reh}%</Text>
+                <Text fontSize="0.1rem">습도</Text>
+
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
                 <StyledIcon name="wi:umbrella" size="3rem" />
                 <Text fontSize="0.7rem">{props.value.pop}%</Text>
+                <Text fontSize="0.1rem">강수확률</Text>
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
                 <StyledIcon name="fluent:weather-squalls-20-regular" size="3rem" />
                 <Text fontSize="0.7rem">{getWsdStatus(props.value.wsd)}</Text>
+                <Text fontSize="0.1rem">바람</Text>
             </MinMaxText>
         </Container>
 

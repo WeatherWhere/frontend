@@ -6,8 +6,8 @@ import WeatherShortMainAll from "../components/weather/weatherShortMainAll/Weath
 
 export default function WeatherShortMainPage() {
 
-  const PageWrap = styled.div`
-  height:100vh;
+  const PageWrap = styled.section`
+    height:100vh;
   `
   
   return (

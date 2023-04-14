@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
       display: none;
     }
 
-    font-family: 'Pretendard Variable';
    }
 
   button:hover {
