@@ -1,18 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import { KAKAO_MAP_DATA } from "../../utils/const/position";
-import WeatherWhereLogo from "../../styles/img/WeatherWhereLogo.svg";
-import {
-  CustomOverlayMap,
-  Map,
-  MapMarker,
-  MarkerClusterer,
-  ZoomControl,
-} from "react-kakao-maps-sdk";
+import { MARKER } from "../../utils/const/marker";
+import LogoGroup from "../../styles/img/LogoGroup.svg";
+import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
 
 export default function KakaoMap() {
   const [level, setLevel] = useState(13);
   const [tourPositions, setTourPositions] = useState([]);
+  const [selectedMarker, setSelectedMarker] = useState();
 
   const mapRef = useRef();
 
@@ -23,6 +18,57 @@ export default function KakaoMap() {
 
     // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
     map.setLevel(level, { anchor: cluster.getCenter() });
+  };
+
+  const EventMarkerContainer = ({
+    tourInfo,
+    index,
+    handleClick,
+    isClicked,
+  }) => {
+    const { mapx, mapy } = tourInfo;
+
+    const [isOver, setIsOver] = useState(false);
+
+    const normalOrigin = { x: 0, y: 0 }; // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
+    const clickOrigin = { x: MARKER.MARKER_WIDTH + MARKER.SPRITE_GAP, y: 0 }; // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
+    const overOrigin = {
+      x: MARKER.MARKER_WIDTH + MARKER.OVER_MARKER_WIDTH + MARKER.SPRITE_GAP * 2,
+      y: 0,
+    }; // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+
+    let spriteOrigin = isOver ? overOrigin : normalOrigin;
+
+    if (isClicked) {
+      spriteOrigin = clickOrigin;
+    }
+
+    return (
+      <MapMarker
+        position={{ lat: mapy, lng: mapx }} // 마커를 표시할 위치
+        image={{
+          src: LogoGroup,
+          size: {
+            width: MARKER.OVER_MARKER_WIDTH,
+            height: MARKER.OVER_MARKER_HEIGHT,
+          },
+          options: {
+            offset: {
+              x: MARKER.OFFSET_X,
+              y: MARKER.OFFSET_Y,
+            },
+            spriteSize: {
+              width: MARKER.SPRITE_WIDTH,
+              height: MARKER.SPRITE_HEIGHT,
+            },
+            spriteOrigin: spriteOrigin,
+          },
+        }}
+        onClick={handleClick}
+        onMouseOver={() => setIsOver(true)}
+        onMouseOut={() => setIsOver(false)}
+      ></MapMarker>
+    );
   };
 
   useEffect(() => {
@@ -51,17 +97,13 @@ export default function KakaoMap() {
         disableClickZoom={true}
         onClusterclick={onClusterclick}
       >
-        {tourPositions.map((pos) => (
-          <MapMarker
-            key={`${pos.mapy}-${pos.mapx}`}
-            position={{ lat: pos.mapy, lng: pos.mapx }}
-            image={{
-              src: WeatherWhereLogo,
-              size: {
-                width: 40,
-                height: 45,
-              },
-            }}
+        {tourPositions.map((tourInfo, index) => (
+          <EventMarkerContainer
+            key={`EventMarkerContainer-${tourInfo.contentId}`}
+            index={index}
+            tourInfo={tourInfo}
+            handleClick={() => setSelectedMarker(index)}
+            isClicked={selectedMarker === index}
           />
         ))}
       </MarkerClusterer>
