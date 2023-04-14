@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, MinMaxText, StyledIcon, Text } from "../weatherShortMainNow/WeatherShortMainNow";
+import { Container, MinMaxText, StyledIcon, Text } from "../weather/weatherShortMainNow/WeatherShortMainNow";
 
 const Line = styled.div`
 border: 1px solid white;

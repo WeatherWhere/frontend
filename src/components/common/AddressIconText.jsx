@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { Container } from "../weatherShortMainNow/WeatherShortMainNow";
-import { StyledIcon } from "../weatherShortMainNow/WeatherShortMainNow";
-import { Text } from "../weatherShortMainNow/WeatherShortMainNow";
+import { Container, StyledIcon, Text } from "../weather/weatherShortMainNow/WeatherShortMainNow";
 import axios from "axios";
 
 

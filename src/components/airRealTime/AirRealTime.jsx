@@ -5,7 +5,7 @@ import GlobalStyle from "../../styles/fonts/fonts";
 import axios from "axios";
 import AddressIconText from "../common/AddressIconText";
 import AirThreeSubData from "./AirThreeSubData";
-import { StyledIcon } from "../weatherShortMainNow/WeatherShortMainNow";
+import { StyledIcon } from "../weather/weatherShortMainNow/WeatherShortMainNow";
 
 const Background = styled.div`
 background-color: ${(props) => {
@@ -68,7 +68,7 @@ export default function AirRealTime() {
   const getAirRealtimeData = async (key, token) => {
     try {
       const data = await getAirRealtime(key);
-      console.log("data.data" + data.data);
+      console.log("data.data" + data.data.data);
       setAirRealtimeData(data.data.data[0]);
     } catch (e) {
       console.log(e);

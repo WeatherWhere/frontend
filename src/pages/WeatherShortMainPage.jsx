@@ -1,9 +1,8 @@
 import React from "react";
-import Header from "../layout/Header";
-import WeatherShortMainNow from "../components/weatherShortMainNow/WeatherShortMainNow";
-import WeatherShortMainAll from "../components/weatherShortMainAll/WeatherShortMainAll";
 import styled from "styled-components";
-
+import Header from "../layout/Header"
+import WeatherShortMainNow from "../components/weather/weatherShortMainNow/WeatherShortMainNow"
+import WeatherShortMainAll from "../components/weather/weatherShortMainAll/WeatherShortMainAll"
 
 export default function WeatherShortMainPage() {
 

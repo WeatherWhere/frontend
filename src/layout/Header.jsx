@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import WeatherWhereLogoText from '../styles/img/WeatherWhereLogoText.svg'
-import { StyledIcon } from '../components/weatherShortMainNow/WeatherShortMainNow';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { StyledIcon } from '../components/weather/weatherShortMainNow/WeatherShortMainNow';
 
 
 const Container = styled.header`

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getWeatherShortMain } from "../../utils/lib/api";
 import styled from "styled-components";
 import { Icon } from '@iconify/react';
-import GlobalStyle from "../../styles/fonts/fonts";
-import AddressIconText from "../common/AddressIconText";
 import ThreeSubData from "./ThreeSubData";
 import axios from "axios";
+import { getWeatherShortMain } from "../../../utils/lib/api";
+import GlobalStyle from "../../../styles/fonts/fonts";
+import AddressIconText from "../../common/AddressIconText";
 
 
 const Background = styled.div`
@@ -106,9 +106,11 @@ const getSkyStatus = (sky, pty) => {
       case 3:
         //눈
         return ["fluent:weather-snow-20-regular", "#d9e3ec"]
-      default:
+      case 4:
         //소나기
         return ["fluent:weather-drizzle-20-regular", "#b7bfc6"]
+      default:
+        return ["fluent:weather-drizzle-20-regular", "A4DCF2"]
     }
 
   }
@@ -224,10 +226,10 @@ export default function WeatherShortMainNow() {
 
       ) :
         (
-        <Background>
-          <GlobalStyle />
-          <Text>Loading...</Text>
-        </Background>
+          <Background>
+            <GlobalStyle />
+            <Text>Loading...</Text>
+          </Background>
         )
       }
     </>
