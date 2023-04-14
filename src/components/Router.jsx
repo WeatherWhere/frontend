@@ -15,6 +15,7 @@ export default function Router() {
         <Route path="/weathershortsub" element={<WeatherShortSub/>} />
         <Route path="/air2/realtime" element={< AirPage/>} />
         <Route path="/air2/forecast" element={<AirForecast />} />
+        <Route path="/tourmap" element={<TourMap />} />
       </Routes>
     </BrowserRouter>
   );

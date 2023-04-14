@@ -12,7 +12,20 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         font-family: 'MapoDPP';
-      }
+    }
+
+    * {
+    box-sizing: border-box;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    font-family: 'Pretendard Variable';
+   }
+
+  button:hover {
+    cursor: pointer;
+  }
 `;
 
 export default GlobalStyle;
