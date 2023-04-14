@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Header2 from "../layout/Header2";
 import KakaoMap from "../components/tourMap/KakaoMap";
 import Temp from "../components/tourMap/Temp";
+import Header from "../layout/Header"
 
 export default function TourMap() {
   return (
     <RootPage>
-      <Header2 />
+      < Header/>
       <KakaoMap />
       <Temp />
     </RootPage>

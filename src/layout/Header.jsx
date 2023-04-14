@@ -49,13 +49,13 @@ function Header() {
       case path.startsWith("/weather2"):
         setIcons([
           { name: "material-symbols:coronavirus-outline", color: "B4B4B4", link: "/air2/realtime" },
-          { name: "uiw:map", color: "7DD178", link: "/tour" }
+          { name: "uiw:map", color: "7DD178", link: "/tour2/map" }
         ]);
         break;
       case path.startsWith("/air"):
         setIcons([
           { name: "ph:sun-bold", color: "FFCD9F", link: "/weather2/short/main" },
-          { name: "uiw:map", color: "7DD178", link: "/tour" }
+          { name: "uiw:map", color: "7DD178", link: "/tour2/map" }
         ]);
         break;
       case path.startsWith("/tour"):

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getWeatherShortMain } from "../utils/lib/api";
+import { getWeatherShortMain } from "../../utils/lib/api";
 
 export default function WeatherShortMain() {
   const locationX = "37.489325";
