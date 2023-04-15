@@ -86,7 +86,7 @@ export default function KakaoMap() {
         lat: KAKAO_MAP_DATA.CENTER_LAT,
         lng: KAKAO_MAP_DATA.CENTER_LNG,
       }}
-      style={{ width: "100%", height: "72%" }}
+      style={{ width: "100%", height: "66%" }}
       level={level}
       ref={mapRef}
       onZoomChanged={(map) => setLevel(map.getLevel())}

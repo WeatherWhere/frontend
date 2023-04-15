@@ -7,5 +7,4 @@ export default function Temp() {
 
 const StTempWrapper = styled.div`
   display: flex;
-  height: 20%;
 `;

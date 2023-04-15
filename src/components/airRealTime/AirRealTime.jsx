@@ -50,11 +50,11 @@ const getPm10Grade = (pm10Grade) => {
     case 1:
       return ["좋음", "야외 활동하기 좋은 날씨네요!", "ri:emotion-happy-line", "#273BBC"];
     case 2:
-      return ["보통", "적당한 날에요~", "ri:emotion-normal-line", "#179501"];
+      return ["보통", "적당한 날이에요~", "ri:emotion-normal-line", "#179501"];
     case 3:
       return ["나쁨", "밖에 나가지 마세요!", "mdi:emoticon-dead-outline", "#6E6E6E"];
     case 4:
-      return ["매우 나쁨", "야외 활동을 삼가하세요!", "mdi:emoticon-devil-outline", "#D73C3F"];
+      return ["매우 나쁨", "야외 활동을 삼가세요!", "mdi:emoticon-devil-outline", "#D65A5D"];
     default:
       return ["알수없음", "", "", "#6E6E6E"];
   }
