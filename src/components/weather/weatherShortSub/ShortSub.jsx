@@ -1,7 +1,7 @@
 //단기예보(12시간) 컴포넌트
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { LineChart, Line, CartesianGrid, CartesianAxis } from 'recharts';
+import { LineChart, Line } from 'recharts';
 import GlobalStyle from "../../../styles/fonts/fonts";
 import { getWeatherShortMain } from "../../../utils/lib/api";
 import { getSkyStatus } from "../weatherShortMainNow/WeatherShortMainNow";
@@ -9,9 +9,9 @@ import { Icon } from '@iconify/react';
 export default function ShortSub(props) {
 
 
-    const [shortMainData, setShortMainData] = useState([]);
+    const [shortSubData, setShortSubData] = useState([]);
 
-    const data = shortMainData.map((value, index) => {
+    const data = shortSubData.map((value, index) => {
         const hour = new Date(value.fcstDateTime).getHours();
         const isAM = hour < 12;
         const fcstDateTime = `${isAM ? "오전" : "오후"} ${hour % 12 || 12}시`;
@@ -32,27 +32,23 @@ export default function ShortSub(props) {
         longitude: null,
     });
 
-    console.log(props.value)
+    const getShortSubData = async (key, token) => {
+        await getWeatherShortMain(key).then((res) => {
+            if (res.data.statusCode === 200) {
+                const data = res.data.data;
+                setShortSubData([...data]);
+            }
+        }).catch((e) => {
+            console.log(e);
+        });
+
+    };
+
+    // useEffect(() => {
+    //     getShortSubData(`/weather/forecast/short/sub?locationX=${position.coords.latitude}&locationY=${position.coords.longitude}`);
+    // }, []);
 
 
-    // const getShortMainData = async (key, token) => {
-    //     await getWeatherShortMain(key).then((res) => {
-    //         if (res.data.statusCode === 200) {
-    //             const data = res.data.data;
-    //             setShortMainData([...data]);
-    //         }
-    //     }).catch((e) => {
-    //         console.log(e);
-    //     });
-
-    // };
-
-    // console.log(shortMainData)
-
-    useEffect(() => {
-        setShortMainData(props);
-        console.log(shortMainData)
-    }, []);
 
     return (
         <>

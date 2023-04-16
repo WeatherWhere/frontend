@@ -17,7 +17,7 @@ export default function AirForecast() {
   console.log(airForecastData);
 
   const handleGetAPI = () => {
-    getAirForecastData(`air/forecast/api?date=${date}`);
+    // getAirForecastData(`air/forecast/data?city=${city}&baseDate=${baseDate}`);
   };
 
   return (

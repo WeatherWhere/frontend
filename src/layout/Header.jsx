@@ -8,13 +8,13 @@ import { StyledIcon } from '../components/weather/weatherShortMainNow/WeatherSho
 
 const Container = styled.header`
   display: flex;
-  padding: 0.3rem;
+  padding: 0.1rem;
   background-color: #fff;
-  height: 4.4rem;
+  height: 3.2rem;
 `;
 
 const Logo = styled.img`
-height:4rem;
+height:3rem;
 `
 
 const LogoWrapper = styled.div`
@@ -90,6 +90,7 @@ function Header() {
               size="2rem"
               color={icon.color}
               index={index}
+              margin="0.2rem"
             />
           </Link>
         ))}

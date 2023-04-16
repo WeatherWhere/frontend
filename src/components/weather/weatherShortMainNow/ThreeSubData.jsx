@@ -11,6 +11,13 @@ width: 2rem;
 transform: rotate(90deg);
 `;
 
+export const IconWrap = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+
+`
+
 export default function ThreeSubData(props) {
 
     const getWsdStatus = (wsd) => {
@@ -35,20 +42,25 @@ export default function ThreeSubData(props) {
 
         <Container marginBottom="0.8rem" onClick={handleDetailClick}>
             <MinMaxText padding="0.1rem">
+                <IconWrap>
                 <StyledIcon name="iwwa:humidity" size="3rem" />
+                </IconWrap>
                 <Text fontSize="0.7rem">{props.value.reh}%</Text>
                 <Text fontSize="0.1rem">습도</Text>
-
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
+                <IconWrap>
                 <StyledIcon name="wi:umbrella" size="3rem" />
+                </IconWrap>
                 <Text fontSize="0.7rem">{props.value.pop}%</Text>
                 <Text fontSize="0.1rem">강수확률</Text>
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
+            <IconWrap>
                 <StyledIcon name="fluent:weather-squalls-20-regular" size="3rem" />
+                </IconWrap>
                 <Text fontSize="0.7rem">{getWsdStatus(props.value.wsd)}</Text>
                 <Text fontSize="0.1rem">바람</Text>
             </MinMaxText>
