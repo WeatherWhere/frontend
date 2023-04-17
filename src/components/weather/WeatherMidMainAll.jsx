@@ -20,6 +20,7 @@ export default function WeatherMidMainAll({ location }) {
         if (index === 0) {
             weekday = '오늘';
           }
+
         return {
             baseTime: weekday,
             ram: value.ram,

@@ -1,35 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { Icon } from '@iconify/react';
 import ThreeSubData from "./ThreeSubData";
 import axios from "axios";
-import { getWeatherShortMain } from "../../../utils/lib/api";
 import GlobalStyle from "../../../styles/fonts/fonts";
 import AddressIconText from "../../common/AddressIconText";
 
-export default function WeatherShortMainNow() {
+export default function WeatherShortMainNow({ location, setNowOrMid }) {
+
+
+  const handleNowClick = () => {
+    setNowOrMid(true);
+  };
+
+  const handleMidClick = () => {
+    setNowOrMid(false);
+  };
 
   const [shortMainNowData, setShortMainNowData] = useState(null);
 
-  //현재 위경도 state
-  const [location, setLocation] = useState({
-    latitude: null,
-    longitude: null,
-  });
-
   //메인 (현재 시간) 받아올 api
-  const getShortMainData = async (key, token) => {
+  const getShortMainData = useCallback(async (key, token) => {
     try {
-      const data = await getWeatherShortMain(key);
-      //console.log(data);
-      setShortMainNowData(data.data.data);
-      console.log(shortMainNowData);
-    } catch (e) {
-      console.log(e);
+      const response = await axios.get(key);
+      setShortMainNowData(response.data.data);
+    } catch (error) {
+      console.log(error);
     }
-  };
+  }, []);
 
   const apiKey = 'ddf617232a0fd602e925eb2a96c61c74';
+
   //주소 저장할 state
   const [address, setAddress] = useState({
     region2: "",
@@ -48,7 +49,7 @@ export default function WeatherShortMainNow() {
       Authorization: `KakaoAK ${apiKey}`
     };
     if (location.latitude && location.longitude) {
-      const res = await axios.get(apiUrl, { params, headers })
+      await axios.get(apiUrl, { params, headers })
         .then((res) => {
           console.log(res.data.documents[0].address.region_2depth_name);
           setAddress({
@@ -62,26 +63,12 @@ export default function WeatherShortMainNow() {
     }
   }
 
-
   useEffect(() => {
-    //사용자의 현재 위치 받아오기
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-        getShortMainData(`/weather/forecast/short/main/now?locationX=${position.coords.latitude}&locationY=${position.coords.longitude}`);
-        kakaoAddress2(position.coords);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-  }, []);
-
-
+    if (location.latitude && location.longitude) {
+      getShortMainData(`/weather/forecast/short/main/now?locationX=${location.latitude}&locationY=${location.longitude}`);
+      kakaoAddress2({ latitude: location.latitude, longitude: location.longitude });
+    }
+  }, [location.latitude, location.longitude, getShortMainData]);
 
 
   return (
@@ -95,22 +82,26 @@ export default function WeatherShortMainNow() {
           <Container marginTop="0.1rem" padding="0.1rem">
             <Text fontSize="3.2rem" marginLeft="5rem" marginRight="auto">
               {shortMainNowData.tmp}°</Text>
-              <MinMaxText>
-                <IconContainer>
-                  <StyledIcon name="ph:arrow-circle-up" size="1rem" />
-                  {shortMainNowData.tmn}°
-                </IconContainer>
-                <IconContainer>
-                  <StyledIcon name="ph:arrow-circle-down" size="1rem" />
-                  {shortMainNowData.tmx}°
-                </IconContainer>
-              </MinMaxText>
+            <MinMaxText>
+              <IconContainer>
+                <StyledIcon name="ph:arrow-circle-up" size="1rem" />
+                {shortMainNowData.tmn}°
+              </IconContainer>
+              <IconContainer>
+                <StyledIcon name="ph:arrow-circle-down" size="1rem" />
+                {shortMainNowData.tmx}°
+              </IconContainer>
+            </MinMaxText>
           </Container>
           <Text fontSize="1rem">어제보다 ?° 낮아요</Text>
           <Container>
             <StyledIcon name={getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[0]} size="14rem" />
           </Container>
           <ThreeSubData value={shortMainNowData} />
+          <ButtonWrap>
+            <Button onClick={handleNowClick}>하루</Button>
+            <Button onClick={handleMidClick}>주간</Button>
+          </ButtonWrap>
         </Background>
 
 
@@ -131,41 +122,50 @@ export default function WeatherShortMainNow() {
 
 
 const Background = styled.div`
-background-color: ${(props) => {
-    const color = getSkyStatus(props.sky, props.pty = 0)[1];
-    return color;
-  }};
-
-flex-direction: column;
-height: 66%;
-flex-wrap: wrap;
-display: flex;
-align-items: center;
-
+  background-color: ${(props) => {
+      const color = getSkyStatus(props.sky, props.pty = 0)[1];
+      return color;
+    }};
+  flex-direction: column;
+  height: 66%;
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
 `;
 
 
 export const Container = styled.div`
-display: flex;
-align-items: center;
-margin-top:${(props) => props.marginTop};
-margin-bottom:${(props) => props.marginBottom};
-padding:${(props) => props.paddingLeft};
-padding-left:${(props) => props.paddingLeft}
-height:10%;
-flex-grow:0.15;
+  display: flex;
+  align-items: center;
+  margin-top:${(props) => props.marginTop};
+  margin-bottom:${(props) => props.marginBottom};
+  padding:${(props) => props.paddingLeft};
+  padding-left:${(props) => props.paddingLeft}
+  height:10%;
+  flex-grow:0.05;
+  margin: auto 0;
+
 `
 
+export const ButtonWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right:auto;
+`;
+export const Button = styled.button`
+`
 
 export const Text = styled(Container)`
-font-size: ${(props) => props.fontSize};
-color: ${(props) => props.color || 'white'};
-display: flex;
-justify-content: center;
-align-items: center;
-padding:${(props) => props.padding};
-margin-left:${(props) => props.marginLeft};
-margin-right:${(props) => props.marginRight};
+  font-size: ${(props) => props.fontSize};
+  color: ${(props) => props.color || 'white'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:${(props) => props.padding};
+  margin-left:${(props) => props.marginLeft};
+  margin-right:${(props) => props.marginRight};
 
 `;
 
@@ -176,9 +176,9 @@ const IconContainer = styled(Container)`
 
 //최저 최고기온 수직정렬
 export const MinMaxText = styled.div`
-color: white;
-font-size: 1.1rem;
-padding:${(props) => props.padding}
+  color: white;
+  font-size: 1.1rem;
+  padding:${(props) => props.padding}
 
 
 `;
@@ -221,16 +221,16 @@ export const getSkyStatus = (sky, pty) => {
     switch (pty) {
       case 1:
         //비
-        return ["fluent:weather-drizzle-20-regular", "#b7bfc6","#A4DCF2"];
+        return ["fluent:weather-drizzle-20-regular", "#b7bfc6", "#A4DCF2"];
       case 2:
         //비/눈
-        return ["fluent:weather-rain-snow-20-regular", "#94a8b8","#A4DCF2"]
+        return ["fluent:weather-rain-snow-20-regular", "#94a8b8", "#A4DCF2"]
       case 3:
         //눈
-        return ["fluent:weather-snow-20-regular", "#d9e3ec","#A4DCF2"]
+        return ["fluent:weather-snow-20-regular", "#d9e3ec", "#A4DCF2"]
       case 4:
         //소나기
-        return ["fluent:weather-drizzle-20-regular", "#b7bfc6","#A4DCF2"]
+        return ["fluent:weather-drizzle-20-regular", "#b7bfc6", "#A4DCF2"]
       default:
         return ["fluent:weather-drizzle-20-regular", "#A4DCF2", "#A4DCF2"]
     }

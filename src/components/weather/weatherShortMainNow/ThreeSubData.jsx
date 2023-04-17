@@ -6,31 +6,30 @@ import { MinMaxText } from "./WeatherShortMainNow";
 import styled from "styled-components";
 
 const Line = styled.div`
-border: 1px solid white;
-width: 2rem;
-transform: rotate(90deg);
+    border: 1px solid white;
+    width: 2rem;
+    transform: rotate(90deg);
 `;
 
 export const IconWrap = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
+const getWsdStatus = (wsd) => {
+    if (wsd < 4) {
+        return "약함";
+    } else if (wsd < 9) {
+        return "약간 강함";
+    } else if (wsd < 14) {
+        return "강함";
+    } else {
+        return "매우 강함";
+    }
+}
 
 export default function ThreeSubData(props) {
 
-    const getWsdStatus = (wsd) => {
-        if (wsd < 4) {
-            return "약함";
-        } else if (wsd < 9) {
-            return "약간 강함";
-        } else if (wsd < 14) {
-            return "강함";
-        } else {
-            return "매우 강함";
-        }
-    }
 
     const navigate = useNavigate();
 
