@@ -5,6 +5,7 @@ import LogoGroup from "../../styles/img/LogoGroup.svg";
 import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
 
 export default function KakaoMap() {
+  
   const [level, setLevel] = useState(13);
   const [tourPositions, setTourPositions] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState();
