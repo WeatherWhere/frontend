@@ -7,11 +7,17 @@ export const client = (token) => {
   if (token) {
     headers = {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
       Authorization: token,
     };
   } else {
     headers = {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
     };
   }
 
