@@ -11,6 +11,8 @@ const Container = styled.header`
   padding: 0.1rem;
   background-color: #fff;
   height: 3.2rem;
+  z-index:6;
+
 `;
 
 const Logo = styled.img`
@@ -46,27 +48,23 @@ function Header() {
 
   useEffect(() => {
     switch (true) {
-      case path.startsWith("/"):
-        setIcons([
-          { name: "material-symbols:coronavirus-outline", color: "B4B4B4", link: "/air2/realtime" },
-          { name: "uiw:map", color: "7DD178", link: "/tour2/map" }
-        ]);
-        break;
-      case path.startsWith("/air"):
+      case path.includes("/air2"):
         setIcons([
           { name: "ph:sun-bold", color: "FFCD9F", link: "/" },
           { name: "uiw:map", color: "7DD178", link: "/tour2/map" }
         ]);
         break;
-      case path.startsWith("/tour"):
+      case path.includes("/tour2"):
         setIcons([
           { name: "material-symbols:coronavirus-outline", color: "B4B4B4", link: "/air2/realtime" },
           { name: "ph:sun-bold", color: "FFCD9F", link: "/" }
         ]);
         break;
       default:
-        setIcons([]);
-    }
+        setIcons([
+          { name: "material-symbols:coronavirus-outline", color: "B4B4B4", link: "/air2/realtime" },
+          { name: "uiw:map", color: "7DD178", link: "/tour2/map" }
+        ]);    }
   }, [path]);
 
   return (
