@@ -24,5 +24,6 @@ export const client = (token) => {
   return axios.create({
     baseURL: "/",
     headers,
+    withCredentials: true,
   });
 };
