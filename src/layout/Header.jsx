@@ -46,7 +46,7 @@ function Header() {
 
   useEffect(() => {
     switch (true) {
-      case path.startsWith("/weather2"):
+      case path.startsWith("/"):
         setIcons([
           { name: "material-symbols:coronavirus-outline", color: "B4B4B4", link: "/air2/realtime" },
           { name: "uiw:map", color: "7DD178", link: "/tour2/map" }
@@ -54,14 +54,14 @@ function Header() {
         break;
       case path.startsWith("/air"):
         setIcons([
-          { name: "ph:sun-bold", color: "FFCD9F", link: "/weather2/short/main" },
+          { name: "ph:sun-bold", color: "FFCD9F", link: "/" },
           { name: "uiw:map", color: "7DD178", link: "/tour2/map" }
         ]);
         break;
       case path.startsWith("/tour"):
         setIcons([
           { name: "material-symbols:coronavirus-outline", color: "B4B4B4", link: "/air2/realtime" },
-          { name: "ph:sun-bold", color: "FFCD9F", link: "/weather2/short/main" }
+          { name: "ph:sun-bold", color: "FFCD9F", link: "/" }
         ]);
         break;
       default:
@@ -78,7 +78,7 @@ function Header() {
         <Logo
           src={WeatherWhereLogoText}
           alt="logo"
-          onClick={() => (window.location.href = "/weather2/short/main")}
+          onClick={() => (window.location.href = "/")}
         />
       </LogoWrapper>
       <IconWrapper>

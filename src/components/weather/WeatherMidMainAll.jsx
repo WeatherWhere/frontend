@@ -16,7 +16,11 @@ export default function WeatherMidMainAll({ location }) {
         const dateStr = value.baseTime;
         const date = new Date(dateStr.slice(0, 4), parseInt(dateStr.slice(4, 6)) - 1, dateStr.slice(6, 8));
         const options = { weekday: 'short' };
-        const weekday = date.toLocaleDateString('ko-KR', options);
+        let weekday = date.toLocaleDateString('ko-KR', options);
+        if (index === 0) {
+            weekday = '오늘';
+          }
+
         return {
             baseTime: weekday,
             ram: value.ram,

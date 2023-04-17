@@ -43,7 +43,8 @@ export default function Router() {
     <BrowserRouter>
         <Routes>
           {/* <Route path="/weather2/mid" element={<WeatherMid />} /> */}
-          <Route path="/weather2/short/main" element={<WeatherShortMainPage location={location} />} />
+          <Route path="/" element={<WeatherShortMainPage location={location} />} />
+
           <Route path="/weather2/short/main/sub" element={<WeatherShortSubPage location={location} />} />
           {/* <Route path="/weathershortsub" element={<WeatherShortSub/>} /> */}
           <Route path="/air2/realtime" element={< AirPage location={location} />} />

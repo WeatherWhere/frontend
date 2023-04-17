@@ -16,7 +16,10 @@ export default function WeatherShortMainAll({ location }) {
     const data = shortMainData.map((value, index) => {
         const hour = new Date(value.fcstDateTime).getHours();
         const isAM = hour < 12;
-        const fcstDateTime = `${isAM ? "오전" : "오후"} ${hour % 12 || 12}시`;
+        let fcstDateTime = `${isAM ? "오전" : "오후"} ${hour % 12 || 12}시`;
+        if (index===0){
+            fcstDateTime = '현재';
+        }
         return {
             fcstDateTime,
             pop: value.pop,
