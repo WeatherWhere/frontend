@@ -1,30 +1,28 @@
-import { useState } from "react";
 import { Container, StyledIcon, Text } from "../weather/weatherShortMainNow/WeatherShortMainNow";
-import axios from "axios";
 
 
 export default function AddressIconText(props) {
 
-    const [query, setQuery] = useState('');
+    // const [query, setQuery] = useState('');
 
-    const apiKey = 'ddf617232a0fd602e925eb2a96c61c74';
+    // const apiKey = 'ddf617232a0fd602e925eb2a96c61c74';
 
-    const handleSearch = async () => {
-      const url = `https://dapi.kakao.com/v2/local/search/address.json?query=${query}`;
-      const headers = { Authorization: `KakaoAK ${apiKey}` };
+    // const handleSearch = async () => {
+    //   const url = `https://dapi.kakao.com/v2/local/search/address.json?query=${query}`;
+    //   const headers = { Authorization: `KakaoAK ${apiKey}` };
   
-      try {
-        const response = await axios.get(url, { headers });
-        const address = response.data.documents[0].address;
-        console.log(address);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    //   try {
+    //     const response = await axios.get(url, { headers });
+    //     const address = response.data.documents[0].address;
+    //     console.log(address);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
   
-    const handleChange = (event) => {
-      setQuery(event.target.value);
-    };
+    // const handleChange = (event) => {
+    //   setQuery(event.target.value);
+    // };
   
 
     return (

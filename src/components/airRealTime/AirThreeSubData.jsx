@@ -3,9 +3,9 @@ import { IconWrap } from "../weather/weatherShortMainNow/ThreeSubData";
 import { Container, MinMaxText, StyledIcon, Text } from "../weather/weatherShortMainNow/WeatherShortMainNow";
 
 const Line = styled.div`
-border: 1px solid white;
-width: 2rem;
-transform: rotate(90deg);
+  border: 1px solid white;
+  width: 2rem;
+  transform: rotate(90deg);
 `;
 
 export default function AirThreeSubData(props) {
