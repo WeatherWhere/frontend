@@ -7,7 +7,7 @@ import WeatherMidMainAll from "../components/weather/WeatherMidMainAll";
 import { useState } from "react";
 
 
-const PageWrap = styled.section`
+export const PageWrap = styled.section`
   height:100vh;
 `
 

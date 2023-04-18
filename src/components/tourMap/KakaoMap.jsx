@@ -3,6 +3,8 @@ import { KAKAO_MAP_DATA } from "../../utils/const/position";
 import { MARKER } from "../../utils/const/marker";
 import LogoGroup from "../../styles/img/LogoGroup.svg";
 import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
+import SearchAddress from "./search/SearchAddress";
+
 
 export default function KakaoMap() {
   
@@ -82,16 +84,18 @@ export default function KakaoMap() {
   }, []);
 
   return (
+
     <Map
       center={{
         lat: KAKAO_MAP_DATA.CENTER_LAT,
         lng: KAKAO_MAP_DATA.CENTER_LNG,
       }}
-      style={{ width: "100%", height: "66%" }}
+      style={{ width: "100%", height: "66%", borderRadius: "10px", position:"relative" }}
       level={level}
       ref={mapRef}
       onZoomChanged={(map) => setLevel(map.getLevel())}
     >
+      <SearchAddress/>
       <MarkerClusterer
         averageCenter={true}
         minLevel={10}
