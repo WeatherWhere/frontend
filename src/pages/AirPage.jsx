@@ -8,6 +8,7 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import AirSubBottom from "../components/airRealTime/AirSubBottom";
 import axios from "axios";
+import AirMidBottom from "../components/airRealTime/AirMidBottom";
 
 const PageWrap = styled.div`
   height:100vh;
@@ -16,6 +17,9 @@ const PageWrap = styled.div`
 
 export default function AirPage({location}) {
 
+  const [nowOrMid, setNowOrMid] = useState(true); 
+
+  
   const [airRealtimeData, setAirRealtimeData] = useState(null);
 
   const getAirRealtimeData = useCallback(async (key, token) => {
@@ -72,8 +76,12 @@ export default function AirPage({location}) {
   return (
     <PageWrap>
       <Header />
-      <AirRealTime location={location} airRealtimeData={airRealtimeData} address={address}/>
-      <AirSubBottom airRealtimeData={airRealtimeData}/>
+      <AirRealTime location={location} airRealtimeData={airRealtimeData} address={address} setNowOrMid={setNowOrMid}/>
+      {nowOrMid ? (
+        <AirSubBottom airRealtimeData={airRealtimeData}/>
+      ) : (
+        <AirMidBottom location={location}/>
+      )}
     </PageWrap>
   )
 }
