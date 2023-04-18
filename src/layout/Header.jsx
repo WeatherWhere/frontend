@@ -10,7 +10,7 @@ const Container = styled.header`
   display: flex;
   padding: 0.1rem;
   background-color: #fff;
-  height: 3.2rem;
+  height: 3.6rem;
   z-index:6;
 
 `;
