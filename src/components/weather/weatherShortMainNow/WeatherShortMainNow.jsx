@@ -65,7 +65,7 @@ export default function WeatherShortMainNow({ location, setNowOrMid }) {
 
   useEffect(() => {
     if (location.latitude && location.longitude) {
-      getShortMainData(`/weather/forecast/short/main/now?locationX=${location.latitude}&locationY=${location.longitude}`);
+      getShortMainData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/short/main/now?locationX=${location.latitude}&locationY=${location.longitude}`);
       kakaoAddress2({ latitude: location.latitude, longitude: location.longitude });
     }
   }, [location.latitude, location.longitude, getShortMainData]);
