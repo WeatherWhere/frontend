@@ -1,14 +1,13 @@
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import Image from 'react-bootstrap/Image'
 import GlobalStyle from "../../styles/fonts/fonts";
 import { CommonWrap, StyledImage } from "./TourCommon";
 
 export default function TourDetail() {
 
   const [detailData, setCommonData] = useState(null);
-  const [tourPositions, setTourPositions] = useState(null);
+  //const [tourPositions, setTourPositions] = useState(null);
 
 
   //관광 공통정보 받아오는 api
