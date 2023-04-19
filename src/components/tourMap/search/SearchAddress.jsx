@@ -17,7 +17,7 @@ export default function SearchAddress() {
         const location = result[0];
         if (location) {
         navigate(`/tour2/searchmap/${location.y}/${location.x}`);
-
+            
         }
 
       }

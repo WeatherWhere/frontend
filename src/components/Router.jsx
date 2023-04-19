@@ -5,6 +5,7 @@ import AirPage from "../pages/AirPage";
 import TourMap from "../pages/TourMap";
 import WeatherShortSubPage from "../pages/WeatherShortSubPage";
 import SearchMapPage from "../pages/SearchMapPage";
+import TourInfoPage from "../pages/TourInfoPage";
 
 export default function Router() {
 
@@ -52,6 +53,7 @@ export default function Router() {
         {/* <Route path="/air2/forecast" element={<AirForecast />} /> */}
         <Route path="/tour2/map" element={<TourMap />} />
         <Route path="/tour2/searchmap/:lat/:lng" element={<SearchMapPage />} />
+        <Route path="/tour2/common" element={<TourInfoPage/>} />
 
 
       </Routes>
