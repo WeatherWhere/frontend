@@ -1,17 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../layout/Header"
+import Header from "../layout/Header";
 import ShortSub from "../components/weather/weatherShortSub/ShortSub";
 
 const PageWrap = styled.section`
-  height:100vh;
-`
-export default function WeatherShortSubPage({location}) {
-
+  height: 100vh;
+`;
+export default function WeatherShortSubPage({ location }) {
   return (
     <PageWrap>
-      <Header />
-      <ShortSub location={location}/>
+      <ShortSub location={location} />
     </PageWrap>
-  )
+  );
 }

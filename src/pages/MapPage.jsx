@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import KakaoMap from "../components/tourMap/KakaoMap";
 import Temp from "../components/tourMap/Temp";
-import Header from "../layout/Header"
+import Header from "../layout/Header";
+import RecommendMap from "../components/tourMap/recommend/RecommendMap";
 
 export default function TourMap() {
   return (
     <RootPage>
-      < Header/>
-      <KakaoMap />
+      <RecommendMap />
       <Temp />
     </RootPage>
   );
