@@ -46,7 +46,7 @@ export default function WeatherMidMainAll({ location }) {
 
     useEffect(() => {
         if (location.latitude && location.longitude) {
-            getMidData(`weather/forecast/week?regionCode=${mockRegionCode}`);
+            getMidData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/week?regionCode=${mockRegionCode}`);
         }
     }, [location.latitude, location.longitude, getMidData]);
 

@@ -61,7 +61,7 @@ export default function ShortSub({ location }) {
 
     useEffect(() => {
         if (location.latitude && location.longitude) {
-            getShortSubData(`/weather/forecast/short/sub?locationX=${location.latitude}&locationY=${location.longitude}`);
+            getShortSubData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/short/sub?locationX=${location.latitude}&locationY=${location.longitude}`);
         }
     }, [location.latitude, location.longitude, getShortSubData]);
 

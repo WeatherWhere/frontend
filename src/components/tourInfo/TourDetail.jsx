@@ -26,7 +26,7 @@ export default function TourDetail() {
       .then((res) => res.json())
       .then((data) => {
         //console.log(data.position[0]);
-          getWeatherMidForecast(`https://api.weatherwhere.link/tour/api3?contentId=264570&contentTypeId=12`);
+          getWeatherMidForecast(`${process.env.REACT_APP_BASE_URL}/tour/api3?contentId=264570&contentTypeId=12`);
       });
 
   }, [getWeatherMidForecast]);

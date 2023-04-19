@@ -45,7 +45,7 @@ export default function WeatherShortMainAll({ location }) {
 
     useEffect(() => {
         if (location.latitude && location.longitude) {
-            getShortMainData(`/weather/forecast/short/main?locationX=${location.latitude}&locationY=${location.longitude}`);
+            getShortMainData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/short/main?locationX=${location.latitude}&locationY=${location.longitude}`);
         }
     }, [location.latitude, location.longitude, getShortMainData]);
 
