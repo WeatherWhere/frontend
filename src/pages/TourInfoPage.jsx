@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Header from "../layout/Header"
-import SearchMap from "../components/tourMap/search/SearchMap";
 import WeatherShortMainAll from "../components/weather/weatherShortMainAll/WeatherShortMainAll";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import TourCommon from "../components/tourInfo/TourCommon";
 import GlobalStyle from "../styles/fonts/fonts";
@@ -12,9 +10,8 @@ import TourDetail from "../components/tourInfo/TourDetail";
 
 export default function TourInfoPage() {
 
-  const { lat, lng } = useParams();
+  //const { lat, lng } = useParams();
 
-  const [nowOrAir, setNowOrAir] = useState(true);
 
   // const [location] = useState({
   //     latitude: parseFloat(lat),
