@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WeatherShortMainPage from "../pages/WeatherShortMainPage";
 import AirPage from "../pages/AirPage";
@@ -6,6 +6,7 @@ import WeatherShortSubPage from "../pages/WeatherShortSubPage";
 import SearchMapPage from "../pages/SearchMapPage";
 import Header from "../layout/Header";
 import RecommendMapPage from "../pages/RecommendMapPage";
+import TourInfoPage from "../pages/TourInfoPage";
 
 export default function Router() {
   const [location, setLocation] = useState({
@@ -58,6 +59,7 @@ export default function Router() {
           />
           <Route path="tour/search" element={<SearchMapPage />} />
           <Route path="tour/recommend" element={<RecommendMapPage />} />
+          <Route path="tour/common" element={<TourInfoPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import GlobalStyle from "../../styles/fonts/fonts";
 import AddressIconText from "../common/AddressIconText";
 import AirThreeSubData from "./AirThreeSubData";
-import { StyledIcon } from "../weather/weatherShortMainNow/WeatherShortMainNow";
+import { Button, ButtonWrap, StyledIcon } from "../weather/weatherShortMainNow/WeatherShortMainNow";
 
 const Background = styled.div`
   background-color: ${(props) => {
@@ -61,8 +61,16 @@ const getPm10Grade = (pm10Grade) => {
 }
 
 
-export default function AirRealTime({airRealtimeData, address}) {
+export default function AirRealTime({airRealtimeData, address, setNowOrMid}) {
 
+
+  const handleNowClick = () => {
+    setNowOrMid(true);
+  };
+
+  const handleMidClick = () => {
+    setNowOrMid(false);
+  };
 
   return (
     <>
@@ -81,6 +89,10 @@ export default function AirRealTime({airRealtimeData, address}) {
             <StyledIcon name={getPm10Grade(airRealtimeData.pm10Grade)[2]} size="12rem" />
           </Container>
           <AirThreeSubData airRealtimeData={airRealtimeData} />
+          <ButtonWrap>
+            <Button onClick={handleNowClick}>현재</Button>
+            <Button onClick={handleMidClick}>주간</Button>
+          </ButtonWrap>
         </Background>
 
       ) :
