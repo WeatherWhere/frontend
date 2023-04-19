@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import WeatherWhereLogoText from "../styles/img/WeatherWhereLogoText.svg";
-import { useEffect } from "react";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { StyledIcon } from "../components/weather/weatherShortMainNow/WeatherShortMainNow";
@@ -63,48 +62,6 @@ function Header() {
       setMapIcon(SEARCH_MAP_ICON);
     }
   };
-  // useEffect(() => {
-  //   switch (true) {
-  //     case path.includes("/air/realtime"):
-  //       setIcons([
-  //         { name: "ph:sun-bold", color: "FFCD9F", link: "" },
-  //         { name: "uiw:map", color: "7DD178", link: "/tour/search" },
-  //       ]);
-  //       break;
-  //     case path.includes("/tour/search"):
-  //       setIcons([
-  //         {
-  //           name: "material-symbols:coronavirus-outline",
-  //           color: "B4B4B4",
-  //           link: "",
-  //         },
-  //         { name: "ph:sun-bold", color: "FFCD9F", link: "/tour/recommend" },
-  //       ]);
-  //       break;
-  //     case path.includes("/tour/recommend"):
-  //       setIcons([
-  //         setIcons([
-  //           {
-  //             name: "material-symbols:coronavirus-outline",
-  //             color: "B4B4B4",
-  //             link: "/air/realtime",
-  //           },
-  //           { name: "ph:sun-bold", color: "FFCD9F", link: "/tour/search" },
-  //         ]),
-  //       ]);
-  //       break;
-  //     default:
-  //       setIcons([
-  //         {
-  //           name: "material-symbols:coronavirus-outline",
-  //           color: "B4B4B4",
-  //           link: "/air/realtime",
-  //         },
-  //         { name: "uiw:map", color: "7DD178", link: "/tour/search" },
-  //       ]);
-  //   }
-  //   setPath(window.location.pathname);
-  // }, [path]);
 
   return (
     <>
