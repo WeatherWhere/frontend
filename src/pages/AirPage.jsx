@@ -67,7 +67,7 @@ export default function AirPage({location}) {
 
   useEffect(() => {
     if (location.latitude && location.longitude) {
-        getAirRealtimeData(`/air/realtime/data?x=${location.longitude}&y=${location.latitude}`);
+        getAirRealtimeData(`${process.env.REACT_APP_BASE_URL}/air/realtime/data?x=${location.longitude}&y=${location.latitude}`);
         kakaoAddress2({latitude: location.latitude, longitude: location.longitude});
 
           }
