@@ -29,7 +29,6 @@ export default function Router() {
       );
     };
 
-    console.log("routes" + location.longitude)
     getLocation();
 
     // 1시간(3,600,000밀리초)마다 위치 정보를 갱신합니다.

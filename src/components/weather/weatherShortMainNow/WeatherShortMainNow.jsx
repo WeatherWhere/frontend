@@ -6,7 +6,7 @@ import axios from "axios";
 import GlobalStyle from "../../../styles/fonts/fonts";
 import AddressIconText from "../../common/AddressIconText";
 
-export default function WeatherShortMainNow({ location, setNowOrMid }) {
+export default function WeatherShortMainNow({ location, setNowOrMid, address }) {
 
 
   const handleNowClick = () => {
@@ -29,44 +29,11 @@ export default function WeatherShortMainNow({ location, setNowOrMid }) {
     }
   }, []);
 
-  const apiKey = 'ddf617232a0fd602e925eb2a96c61c74';
 
-  //주소 저장할 state
-  const [address, setAddress] = useState({
-    region2: "",
-    region3: ""
-  })
-
-  //위경도 -> 행정동 주소로 바꾸는 카카오 api
-  const kakaoAddress2 = async (location) => {
-    const apiUrl = 'https://dapi.kakao.com/v2/local/geo/coord2address.json';
-    const params = {
-      x: location.longitude,
-      y: location.latitude,
-      input_coord: "WGS84"
-    };
-    const headers = {
-      Authorization: `KakaoAK ${apiKey}`
-    };
-    if (location.latitude && location.longitude) {
-      await axios.get(apiUrl, { params, headers })
-        .then((res) => {
-          console.log(res.data.documents[0].address.region_2depth_name);
-          setAddress({
-            region2: res.data.documents[0].address.region_2depth_name,
-            region3: res.data.documents[0].address.region_3depth_name
-          })
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }
 
   useEffect(() => {
     if (location.latitude && location.longitude) {
       getShortMainData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/short/main/now?locationX=${location.latitude}&locationY=${location.longitude}`);
-      kakaoAddress2({ latitude: location.latitude, longitude: location.longitude });
     }
   }, [location.latitude, location.longitude, getShortMainData]);
 
