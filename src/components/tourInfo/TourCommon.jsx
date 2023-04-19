@@ -67,15 +67,16 @@ export default function TourCommon() {
 
 }
 
-const StyledImage = styled(Image)`
+export const StyledImage = styled(Image)`
 height:60%;
 width:60%;
 `;
 
-const CommonWrap = styled.div`
+export const CommonWrap = styled.div`
 flex-direction: column;
 display: flex;
 align-items: center;
+flex:1;
 
 `
 

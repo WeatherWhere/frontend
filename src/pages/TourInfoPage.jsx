@@ -8,6 +8,7 @@ import TourCommon from "../components/tourInfo/TourCommon";
 import GlobalStyle from "../styles/fonts/fonts";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import TourDetail from "../components/tourInfo/TourDetail";
 
 export default function TourInfoPage() {
 
@@ -39,6 +40,7 @@ export default function TourInfoPage() {
             <TourCommon/>
           </Tab>
           <Tab eventKey="detail" title="소개 정보">
+            <TourDetail/>
           </Tab>
         </StyledTabs>
       </Background>            
@@ -64,6 +66,9 @@ const Background = styled.div`
   box-shadow: 3px 3px 70px rgba(0, 128, 0, 0.1);
   margin:0.4rem;
   border-radius:1%
+  display:flex;
+  flex-direction: column;
+
 `;
 
 const RootPage = styled.section`
