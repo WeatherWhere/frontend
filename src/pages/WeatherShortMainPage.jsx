@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../layout/Header";
 import WeatherShortMainNow from "../components/weather/weatherShortMainNow/WeatherShortMainNow";
 import WeatherShortMainAll from "../components/weather/weatherShortMainAll/WeatherShortMainAll";
 import WeatherMidMainAll from "../components/weather/WeatherMidMainAll";

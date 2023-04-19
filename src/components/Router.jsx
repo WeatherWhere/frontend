@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WeatherShortMainPage from "../pages/WeatherShortMainPage";
 import AirPage from "../pages/AirPage";
-import TourMap from "../pages/MapPage";
 import WeatherShortSubPage from "../pages/WeatherShortSubPage";
 import SearchMapPage from "../pages/SearchMapPage";
 import Header from "../layout/Header";
+import RecommendMapPage from "../pages/RecommendMapPage";
 
 export default function Router() {
   const [location, setLocation] = useState({
@@ -56,8 +56,8 @@ export default function Router() {
             path="air/realtime"
             element={<AirPage location={location} />}
           />
-          <Route path="tour/recommend" element={<TourMap />} />
           <Route path="tour/search" element={<SearchMapPage />} />
+          <Route path="tour/recommend" element={<RecommendMapPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

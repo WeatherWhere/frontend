@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import Header from "../layout/Header";
 import SearchMap from "../components/tourMap/search/SearchMap";
 import WeatherShortMainAll from "../components/weather/weatherShortMainAll/WeatherShortMainAll";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
+import { PageWrap } from "./WeatherShortMainPage";
 
 export default function SearchMapPage() {
   const { lat, lng } = useParams();
@@ -14,16 +13,9 @@ export default function SearchMapPage() {
   });
 
   return (
-    <RootPage>
+    <PageWrap>
       <SearchMap />
       <WeatherShortMainAll location={location} />
-    </RootPage>
+    </PageWrap>
   );
 }
-
-const RootPage = styled.section`
-  display: flex;
-  flex-direction: column;
-
-  height: 100vh;
-`;

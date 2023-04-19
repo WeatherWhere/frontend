@@ -4,6 +4,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { StyledIcon } from "../components/weather/weatherShortMainNow/WeatherShortMainNow";
+import {
+  AIR_ICON,
+  RECOMMEND_MAP_ICON,
+  SEARCH_MAP_ICON,
+  WEATHER_ICON,
+} from "../utils/const/icon";
 
 const Container = styled.header`
   display: flex;
@@ -39,38 +45,66 @@ const LeftWrapper = styled.div`
 `;
 
 function Header() {
-  const [icons, setIcons] = useState([]);
-  const path = window.location.pathname;
+  const [infoIcon, setInfoIcon] = useState(AIR_ICON);
+  const [mapIcon, setMapIcon] = useState(SEARCH_MAP_ICON);
 
-  useEffect(() => {
-    switch (true) {
-      case path.includes("/air"):
-        setIcons([
-          { name: "ph:sun-bold", color: "FFCD9F", link: "/" },
-          { name: "uiw:map", color: "7DD178", link: "/tour/search" },
-        ]);
-        break;
-      case path.includes("/tour"):
-        setIcons([
-          {
-            name: "material-symbols:coronavirus-outline",
-            color: "B4B4B4",
-            link: "/air/realtime",
-          },
-          { name: "ph:sun-bold", color: "FFCD9F", link: "/" },
-        ]);
-        break;
-      default:
-        setIcons([
-          {
-            name: "material-symbols:coronavirus-outline",
-            color: "B4B4B4",
-            link: "/air/realtime",
-          },
-          { name: "uiw:map", color: "7DD178", link: "/tour/search" },
-        ]);
+  const handleInfoIconClick = () => {
+    if (infoIcon === AIR_ICON) {
+      setInfoIcon(WEATHER_ICON);
+    } else {
+      setInfoIcon(AIR_ICON);
     }
-  }, [path]);
+  };
+
+  const handleMapIconClick = () => {
+    if (mapIcon === SEARCH_MAP_ICON) {
+      setMapIcon(RECOMMEND_MAP_ICON);
+    } else {
+      setMapIcon(SEARCH_MAP_ICON);
+    }
+  };
+  // useEffect(() => {
+  //   switch (true) {
+  //     case path.includes("/air/realtime"):
+  //       setIcons([
+  //         { name: "ph:sun-bold", color: "FFCD9F", link: "" },
+  //         { name: "uiw:map", color: "7DD178", link: "/tour/search" },
+  //       ]);
+  //       break;
+  //     case path.includes("/tour/search"):
+  //       setIcons([
+  //         {
+  //           name: "material-symbols:coronavirus-outline",
+  //           color: "B4B4B4",
+  //           link: "",
+  //         },
+  //         { name: "ph:sun-bold", color: "FFCD9F", link: "/tour/recommend" },
+  //       ]);
+  //       break;
+  //     case path.includes("/tour/recommend"):
+  //       setIcons([
+  //         setIcons([
+  //           {
+  //             name: "material-symbols:coronavirus-outline",
+  //             color: "B4B4B4",
+  //             link: "/air/realtime",
+  //           },
+  //           { name: "ph:sun-bold", color: "FFCD9F", link: "/tour/search" },
+  //         ]),
+  //       ]);
+  //       break;
+  //     default:
+  //       setIcons([
+  //         {
+  //           name: "material-symbols:coronavirus-outline",
+  //           color: "B4B4B4",
+  //           link: "/air/realtime",
+  //         },
+  //         { name: "uiw:map", color: "7DD178", link: "/tour/search" },
+  //       ]);
+  //   }
+  //   setPath(window.location.pathname);
+  // }, [path]);
 
   return (
     <>
@@ -90,20 +124,29 @@ function Header() {
           />
         </LogoWrapper>
         <IconWrapper>
-          {icons.map((icon, index) => (
-            <Link key={icon.name} to={icon.link}>
-              <StyledIcon
-                key={icon.name}
-                name={icon.name}
-                size="2rem"
-                color={icon.color}
-                index={index}
-                margin="0.2rem"
-              />
-            </Link>
-          ))}
+          <Link key={infoIcon.name} to={infoIcon.link}>
+            <StyledIcon
+              key={infoIcon.name}
+              name={infoIcon.name}
+              size="2rem"
+              color={infoIcon.color}
+              margin="0.2rem"
+              onClick={handleInfoIconClick}
+            />
+          </Link>
+          <Link key={mapIcon.name} to={mapIcon.link}>
+            <StyledIcon
+              key={mapIcon.name}
+              name={mapIcon.name}
+              size="2rem"
+              color={mapIcon.color}
+              margin="0.2rem"
+              onClick={handleMapIconClick}
+            />
+          </Link>
         </IconWrapper>
       </Container>
+      {/* 일정한 뷰를 위해 Outlet을 감싸는 컴포넌트 필요 */}
       <Outlet />
     </>
   );
