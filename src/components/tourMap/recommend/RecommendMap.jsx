@@ -11,7 +11,8 @@ import {
 } from "react-kakao-maps-sdk";
 import CustomOverlayBox from "../common/CustomOverlayBox";
 
-export default function RecommendMap() {
+export default function RecommendMap(props) {
+  const { showModal } = props;
   const [level, setLevel] = useState(13);
   const [tourPositions, setTourPositions] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState();
@@ -91,10 +92,9 @@ export default function RecommendMap() {
             yAnchor={1.5}
           >
             <CustomOverlayBox
-              title={tourInfo.title}
-              firstImage={tourInfo.firstImage}
-              addr={tourInfo.addr}
+              tourInfo={tourInfo}
               setIsOpen={setIsOpen}
+              showModal={showModal}
             />
           </CustomOverlayMap>
         )}

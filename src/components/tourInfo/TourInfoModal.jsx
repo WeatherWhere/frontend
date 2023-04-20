@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import WeatherShortMainAll from "../components/weather/weatherShortMainAll/WeatherShortMainAll";
+import WeatherShortMainAll from "../weather/weatherShortMainAll/WeatherShortMainAll";
 import styled from "styled-components";
-import TourCommon from "../components/tourInfo/TourCommon";
-import GlobalStyle from "../styles/fonts/fonts";
+import TourCommon from "./TourCommon";
+import GlobalStyle from "../../styles/fonts/fonts";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import TourDetail from "../components/tourInfo/TourDetail";
+import TourDetail from "./TourDetail";
+import { CLOSE_ICON } from "../../utils/const/icon";
+import { Icon } from "@iconify/react";
 
-export default function TourInfoPage() {
+export default function TourInfoModal(props) {
+  const { isOpen, setModalOpen, modalInfo } = props;
+  console.log(modalInfo);
   //const { lat, lng } = useParams();
 
   // const [location] = useState({
@@ -21,7 +25,7 @@ export default function TourInfoPage() {
   });
 
   return (
-    <RootPage>
+    <RootPage isOpen={isOpen}>
       <GlobalStyle />
       <Background>
         <StyledTabs defaultActiveKey="common" className="mb-3" justify>
@@ -34,6 +38,7 @@ export default function TourInfoPage() {
         </StyledTabs>
       </Background>
       <WeatherShortMainAll location={location} />
+      <StClose name={CLOSE_ICON.name} onClick={() => setModalOpen(false)} />
     </RootPage>
   );
 }
@@ -62,4 +67,31 @@ const RootPage = styled.section`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100%;
+  border-radius: 10px;
+
+  background-color: white;
+  z-index: 999;
+
+  position: absolute;
+  top: 6%;
+  translate: translate(-50%, -50%);
+  animation: slide-up 0.8s ease;
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+`;
+
+const StClose = styled(Icon).attrs((props) => ({
+  icon: props.name,
+}))`
+  position: absolute;
+  right: 7px;
+  top: 7px;
 `;

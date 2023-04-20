@@ -3,10 +3,10 @@ import styled from "styled-components";
 import ImgNotFound from "../../../styles/img/ImgNotFound.png";
 import { CLOSE_ICON, RIGHT_ARROW_ICON } from "../../../utils/const/icon";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
 
 export default function CustomOverlayBox(props) {
-  const { title, firstImage, addr, setIsOpen } = props;
+  const { tourInfo, setIsOpen, showModal } = props;
+  const { title, firstImage, addr } = tourInfo;
   const compressAddr = addr.split(" ");
 
   return (
@@ -25,9 +25,8 @@ export default function CustomOverlayBox(props) {
           <StAddr>{compressAddr[0] + " " + compressAddr[1]}</StAddr>
         </StBody>
         <StLink
-          to={{
-            pathname: RIGHT_ARROW_ICON.link,
-            state: props,
+          onClick={() => {
+            showModal(tourInfo);
           }}
         >
           <StArrow name={RIGHT_ARROW_ICON.name} />
@@ -77,7 +76,7 @@ const StBody = styled.div`
   width: 85%;
 `;
 
-const StLink = styled(Link)`
+const StLink = styled.div`
   display: flex;
   align-items: center;
   width: 15%;
