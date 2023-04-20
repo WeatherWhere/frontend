@@ -71,7 +71,7 @@ const RootPage = styled.section`
   border-radius: 10px;
 
   background-color: white;
-  z-index: 999;
+  z-index: 1000;
 
   position: absolute;
   top: 6%;

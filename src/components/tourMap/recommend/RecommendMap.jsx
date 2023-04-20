@@ -90,6 +90,7 @@ export default function RecommendMap(props) {
             position={{ lat: mapy, lng: mapx }}
             xAnchor={0.38}
             yAnchor={1.5}
+            zIndex={999}
           >
             <CustomOverlayBox
               tourInfo={tourInfo}

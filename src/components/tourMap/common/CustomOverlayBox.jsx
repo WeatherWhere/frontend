@@ -47,6 +47,8 @@ const StInfoWrap = styled.section`
 
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+
+  z-index: 999;
 `;
 
 const ImageWrapper = styled.div`
