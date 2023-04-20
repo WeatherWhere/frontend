@@ -7,9 +7,9 @@ import GlobalStyle from "../../styles/fonts/fonts";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 
-export default function WeatherMidMainAll({ location }) {
+export default function WeatherMidMainAll({ address }) {
 
-    const mockRegionCode = "11B10101";
+    // const mockRegionCode = "11B10101";
     const [midData, setMidData] = useState([]);
 
     const data = midData.map((value, index) => {
@@ -44,12 +44,18 @@ export default function WeatherMidMainAll({ location }) {
 
     }, []);
 
-    useEffect(() => {
-        if (location.latitude && location.longitude) {
-            getMidData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/week?regionCode=${mockRegionCode}`);
-        }
-    }, [location.latitude, location.longitude, getMidData]);
+    // useEffect(() => {
+    //     if (address) {
+    //         getMidData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/week?regionCode=${mockRegionCode}&`);
+    //     }
+    // }, [address, getMidData]);
 
+    useEffect(() => {
+        if (address) {
+            getMidData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/mid?region1=${address.region1}&region2=${address.region2}`);
+        }
+    }, [address, getMidData]);
+    
     return (
         <>
             <Background>
@@ -194,6 +200,6 @@ export const StyledIcon = styled(Icon).attrs(props => ({
     margin-left:0.2rem;
   `;
 
-const TR = styled.tr`
+export const TR = styled.tr`
 
 `;

@@ -1,7 +1,7 @@
 import { Container, StyledIcon, Text } from "../weather/weatherShortMainNow/WeatherShortMainNow";
 
 
-export default function AddressIconText(props) {
+export default function AddressIconText({address}) {
 
     // const [query, setQuery] = useState('');
 
@@ -29,7 +29,7 @@ export default function AddressIconText(props) {
         <>
         <Container marginTop="0.8rem" padding="1rem">
             <StyledIcon name="ri:map-pin-2-line" size="1.7rem" />
-            <Text fontSize="1.2rem" padding="0.8rem">{props.address.region2 + ` ` + props.address.region3} </Text>
+            <Text fontSize="1.2rem" padding="0.8rem">{address.region2 + ` ` +address.region3} </Text>
             <StyledIcon name="ic:baseline-search" size="1.7rem" />
         </Container>
         </>

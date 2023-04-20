@@ -5,8 +5,9 @@ import ThreeSubData from "./ThreeSubData";
 import axios from "axios";
 import GlobalStyle from "../../../styles/fonts/fonts";
 import AddressIconText from "../../common/AddressIconText";
+import { Button } from "../../airRealTime/AirRealTime";
 
-export default function WeatherShortMainNow({ location, setNowOrMid }) {
+export default function WeatherShortMainNow({ location, setNowOrMid, address, nowOrMid }) {
 
 
   const handleNowClick = () => {
@@ -29,44 +30,11 @@ export default function WeatherShortMainNow({ location, setNowOrMid }) {
     }
   }, []);
 
-  const apiKey = 'ddf617232a0fd602e925eb2a96c61c74';
 
-  //주소 저장할 state
-  const [address, setAddress] = useState({
-    region2: "",
-    region3: ""
-  })
-
-  //위경도 -> 행정동 주소로 바꾸는 카카오 api
-  const kakaoAddress2 = async (location) => {
-    const apiUrl = 'https://dapi.kakao.com/v2/local/geo/coord2address.json';
-    const params = {
-      x: location.longitude,
-      y: location.latitude,
-      input_coord: "WGS84"
-    };
-    const headers = {
-      Authorization: `KakaoAK ${apiKey}`
-    };
-    if (location.latitude && location.longitude) {
-      await axios.get(apiUrl, { params, headers })
-        .then((res) => {
-          console.log(res.data.documents[0].address.region_2depth_name);
-          setAddress({
-            region2: res.data.documents[0].address.region_2depth_name,
-            region3: res.data.documents[0].address.region_3depth_name
-          })
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }
 
   useEffect(() => {
     if (location.latitude && location.longitude) {
       getShortMainData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/short/main/now?locationX=${location.latitude}&locationY=${location.longitude}`);
-      kakaoAddress2({ latitude: location.latitude, longitude: location.longitude });
     }
   }, [location.latitude, location.longitude, getShortMainData]);
 
@@ -99,8 +67,8 @@ export default function WeatherShortMainNow({ location, setNowOrMid }) {
           </Container>
           <ThreeSubData value={shortMainNowData} />
           <ButtonWrap>
-            <Button onClick={handleNowClick}>하루</Button>
-            <Button onClick={handleMidClick}>주간</Button>
+            <Button onClick={handleNowClick} color={nowOrMid? getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[1] : "#969696"}>하루</Button>
+            <Button onClick={handleMidClick} color={nowOrMid?  "#969696" : getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[1]}>주간</Button>
           </ButtonWrap>
         </Background>
 
@@ -123,7 +91,7 @@ export default function WeatherShortMainNow({ location, setNowOrMid }) {
 
 const Background = styled.div`
   background-color: ${(props) => {
-      const color = getSkyStatus(props.sky, props.pty = 0)[1];
+      const color = getSkyStatus(props.sky, props.pty)[1];
       return color;
     }};
   flex-direction: column;
@@ -131,7 +99,6 @@ const Background = styled.div`
   flex-wrap: wrap;
   display: flex;
   align-items: center;
-  border-radius: 10px;
 `;
 
 
@@ -154,8 +121,7 @@ export const ButtonWrap = styled.div`
   justify-content: flex-start;
   margin-right:auto;
 `;
-export const Button = styled.button`
-`
+
 
 export const Text = styled(Container)`
   font-size: ${(props) => props.fontSize};
@@ -166,7 +132,6 @@ export const Text = styled(Container)`
   padding:${(props) => props.padding};
   margin-left:${(props) => props.marginLeft};
   margin-right:${(props) => props.marginRight};
-
 `;
 
 

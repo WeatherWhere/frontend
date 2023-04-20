@@ -23,9 +23,7 @@ export default function TourDetail() {
       .then((res) => res.json())
       .then((data) => {
         //console.log(data.position[0]);
-        getWeatherMidForecast(
-          `${process.env.REACT_APP_BASE_URL}/tour/api3?contentId=264570&contentTypeId=12`
-        );
+          getWeatherMidForecast(`${process.env.REACT_APP_BASE_URL}/tour/detail?contentId=264570&contentTypeId=12`);
       });
   }, [getWeatherMidForecast]);
 
@@ -42,17 +40,17 @@ export default function TourDetail() {
             <Table>
               <thead>
                 <tr>
-                  <th>{detailData.useTime}</th>
+                  <th>강남</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <TD borderLeft="0">이용시간 </TD>
+                  <TD space="nowrap">이용시간 </TD>
                   <TD>{detailData.useTime}</TD>
                 </tr>
                 <tr>
-                  <TD borderLeft="0">개요</TD>
-                  <TD height="10rem"></TD>
+                  <TD >개요</TD>
+                  <TD></TD>
                 </tr>
               </tbody>
             </Table>
@@ -64,6 +62,7 @@ export default function TourDetail() {
     </>
   );
 }
+
 
 export const TableWrap = styled.div`
   padding: 0.3rem;

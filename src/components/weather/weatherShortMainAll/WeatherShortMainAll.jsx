@@ -134,7 +134,7 @@ export const Table = styled.table`
     position: relative;
     overflowY: scroll;
     color:#969696;
-    font-size:0.7rem;
+    font-size:0.9rem;
     padding: 0.5rem 0;
     border-collapse: collapse;
     margin: auto;
