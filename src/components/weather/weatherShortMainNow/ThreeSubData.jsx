@@ -34,7 +34,7 @@ export default function ThreeSubData(props) {
     const navigate = useNavigate();
 
     const handleDetailClick=()=>{
-        navigate("/weather2/short/main/sub", { state: props.value });
+        navigate("weather/sub", { state: props.value });
     }
 
     return (

@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Header from "../layout/Header"
-import WeatherShortMainNow from "../components/weather/weatherShortMainNow/WeatherShortMainNow"
-import WeatherShortMainAll from "../components/weather/weatherShortMainAll/WeatherShortMainAll"
+import WeatherShortMainNow from "../components/weather/weatherShortMainNow/WeatherShortMainNow";
+import WeatherShortMainAll from "../components/weather/weatherShortMainAll/WeatherShortMainAll";
 import WeatherMidMainAll from "../components/weather/WeatherMidMainAll";
 import { useState } from "react";
 import axios from "axios";
 
-
 export const PageWrap = styled.section`
-  height:100vh;
-`
-
+  height: 100vh;
+`;
 
 export default function WeatherShortMainPage({ location }) {
+
+  const [nowOrMid, setNowOrMid] = useState(true);
 
   const apiKey = 'ddf617232a0fd602e925eb2a96c61c74';
 
@@ -58,11 +57,8 @@ export default function WeatherShortMainPage({ location }) {
   }, [location.latitude, location.longitude]);
 
 
-  const [nowOrMid, setNowOrMid] = useState(true); 
-
   return (
     <PageWrap>
-      <Header />
         <WeatherShortMainNow location={location} setNowOrMid={setNowOrMid} nowOrMid={nowOrMid}address={address}/>
         {nowOrMid ? (
         <WeatherShortMainAll location={location} />
@@ -70,5 +66,5 @@ export default function WeatherShortMainPage({ location }) {
         <WeatherMidMainAll location={location} address={address} />
       )}
     </PageWrap>
-  )
+  );
 }
