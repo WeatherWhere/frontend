@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { KAKAO_MAP_DATA } from "../../../utils/const/position";
 import { MARKER } from "../../../utils/const/marker";
 import LogoGroup from "../..//../styles/img/LogoGroup.svg";
@@ -12,12 +12,18 @@ import {
 import CustomOverlayBox from "../common/CustomOverlayBox";
 
 export default function RecommendMap(props) {
-  const { showModal } = props;
+  const { showModal, selectedPositions } = props;
   const [level, setLevel] = useState(13);
-  const [tourPositions, setTourPositions] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState();
 
   const mapRef = useRef();
+
+  const normalOrigin = { x: 0, y: 0 }; // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
+  const clickOrigin = { x: MARKER.MARKER_WIDTH + MARKER.SPRITE_GAP, y: 0 }; // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
+  const overOrigin = {
+    x: MARKER.MARKER_WIDTH + MARKER.OVER_MARKER_WIDTH + MARKER.SPRITE_GAP * 2,
+    y: 0,
+  }; // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
   const onClusterclick = (_target, cluster) => {
     const map = mapRef.current;
@@ -34,24 +40,17 @@ export default function RecommendMap(props) {
     handleClick,
     isClicked,
   }) => {
-    const { mapx, mapy } = tourInfo;
+    const { latitude, longitude } = tourInfo;
 
     const [isOver, setIsOver] = useState(false);
-    const [isOpen, setIsOpen] = useState(isClicked);
+    const [isModalOpen, setIsModalOpen] = useState(isClicked);
 
     const map = useMap();
     const handleOverlayClick = (marker) => {
       handleClick();
-      setIsOpen(true);
+      setIsModalOpen(true);
       map.panTo(marker.getPosition());
     };
-
-    const normalOrigin = { x: 0, y: 0 }; // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
-    const clickOrigin = { x: MARKER.MARKER_WIDTH + MARKER.SPRITE_GAP, y: 0 }; // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
-    const overOrigin = {
-      x: MARKER.MARKER_WIDTH + MARKER.OVER_MARKER_WIDTH + MARKER.SPRITE_GAP * 2,
-      y: 0,
-    }; // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
     let spriteOrigin = isOver ? overOrigin : normalOrigin;
 
@@ -62,7 +61,7 @@ export default function RecommendMap(props) {
     return (
       <>
         <MapMarker
-          position={{ lat: mapy, lng: mapx }} // 마커를 표시할 위치
+          position={{ lat: latitude, lng: longitude }} // 마커를 표시할 위치
           image={{
             src: LogoGroup,
             size: {
@@ -85,16 +84,16 @@ export default function RecommendMap(props) {
           onMouseOver={() => setIsOver(true)}
           onMouseOut={() => setIsOver(false)}
         />
-        {isOpen && (
+        {isModalOpen && (
           <CustomOverlayMap
-            position={{ lat: mapy, lng: mapx }}
+            position={{ lat: latitude, lng: longitude }}
             xAnchor={0.38}
             yAnchor={1.5}
             zIndex={999}
           >
             <CustomOverlayBox
               tourInfo={tourInfo}
-              setIsOpen={setIsOpen}
+              setIsModalOpen={setIsModalOpen}
               showModal={showModal}
             />
           </CustomOverlayMap>
@@ -102,15 +101,6 @@ export default function RecommendMap(props) {
       </>
     );
   };
-
-  useEffect(() => {
-    fetch("/mock/tour_data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setTourPositions(data.position);
-      });
-  }, []);
 
   return (
     <>
@@ -135,9 +125,9 @@ export default function RecommendMap(props) {
           disableClickZoom={true}
           onClusterclick={onClusterclick}
         >
-          {tourPositions.map((tourInfo, index) => (
+          {selectedPositions.map((tourInfo, index) => (
             <EventMarkerContainer
-              key={`EventMarkerContainer-${tourInfo.contentId}`}
+              key={`EventMarkerContainer-${tourInfo.contentId}-${index}`}
               index={index}
               tourInfo={tourInfo}
               handleClick={() => setSelectedMarker(index)}

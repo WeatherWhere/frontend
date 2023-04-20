@@ -5,7 +5,7 @@ import { CLOSE_ICON, RIGHT_ARROW_ICON } from "../../../utils/const/icon";
 import { Icon } from "@iconify/react";
 
 export default function CustomOverlayBox(props) {
-  const { tourInfo, setIsOpen, showModal } = props;
+  const { tourInfo, setIsModalOpen, showModal } = props;
   const { title, firstImage, addr } = tourInfo;
   const compressAddr = addr.split(" ");
 
@@ -15,7 +15,7 @@ export default function CustomOverlayBox(props) {
         {firstImage ? <StImg src={firstImage} /> : <StImg src={ImgNotFound} />}
         <StClose
           name={CLOSE_ICON.name}
-          onClick={() => setIsOpen(false)}
+          onClick={() => setIsModalOpen(false)}
           color={firstImage ? "gray" : "white"}
         />
       </ImageWrapper>
