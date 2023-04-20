@@ -1,23 +1,26 @@
-import styled from 'styled-components';
-import WeatherWhereLogoText from '../styles/img/WeatherWhereLogoText.svg'
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { StyledIcon } from '../components/weather/weatherShortMainNow/WeatherShortMainNow';
-
+import styled from "styled-components";
+import WeatherWhereLogoText from "../styles/img/WeatherWhereLogoText.svg";
+import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { StyledIcon } from "../components/weather/weatherShortMainNow/WeatherShortMainNow";
+import {
+  AIR_ICON,
+  RECOMMEND_MAP_ICON,
+  SEARCH_MAP_ICON,
+  WEATHER_ICON,
+} from "../utils/const/icon";
 
 const Container = styled.header`
   display: flex;
   padding: 0.1rem;
   background-color: #fff;
   height: 3.6rem;
-  z-index:6;
-
+  z-index: 6;
 `;
 
 const Logo = styled.img`
-height:3rem;
-`
+  height: 3rem;
+`;
 
 const LogoWrapper = styled.div`
   display: flex;
@@ -40,63 +43,70 @@ const LeftWrapper = styled.div`
   flex: 1;
 `;
 
-
 function Header() {
+  const [infoIcon, setInfoIcon] = useState(AIR_ICON);
+  const [mapIcon, setMapIcon] = useState(SEARCH_MAP_ICON);
 
-  const [icons, setIcons] = useState([]);
-  const path = window.location.pathname;
+  const handleInfoIconClick = () => {
+    if (infoIcon === AIR_ICON) {
+      setInfoIcon(WEATHER_ICON);
+    } else {
+      setInfoIcon(AIR_ICON);
+    }
+  };
 
-  useEffect(() => {
-    switch (true) {
-      case path.includes("/air2"):
-        setIcons([
-          { name: "ph:sun-bold", color: "FFCD9F", link: "/" },
-          { name: "uiw:map", color: "7DD178", link: "/tour2/map" }
-        ]);
-        break;
-      case path.includes("/tour2"):
-        setIcons([
-          { name: "material-symbols:coronavirus-outline", color: "B4B4B4", link: "/air2/realtime" },
-          { name: "ph:sun-bold", color: "FFCD9F", link: "/" }
-        ]);
-        break;
-      default:
-        setIcons([
-          { name: "material-symbols:coronavirus-outline", color: "B4B4B4", link: "/air2/realtime" },
-          { name: "uiw:map", color: "7DD178", link: "/tour2/map" }
-        ]);    }
-  }, [path]);
+  const handleMapIconClick = () => {
+    if (mapIcon === SEARCH_MAP_ICON) {
+      setMapIcon(RECOMMEND_MAP_ICON);
+    } else {
+      setMapIcon(SEARCH_MAP_ICON);
+    }
+  };
 
   return (
-    <Container>
-      <LeftWrapper >
-        <StyledIcon name="material-symbols:menu-rounded" color="B4B4B4" size="2rem" />
-      </LeftWrapper>
-      <LogoWrapper>
-        <Logo
-          src={WeatherWhereLogoText}
-          alt="logo"
-          onClick={() => (window.location.href = "/")}
-        />
-      </LogoWrapper>
-      <IconWrapper>
-        {icons.map((icon, index) => (
-          <Link key={icon.name} to={icon.link}>
+    <>
+      <Container>
+        <LeftWrapper>
+          <StyledIcon
+            name="material-symbols:menu-rounded"
+            color="B4B4B4"
+            size="2rem"
+          />
+        </LeftWrapper>
+        <LogoWrapper>
+          <Logo
+            src={WeatherWhereLogoText}
+            alt="logo"
+            onClick={() => (window.location.href = "/")}
+          />
+        </LogoWrapper>
+        <IconWrapper>
+          <Link key={infoIcon.name} to={infoIcon.link}>
             <StyledIcon
-              key={icon.name}
-              name={icon.name}
+              key={infoIcon.name}
+              name={infoIcon.name}
               size="2rem"
-              color={icon.color}
-              index={index}
+              color={infoIcon.color}
               margin="0.2rem"
+              onClick={handleInfoIconClick}
             />
           </Link>
-        ))}
-      </IconWrapper>
-    </Container>
-
+          <Link key={mapIcon.name} to={mapIcon.link}>
+            <StyledIcon
+              key={mapIcon.name}
+              name={mapIcon.name}
+              size="2rem"
+              color={mapIcon.color}
+              margin="0.2rem"
+              onClick={handleMapIconClick}
+            />
+          </Link>
+        </IconWrapper>
+      </Container>
+      {/* 일정한 뷰를 위해 Outlet을 감싸는 컴포넌트 필요 */}
+      <Outlet />
+    </>
   );
 }
-
 
 export default Header;
