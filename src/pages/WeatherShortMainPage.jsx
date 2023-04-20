@@ -63,7 +63,7 @@ export default function WeatherShortMainPage({ location }) {
   return (
     <PageWrap>
       <Header />
-        <WeatherShortMainNow location={location} setNowOrMid={setNowOrMid} address={address}/>
+        <WeatherShortMainNow location={location} setNowOrMid={setNowOrMid} nowOrMid={nowOrMid}address={address}/>
         {nowOrMid ? (
         <WeatherShortMainAll location={location} />
       ) : (

@@ -28,6 +28,7 @@ export default function TourInfoPage() {
       <Header />
       <GlobalStyle />
       <Background>
+        <TapWrap>
         <StyledTabs
           defaultActiveKey="common"
           className="mb-3"
@@ -40,13 +41,14 @@ export default function TourInfoPage() {
             <TourDetail/>
           </Tab>
         </StyledTabs>
+        </TapWrap>
       </Background>            
       <WeatherShortMainAll location={location} />
     </RootPage>
   )
 }
 const StyledTabs = styled(Tabs)`
-
+  display:flex;
   .nav-link {
     color: #969696;
   }
@@ -56,20 +58,27 @@ const StyledTabs = styled(Tabs)`
   }
 `;
 
-
 const Background = styled.div`
   height: 66%;
-  align-items: center;
   box-shadow: 3px 3px 70px rgba(0, 128, 0, 0.1);
   margin:0.4rem;
   border-radius:1%
   display:flex;
-  flex-direction: column;
+  justify-content:center;
 
-`;
+  `;
 
 const RootPage = styled.section`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  
 `;
+const TapWrap = styled.div`
+display:flex;
+justify-content:top;
+align-item: center;
+flex-direction:column;
+height: 100%;
+
+`

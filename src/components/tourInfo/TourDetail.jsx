@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
+import { Image } from "react-bootstrap";
 import styled from "styled-components";
 import GlobalStyle from "../../styles/fonts/fonts";
-import { CommonWrap, StyledImage } from "./TourCommon";
 
 export default function TourDetail() {
 
@@ -25,7 +25,7 @@ export default function TourDetail() {
       .then((res) => res.json())
       .then((data) => {
         //console.log(data.position[0]);
-          getWeatherMidForecast(`${process.env.REACT_APP_BASE_URL}/tour/api3?contentId=264570&contentTypeId=12`);
+          getWeatherMidForecast(`${process.env.REACT_APP_BASE_URL}/tour/detail?contentId=264570&contentTypeId=12`);
       });
 
   }, [getWeatherMidForecast]);
@@ -40,17 +40,17 @@ export default function TourDetail() {
             <Table>
               <thead>
                 <tr>
-                  <th>{detailData.useTime}</th>
+                  <th>강남</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <TD borderLeft="0">이용시간 </TD>
+                  <TD space="nowrap">이용시간 </TD>
                   <TD>{detailData.useTime}</TD>
                 </tr>
                 <tr>
-                  <TD borderLeft="0">개요</TD>
-                  <TD height="10rem"></TD>
+                  <TD >개요</TD>
+                  <TD></TD>
                 </tr>
               </tbody>
             </Table>
@@ -63,33 +63,41 @@ export default function TourDetail() {
 
 }
 
+const CommonWrap = styled.div`
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  height:auto;
+
+`
+
+const StyledImage = styled(Image)`
+  height:60%;
+  width:70%;
+`;
 
 
-export const TableWrap = styled.div`
+const TableWrap = styled.div`
     padding:0.3rem;
     align-items: center;
     display: flex;
     justify-content:center;
 `
 
-export const Table = styled.table`
-  width:95%;
+const Table = styled.table`
     display: flex;
     align-items: center;
     color:#969696;
-    font-size:0.8rem;
+    font-size:0.9rem;
     padding: 0.2rem 0;
     flex-direction: column;
+    margin:1rem;
 `;
 
-export const TD = styled.td`
-    height: ${(props)=>props.height};
-    width:90%;
-    display: flex;
+const TD = styled.td`
     text-align: center;
     padding: 0 0.3rem 0rem 0.3rem;
     overflow-y: scroll;
-
+    align-items: center;
 `;
-    
 

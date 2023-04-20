@@ -35,6 +35,7 @@ export default function AirPage({location}) {
   const apiKey = 'ddf617232a0fd602e925eb2a96c61c74';
   //주소 저장할 state
   const [address, setAddress] = useState({
+    address_name: "",
     region2: "",
     region3: ""
   })
@@ -55,6 +56,7 @@ export default function AirPage({location}) {
         .then((res) => {
           console.log(res.data.documents[0].address.region_2depth_name);
           setAddress({
+            address_name: res.data.documents[0].address.address_name,
             region2: res.data.documents[0].address.region_2depth_name,
             region3: res.data.documents[0].address.region_3depth_name
           })
@@ -76,12 +78,13 @@ export default function AirPage({location}) {
   return (
     <PageWrap>
       <Header />
-      <AirRealTime location={location} airRealtimeData={airRealtimeData} address={address} setNowOrMid={setNowOrMid}/>
+      <AirRealTime location={location} airRealtimeData={airRealtimeData} address={address} setNowOrMid={setNowOrMid} nowOrMid ={nowOrMid} />
       {nowOrMid ? (
         <AirSubBottom airRealtimeData={airRealtimeData}/>
       ) : (
-        <AirMidBottom location={location}/>
+        <AirMidBottom location={location} address={address}/>
       )}
     </PageWrap>
   )
 }
+

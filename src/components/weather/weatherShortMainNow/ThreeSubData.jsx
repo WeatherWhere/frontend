@@ -44,24 +44,24 @@ export default function ThreeSubData(props) {
                 <IconWrap>
                 <StyledIcon name="iwwa:humidity" size="3rem" />
                 </IconWrap>
-                <Text fontSize="0.7rem">{props.value.reh}%</Text>
-                <Text fontSize="0.1rem">습도</Text>
+                <Text fontSize="0.8rem">{props.value.reh}%</Text>
+                <Text fontSize="0.7rem">습도</Text>
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
                 <IconWrap>
                 <StyledIcon name="wi:umbrella" size="3rem" />
                 </IconWrap>
-                <Text fontSize="0.7rem">{props.value.pop}%</Text>
-                <Text fontSize="0.1rem">강수확률</Text>
+                <Text fontSize="0.8rem">{props.value.pop}%</Text>
+                <Text fontSize="0.7rem">강수확률</Text>
             </MinMaxText>
             <Line />
             <MinMaxText padding="0.1rem">
             <IconWrap>
                 <StyledIcon name="fluent:weather-squalls-20-regular" size="3rem" />
                 </IconWrap>
-                <Text fontSize="0.7rem">{getWsdStatus(props.value.wsd)}</Text>
-                <Text fontSize="0.1rem">바람</Text>
+                <Text fontSize="0.8rem">{getWsdStatus(props.value.wsd)}</Text>
+                <Text fontSize="0.7rem">바람</Text>
             </MinMaxText>
         </Container>
 

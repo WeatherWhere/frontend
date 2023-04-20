@@ -3,7 +3,69 @@ import styled from "styled-components";
 import GlobalStyle from "../../styles/fonts/fonts";
 import AddressIconText from "../common/AddressIconText";
 import AirThreeSubData from "./AirThreeSubData";
-import { Button, ButtonWrap, StyledIcon } from "../weather/weatherShortMainNow/WeatherShortMainNow";
+import { ButtonWrap, StyledIcon } from "../weather/weatherShortMainNow/WeatherShortMainNow";
+
+
+export default function AirRealTime({airRealtimeData, address, setNowOrMid, nowOrMid}) {
+
+  console.log(nowOrMid);
+  
+  const handleNowClick = () => {
+    setNowOrMid(true);
+  };
+
+  const handleMidClick = () => {
+    setNowOrMid(false);
+  };
+
+  return (
+    <>
+
+      {airRealtimeData ? (
+        <Background pm10Grade={airRealtimeData.pm10Grade}>
+          <GlobalStyle />
+          <AddressIconText address={address} />
+          <Container marginTop="0.1rem" padding="0.1rem">
+            <Text fontSize="2.4rem">
+              {getPm10Grade(airRealtimeData.pm10Grade)[0]}
+            </Text>
+          </Container>
+          <Text fontSize="1rem" padding="0.5rem">{getPm10Grade(airRealtimeData.pm10Grade)[1]}</Text>
+          <Container padding="1rem">
+            <StyledIcon name={getPm10Grade(airRealtimeData.pm10Grade)[2]} size="12rem" />
+          </Container>
+          <AirThreeSubData airRealtimeData={airRealtimeData} />
+          <ButtonWrap>
+            <Button color={nowOrMid? getPm10Grade(airRealtimeData.pm10Grade)[3] : "#969696"} onClick={handleNowClick}>현재</Button>
+            <Button color={nowOrMid?  "#969696" : getPm10Grade(airRealtimeData.pm10Grade)[3]} onClick={handleMidClick}>주간</Button>
+          </ButtonWrap>
+        </Background>
+
+      ) :
+        <Background>
+          <GlobalStyle />
+          <Text>Loading...</Text>
+        </Background>
+      }
+
+    </>
+  );
+}
+
+
+export const Button = styled.button`
+  background-color: white;
+  color: ${(props) => props.color};
+
+  &:active{
+    background: ${(props) => props.color};
+  }
+  font-size: 0.9rem;
+  border-radius:4px;
+  border: none;
+  margin:0.2rem;
+}
+`
 
 const Background = styled.div`
   background-color: ${(props) => {
@@ -16,7 +78,6 @@ const Background = styled.div`
   flex-wrap: wrap;
   display: flex;
   align-items: center;
-  border-radius: 10px;
 
 `;
 
@@ -58,50 +119,4 @@ const getPm10Grade = (pm10Grade) => {
     default:
       return ["알수없음", "", "", "#6E6E6E"];
   }
-}
-
-
-export default function AirRealTime({airRealtimeData, address, setNowOrMid}) {
-
-
-  const handleNowClick = () => {
-    setNowOrMid(true);
-  };
-
-  const handleMidClick = () => {
-    setNowOrMid(false);
-  };
-
-  return (
-    <>
-
-      {airRealtimeData ? (
-        <Background pm10Grade={airRealtimeData.pm10Grade}>
-          <GlobalStyle />
-          <AddressIconText address={address} />
-          <Container marginTop="0.1rem" padding="0.1rem">
-            <Text fontSize="2.4rem">
-              {getPm10Grade(airRealtimeData.pm10Grade)[0]}
-            </Text>
-          </Container>
-          <Text fontSize="1rem" padding="0.5rem">{getPm10Grade(airRealtimeData.pm10Grade)[1]}</Text>
-          <Container padding="1rem">
-            <StyledIcon name={getPm10Grade(airRealtimeData.pm10Grade)[2]} size="12rem" />
-          </Container>
-          <AirThreeSubData airRealtimeData={airRealtimeData} />
-          <ButtonWrap>
-            <Button onClick={handleNowClick}>현재</Button>
-            <Button onClick={handleMidClick}>주간</Button>
-          </ButtonWrap>
-        </Background>
-
-      ) :
-        <Background>
-          <GlobalStyle />
-          <Text>Loading...</Text>
-        </Background>
-      }
-
-    </>
-  );
 }

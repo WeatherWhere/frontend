@@ -52,7 +52,7 @@ export default function WeatherMidMainAll({ address }) {
 
     useEffect(() => {
         if (address) {
-            getMidData(`http://localhost:8080/weather/forecast/week/address?region1=${address.region1}&region2=${address.region2}`);
+            getMidData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/mid?region1=${address.region1}&region2=${address.region2}`);
         }
     }, [address, getMidData]);
     
@@ -200,6 +200,6 @@ export const StyledIcon = styled(Icon).attrs(props => ({
     margin-left:0.2rem;
   `;
 
-const TR = styled.tr`
+export const TR = styled.tr`
 
 `;

@@ -1,153 +1,151 @@
-//대기 주간예보 컴포넌트(Bottom)
+import { Icon } from "@iconify/react";
+import { useCallback, useEffect, useState } from "react";
+import GlobalStyle from "../../styles/fonts/fonts";
+import { getWeatherShortMain } from "../../utils/lib/api";
+import { TableWrap } from "../weather/weatherShortSub/ShortSub";
+import styled from "styled-components";
+
+export default function AirMidBottom({ location, address }) {
 
 
-export default function AirMidBottom({ location }) {
+    const [airMidData, setAirMidData] = useState([]);
+
+    const data = airMidData.map((value, index) => {
+        let baseDate = value.baseDate;
+        const date = new Date(baseDate);
+        const options = { weekday: 'short' };
+        let weekday = date.toLocaleDateString('ko-KR', options);
+        if (index === 0) {
+            weekday = '오늘';
+        }
+        return {
+            weekday,
+            forecast: value.forecast,
+            reliability: value.reliability,
+
+        };
+    });
+
+    const getShortMainData = useCallback(async (key, token) => {
+        await getWeatherShortMain(key).then((res) => {
+            if (res.data.resultCode === 200) {
+                const data = res.data.data;
+                setAirMidData([...data]);
+            }
+        }).catch((e) => {
+            console.log(e);
+        });
+
+    }, []);
+
+    useEffect(() => {
+        if (location && address) {
+            getShortMainData(`${process.env.REACT_APP_BASE_URL}/air/forecast/data?addr=경기 성남시&baseDate=2023-04-20`);
+        }
+    }, [location, address, getShortMainData]);
 
 
-    // const [midSubData, setMidSubData] = useState([]);
+    return (
+        <>
+            <Background>
+                <GlobalStyle />
+                <TableWrap>
+                    <Table>
+                        <tbody>
+                            <tr>
+                                <TD borderLeft="0"></TD>
 
-    // const data = midSubData.map((value, index) => {
-        
-    //     if (index===0){
-    //         baseTime = '현재';
-    //     }
-    //     return {
-    //         fcstDateTime,
-    //         pop: value.pop,
-    //         pty: value.pty,
-    //         sky: value.sky,
-    //         tmp: value.tmp,
-    //         wsd: value.wsd,
-    //         reh: value.reh,
-    //     };
-    // });
+                                {data.map((item, index) => (
+                                    <TD key={index}>{item.weekday}</TD>
+                                ))}
+                            </tr>
+                            <tr>
+                                <TD borderLeft="0">신뢰도</TD>
 
-    // const getMidData = useCallback(async (key, token) => {
-    //     await getWeatherShortMain(key).then((res) => {
-    //         if (res.data.statusCode === 200) {
-    //             const data = res.data.data;
-    //             setMidSubData([...data]);
-    //         }
-    //     }).catch((e) => {
-    //         console.log(e);
-    //     });
+                                {data.map((item, index) => (
+                                    <TD key={index}>{item.reliability}</TD>
+                                ))}
+                            </tr>
+                            <tr>
+                                <TD borderLeft="0">위험도</TD>
 
-    // }, []);
+                                {data.map((item, index) => (
+                                    <TD key={index}>{item.forecast}</TD>
+                                ))}
+                            </tr>
 
-    // useEffect(() => {
-    //     if (location.latitude && location.longitude) {
-    //         getMidData(`/weather/forecast/short/main?locationX=${location.latitude}&locationY=${location.longitude}`);
-    //     }
-    // }, [location.latitude, location.longitude, getMidData]);
+                            <tr>
+                                <TD borderLeft="0"></TD>
+                                {data.map((item, index) => (
+                                    <TD key={index} >
+                                        <StyledIcon name={getAirQuality(item.forecast)[0]} color={getAirQuality(item.forecast)[1]} size="2rem" />
+                                    </TD>
+                                ))}
+                            </tr>
+                        </tbody>
+                    </Table>
+                </TableWrap>
 
-
-    // return (
-    //     <>
-    //         <Background>
-    //             <GlobalStyle />
-    //             <TableWrap>
-    //                 <Table>
-    //                     <tbody>
-    //                         <tr>
-    //                             <TD borderLeft="0"></TD>
-
-    //                             {data.map((item, index) => (
-    //                                 <TD key={index}>{item.fcstDateTime}</TD>
-    //                             ))}
-    //                         </tr>
-    //                         <tr>
-    //                             <TD borderLeft="0"></TD>
-    //                             {data.map((item, index) => (
-    //                                 <TD key={index} >
-    //                                     <StyledIcon name={getSkyStatus(item.sky, item.pty)[0]} color={getSkyStatus(item.sky, item.pty)[2]} size="2rem" />
-    //                                 </TD>
-    //                             ))}
-    //                         </tr>
-    //                         <tr>
-    //                             <TD borderLeft="0">기온</TD>
-
-    //                             {data.map((item, index) => (
-    //                                 <TD key={index}>{item.tmp}°</TD>
-    //                             ))}
-    //                         </tr>
-    //                         <tr>
-    //                             <TD borderLeft="0" />
-    //                             <TD colSpan="12" >
-    //                                 <ChartContainer>
-    //                                     <LineChart data={data} width={900} height={50}>
-    //                                         <Line type="linear" dataKey="tmp" stroke="#A4DCF2" strokeWidth={2}
-    //                                             curve="linear" legendType="none" dot={{ r: 5 }} />
-    //                                     </LineChart>
-    //                                 </ChartContainer>
-    //                             </TD>
-    //                         </tr>
-    //                         <tr>
-    //                             <TD borderLeft="0">강수</TD>
-
-    //                             {data.map((item, index) => (
-    //                                 <TD key={index}>{item.reh}%</TD>
-    //                             ))}
-    //                         </tr>
-    //                     </tbody>
-    //                 </Table>
-    //             </TableWrap>
-
-    //         </Background>
-    //     </>
-    // );
+            </Background>
+        </>
+    );
 
 
 }
 
 
-// export const Background = styled.div`
-//     border-radius: 10px;
-//     display: flex;
-//     align-items: center;
-//     overflow-y: auto;
-//     overflow-y: hidden;.
-//     overflow-x: auto;
-//     justify-content: center; 
+const Background = styled.div`
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    overflow-y: auto;
+    overflow-y: hidden;.
+    overflow-x: auto;
+    justify-content: center; 
+`;
 
-// `;
+const Table = styled.table`
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflowY: scroll;
+    color:#969696;
+    font-size:0.9rem;
+    padding: 0.5rem 0;
+    border-collapse: collapse;
+    margin: auto;
+    flex: 1;
+    justify-content: center; 
 
+`;
 
-// const ChartContainer = styled.div`
-//   display: flex;
-//   margin:0 1.1rem 0 1.1rem;
-  
-// `;
+const TD = styled.td`
+    text-align: center;
+    padding: 0 0.7rem 1rem 0.7rem;
+    height: 1rem;
+    white-space: nowrap;
+    border-left: ${(props) => props.borderLeft || '1px dashed #CDCDCD'};
+    `;
 
+//아이콘 컴포넌트
+export const StyledIcon = styled(Icon).attrs(props => ({
+    icon: props.name,
+    style: {
+        fontSize: props.size,
+        color: props.color
+    },
+}))`  
+`;
 
-// export const Table = styled.table`
-//     display: flex;
-//     align-items: center;
-//     position: relative;
-//     overflowY: scroll;
-//     color:#969696;
-//     font-size:0.7rem;
-//     padding: 0.5rem 0;
-//     border-collapse: collapse;
-//     margin: auto;
-//     flex: 1;
-//     justify-content: center; 
-
-// `;
-
-// export const TD = styled.td`
-//     text-align: center;
-//     padding: 0 0.3rem 0rem 0.3rem;
-//     height: 1rem;
-//     white-space: nowrap;
-//     border-left: ${(props) => props.borderLeft || '1px dashed #CDCDCD'};
-//     `;
-
-// //아이콘 컴포넌트
-// export const StyledIcon = styled(Icon).attrs(props => ({
-//     icon: props.name,
-//     style: {
-//         fontSize: props.size,
-//         color: props.color
-//     },
-// }))`  
-//   `;
+const getAirQuality = (grade) => {
+    switch (grade) {
+        case '좋음':
+            return ["ri:emotion-happy-line", "#273BBC"];
+        case '보통':
+            return ["ri:emotion-normal-line", "#179501"];
+        case '나쁨':
+            return ["mdi:emoticon-dead-outline", "#6E6E6E"];
+        default:
+            return ["mdi:emoticon-devil-outline", "#D65A5D"];
+    }
+};

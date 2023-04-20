@@ -5,8 +5,9 @@ import ThreeSubData from "./ThreeSubData";
 import axios from "axios";
 import GlobalStyle from "../../../styles/fonts/fonts";
 import AddressIconText from "../../common/AddressIconText";
+import { Button } from "../../airRealTime/AirRealTime";
 
-export default function WeatherShortMainNow({ location, setNowOrMid, address }) {
+export default function WeatherShortMainNow({ location, setNowOrMid, address, nowOrMid }) {
 
 
   const handleNowClick = () => {
@@ -66,8 +67,8 @@ export default function WeatherShortMainNow({ location, setNowOrMid, address }) 
           </Container>
           <ThreeSubData value={shortMainNowData} />
           <ButtonWrap>
-            <Button onClick={handleNowClick}>하루</Button>
-            <Button onClick={handleMidClick}>주간</Button>
+            <Button onClick={handleNowClick} color={nowOrMid? getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[1] : "#969696"}>하루</Button>
+            <Button onClick={handleMidClick} color={nowOrMid?  "#969696" : getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[1]}>주간</Button>
           </ButtonWrap>
         </Background>
 
@@ -90,7 +91,7 @@ export default function WeatherShortMainNow({ location, setNowOrMid, address }) 
 
 const Background = styled.div`
   background-color: ${(props) => {
-      const color = getSkyStatus(props.sky, props.pty = 0)[1];
+      const color = getSkyStatus(props.sky, props.pty)[1];
       return color;
     }};
   flex-direction: column;
@@ -98,7 +99,6 @@ const Background = styled.div`
   flex-wrap: wrap;
   display: flex;
   align-items: center;
-  border-radius: 10px;
 `;
 
 
@@ -121,8 +121,7 @@ export const ButtonWrap = styled.div`
   justify-content: flex-start;
   margin-right:auto;
 `;
-export const Button = styled.button`
-`
+
 
 export const Text = styled(Container)`
   font-size: ${(props) => props.fontSize};
@@ -133,7 +132,6 @@ export const Text = styled(Container)`
   padding:${(props) => props.padding};
   margin-left:${(props) => props.marginLeft};
   margin-right:${(props) => props.marginRight};
-
 `;
 
 
