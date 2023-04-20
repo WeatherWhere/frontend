@@ -21,3 +21,12 @@ export const RECOMMEND_MAP_ICON = {
   color: "7DD178",
   link: "/tour/search",
 };
+
+export const CLOSE_ICON = {
+  name: "material-symbols:close-rounded",
+};
+
+export const RIGHT_ARROW_ICON = {
+  name: "material-symbols:arrow-forward-ios-rounded",
+  link: "/tour/common",
+};
