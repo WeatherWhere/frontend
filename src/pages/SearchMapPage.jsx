@@ -18,8 +18,6 @@ export default function SearchMapPage({ location }) {
     setModalOpen(true);
   };
 
-  console.log(searchLocation);
-
   return (
     <PageWrap>
       <SearchMap

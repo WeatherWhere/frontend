@@ -12,7 +12,6 @@ export default function SearchAddress(props) {
   const getTourSearched = useCallback(async (key, searchLocation, token) => {
     try {
       const { data } = await getTourInfo(key);
-      console.log(data);
       if (data.resultCode === 200) {
         handleSearchedPositions(data.data, searchLocation);
         setIsProper(true);
@@ -43,7 +42,6 @@ export default function SearchAddress(props) {
         if (status === window.kakao.maps.services.Status.OK) {
           const location = result[0];
           if (location) {
-            console.log(location);
             getTourSearched(
               `${process.env.REACT_APP_BASE_URL}/tour/search?contentTypeId=12&x=${location.x}&y=${location.y}`,
               location

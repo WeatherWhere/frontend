@@ -20,7 +20,6 @@ export default function AirPage({ location }) {
   const getAirRealtimeData = useCallback(async (key, token) => {
     try {
       const data = await getAirRealtime(key);
-      console.log("data.data" + data.data.data);
       setAirRealtimeData(data.data.data[0]);
     } catch (e) {
       console.log(e);
@@ -50,7 +49,6 @@ export default function AirPage({ location }) {
       await axios
         .get(apiUrl, { params, headers })
         .then((res) => {
-          console.log(res.data.documents[0].address.region_2depth_name);
           setAddress({
             address_name: res.data.documents[0].address.address_name,
             region2: res.data.documents[0].address.region_2depth_name,
@@ -77,15 +75,19 @@ export default function AirPage({ location }) {
 
   return (
     <PageWrap>
-
-      <AirRealTime location={location} airRealtimeData={airRealtimeData} address={address} setNowOrMid={setNowOrMid} nowOrMid ={nowOrMid} />
+      <AirRealTime
+        location={location}
+        airRealtimeData={airRealtimeData}
+        address={address}
+        setNowOrMid={setNowOrMid}
+        nowOrMid={nowOrMid}
+      />
 
       {nowOrMid ? (
         <AirSubBottom location={location} airRealtimeData={airRealtimeData} />
       ) : (
-        <AirMidBottom location={location} address={address}/>
+        <AirMidBottom location={location} address={address} />
       )}
     </PageWrap>
   );
 }
-
