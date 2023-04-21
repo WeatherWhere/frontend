@@ -1,56 +1,52 @@
-import { useParams } from "react-router-dom";
-import {
-  Map,
-  MapMarker,
-  MarkerClusterer,
-  useMap,
-  CustomOverlayMap,
-} from "react-kakao-maps-sdk";
-import { useEffect, useState } from "react";
+import { Map, MapMarker, useMap, CustomOverlayMap } from "react-kakao-maps-sdk";
+import { useState } from "react";
 import { MARKER } from "../../../utils/const/marker";
 import LogoGroup from "../../../styles/img/LogoGroup.svg";
 import SearchAddress from "./SearchAddress";
 import styled from "styled-components";
+import CustomOverlayBox from "../common/CustomOverlayBox";
+import { Button } from "../../airRealTime/AirRealTime";
 
-const SearchMap = () => {
+const SearchMap = (props) => {
+  const { searchLocation, setSearchLocation, showModal, handleCategory } =
+    props;
+
+  const [searchedPositions, setSearchedPositions] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState();
 
-  useEffect(() => {
-    fetch("/mock/tour_data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setTourPositions(data.position);
-      });
-  }, []);
+  const normalOrigin = { x: 0, y: 0 }; // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
+  const clickOrigin = { x: MARKER.MARKER_WIDTH + MARKER.SPRITE_GAP, y: 0 }; // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
+  const overOrigin = {
+    x: MARKER.MARKER_WIDTH + MARKER.OVER_MARKER_WIDTH + MARKER.SPRITE_GAP * 2,
+    y: 0,
+  }; // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
-  const [tourPositions, setTourPositions] = useState([]);
+  const handleSearchedPositions = (data, location) => {
+    setSearchedPositions(data);
+    setSearchLocation((prev) => ({
+      ...prev,
+      latitude: location.y,
+      longitude: location.x,
+    }));
+  };
 
-  const { lat, lng } = useParams();
-
-  const [center] = useState({
-    // 지도의 초기 위치
-    center: { lat: parseFloat(lat), lng: parseFloat(lng) },
-    // 지도 위치 변경시 panto를 이용할지(부드럽게 이동)
-    isPanto: true,
-  });
-
-  const EventMarkerContainer = ({ tourInfo, handleClick, isClicked }) => {
-    const handleMarkerClick = (marker) => {
-      map.panTo(marker.getPosition());
-      handleClick();
-    };
-
+  const EventMarkerContainer = ({
+    tourInfo,
+    index,
+    handleClick,
+    isClicked,
+  }) => {
+    // 검색했을 시 위,경도는 mapx, mapy로 주고 있음.
     const { mapx, mapy } = tourInfo;
-    const map = useMap();
+    const [isOver, setIsOver] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(isClicked);
 
-    const [isOver] = useState(false);
-    const normalOrigin = { x: 0, y: 0 }; // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
-    const clickOrigin = { x: MARKER.MARKER_WIDTH + MARKER.SPRITE_GAP, y: 0 }; // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
-    const overOrigin = {
-      x: MARKER.MARKER_WIDTH + MARKER.OVER_MARKER_WIDTH + MARKER.SPRITE_GAP * 2,
-      y: 0,
-    }; // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+    const map = useMap();
+    const handleMarkerClick = (marker) => {
+      handleClick();
+      setIsModalOpen(true);
+      map.panTo(marker.getPosition());
+    };
 
     let spriteOrigin = isOver ? overOrigin : normalOrigin;
 
@@ -59,44 +55,53 @@ const SearchMap = () => {
     }
 
     return (
-      <MapMarker
-        position={{ lat: mapy, lng: mapx }} // 마커를 표시할 위치
-        image={{
-          src: LogoGroup,
-          size: {
-            width: MARKER.OVER_MARKER_WIDTH,
-            height: MARKER.OVER_MARKER_HEIGHT,
-          },
-          options: {
-            offset: {
-              x: MARKER.OFFSET_X,
-              y: MARKER.OFFSET_Y,
+      <>
+        <MapMarker
+          position={{ lat: mapy, lng: mapx }} // 마커를 표시할 위치
+          image={{
+            src: LogoGroup,
+            size: {
+              width: MARKER.OVER_MARKER_WIDTH,
+              height: MARKER.OVER_MARKER_HEIGHT,
             },
-            spriteSize: {
-              width: MARKER.SPRITE_WIDTH,
-              height: MARKER.SPRITE_HEIGHT,
+            options: {
+              offset: {
+                x: MARKER.OFFSET_X,
+                y: MARKER.OFFSET_Y,
+              },
+              spriteSize: {
+                width: MARKER.SPRITE_WIDTH,
+                height: MARKER.SPRITE_HEIGHT,
+              },
+              spriteOrigin: spriteOrigin,
             },
-            spriteOrigin: spriteOrigin,
-          },
-        }}
-        onClick={handleMarkerClick}
-      >
-        {isClicked && (
-          <CustomOverlayMap position={{ lat: mapy, lng: mapx }} yAnchor={-0.5}>
-            <InfoWrap>
-              <Img src={tourInfo.firstImage} type="rectangle" />
-              <Text>{tourInfo.title}</Text>
-            </InfoWrap>
+          }}
+          onClick={handleMarkerClick}
+          onMouseOver={() => setIsOver(true)}
+          onMouseOut={() => setIsOver(false)}
+        />
+        {isModalOpen && (
+          <CustomOverlayMap
+            position={{ lat: mapy, lng: mapx }}
+            xAnchor={0.38}
+            yAnchor={1.5}
+            zIndex={999}
+          >
+            <CustomOverlayBox
+              tourInfo={tourInfo}
+              setIsModalOpen={setIsModalOpen}
+              showModal={showModal}
+            />
           </CustomOverlayMap>
         )}
-      </MapMarker>
+      </>
     );
   };
 
   return (
     <Map
-      center={center.center}
-      isPanto={center.isPanto}
+      center={{ lat: searchLocation.latitude, lng: searchLocation.longitude }}
+      isPanto={true}
       style={{
         width: "100%",
         height: "66%",
@@ -105,23 +110,20 @@ const SearchMap = () => {
       }}
       level={9}
     >
-      <SearchAddress />
-
-      <MarkerClusterer
-        averageCenter={true}
-        minLevel={10}
-        disableClickZoom={true}
-      >
-        {tourPositions.map((tourInfo, index) => (
-          <EventMarkerContainer
-            key={`EventMarkerContainer-${tourInfo.contentId}`}
-            index={index}
-            tourInfo={tourInfo}
-            handleClick={() => setSelectedMarker(index)}
-            isClicked={selectedMarker === index}
-          />
-        ))}
-      </MarkerClusterer>
+      {searchedPositions.map((tourInfo, index) => (
+        <EventMarkerContainer
+          key={`EventMarkerContainer-${tourInfo.contentId}-${index}`}
+          index={index}
+          tourInfo={tourInfo}
+          handleClick={() => setSelectedMarker(index)}
+          isClicked={selectedMarker === index}
+        />
+      ))}
+      <ButtonWrapper>
+        <Button onClick={() => handleCategory("weather")}>날씨</Button>
+        <Button onClick={() => handleCategory("air")}>대기</Button>
+      </ButtonWrapper>
+      <SearchAddress handleSearchedPositions={handleSearchedPositions} />
     </Map>
   );
 };
@@ -129,9 +131,9 @@ const SearchMap = () => {
 export default SearchMap;
 
 export const Text = styled.div`
-display:flex
-font-size:0.9rem;
-color:#969696
+  display: flex;
+  font-size: 0.9rem;
+  color: #969696;
 `;
 
 export const InfoWrap = styled.div`
@@ -146,4 +148,13 @@ export const Img = styled.img`
   width: 120px;
   height: 80px;
   object-fit: cover;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  right: 0;
+  bottom: 34%;
+
+  z-index: 1000;
 `;

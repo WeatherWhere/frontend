@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import WeatherShortMainAll from "../weather/weatherShortMainAll/WeatherShortMainAll";
 import styled from "styled-components";
 import TourCommon from "./TourCommon";
@@ -12,33 +12,61 @@ import AirSubBottom from "../airRealTime/AirSubBottom";
 
 export default function TourInfoModal(props) {
   const { isOpen, setModalOpen, modalInfo } = props;
-  console.log(modalInfo);
 
   const [location] = useState({
     latitude: modalInfo.latitude,
     longitude: modalInfo.longitude,
-
   });
   const [weatherOrAir, setWeatherOrAir] = useState(true);
 
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    // 이벤트 핸들러 함수
+    const handler = (event) => {
+      // mousedown 이벤트가 발생한 영역이 모달창이 아닐 때, 모달창 제거 처리
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        event.preventDefault();
+        setModalOpen(false);
+      }
+    };
+
+    // 이벤트 핸들러 등록
+    document.addEventListener("mousedown", handler, { passive: false });
+    document.addEventListener("touchstart", handler, { passive: false }); // 모바일 대응
+
+    return () => {
+      // 이벤트 핸들러 해제
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("touchstart", handler); // 모바일 대응
+    };
+  });
+
   return (
-    <RootPage isOpen={isOpen}>
+    <RootPage ref={modalRef} isOpen={isOpen}>
       <GlobalStyle />
       <Background>
         <StyledTabs defaultActiveKey="common" className="mb-3" justify>
           <Tab eventKey="common" title="공통 정보">
-            <TourCommon modalInfo={modalInfo} setWeatherOrAir={setWeatherOrAir} weatherOrAir={weatherOrAir}/>
-
+            <TourCommon
+              modalInfo={modalInfo}
+              setWeatherOrAir={setWeatherOrAir}
+              weatherOrAir={weatherOrAir}
+            />
           </Tab>
           <Tab eventKey="detail" title="소개 정보">
-            <TourDetail modalInfo={modalInfo} setWeatherOrAir={setWeatherOrAir} weatherOrAir={weatherOrAir}/>
+            <TourDetail
+              modalInfo={modalInfo}
+              setWeatherOrAir={setWeatherOrAir}
+              weatherOrAir={weatherOrAir}
+            />
           </Tab>
         </StyledTabs>
       </Background>
       {weatherOrAir ? (
         <WeatherShortMainAll location={location} />
       ) : (
-        <AirSubBottom location={location}/>
+        <AirSubBottom location={location} />
       )}
       <StClose name={CLOSE_ICON.name} onClick={() => setModalOpen(false)} />
     </RootPage>
@@ -73,10 +101,10 @@ const RootPage = styled.section`
   border-radius: 10px;
 
   background-color: white;
-  z-index: 1000;
+  z-index: 1100;
 
   position: absolute;
-  top: 6%;
+  top: 0;
   translate: translate(-50%, -50%);
   animation: slide-up 0.8s ease;
 
@@ -94,6 +122,6 @@ const StClose = styled(Icon).attrs((props) => ({
   icon: props.name,
 }))`
   position: absolute;
-  right: 7px;
-  top: 7px;
+  right: 10px;
+  top: 10px;
 `;

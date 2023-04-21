@@ -109,6 +109,7 @@ export default function RecommendMap(props) {
           lat: KAKAO_MAP_DATA.CENTER_LAT,
           lng: KAKAO_MAP_DATA.CENTER_LNG,
         }}
+        isPanto={true}
         style={{
           width: "100%",
           height: "66%",
