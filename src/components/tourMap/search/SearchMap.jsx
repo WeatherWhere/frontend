@@ -5,9 +5,11 @@ import LogoGroup from "../../../styles/img/LogoGroup.svg";
 import SearchAddress from "./SearchAddress";
 import styled from "styled-components";
 import CustomOverlayBox from "../common/CustomOverlayBox";
+import { Button } from "../../airRealTime/AirRealTime";
 
 const SearchMap = (props) => {
-  const { searchLocation, setSearchLocation, showModal } = props;
+  const { searchLocation, setSearchLocation, showModal, handleCategory } =
+    props;
 
   const [searchedPositions, setSearchedPositions] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState();
@@ -117,6 +119,10 @@ const SearchMap = (props) => {
           isClicked={selectedMarker === index}
         />
       ))}
+      <ButtonWrapper>
+        <Button onClick={() => handleCategory("weather")}>날씨</Button>
+        <Button onClick={() => handleCategory("air")}>대기</Button>
+      </ButtonWrapper>
       <SearchAddress handleSearchedPositions={handleSearchedPositions} />
     </Map>
   );
@@ -125,9 +131,9 @@ const SearchMap = (props) => {
 export default SearchMap;
 
 export const Text = styled.div`
-display:flex
-font-size:0.9rem;
-color:#969696
+  display: flex;
+  font-size: 0.9rem;
+  color: #969696;
 `;
 
 export const InfoWrap = styled.div`
@@ -142,4 +148,13 @@ export const Img = styled.img`
   width: 120px;
   height: 80px;
   object-fit: cover;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  right: 0;
+  bottom: 34%;
+
+  z-index: 1000;
 `;

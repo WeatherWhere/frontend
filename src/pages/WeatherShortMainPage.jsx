@@ -8,6 +8,7 @@ import axios from "axios";
 
 export const PageWrap = styled.section`
   height: 100vh;
+  position: relative;
 `;
 
 export default function WeatherShortMainPage({ location }) {
