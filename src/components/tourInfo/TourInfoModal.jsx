@@ -14,8 +14,9 @@ export default function TourInfoModal(props) {
   console.log(modalInfo);
 
   const [location] = useState({
-    latitude: modalInfo.latitude,
-    longitude: modalInfo.longitude,
+    latitude: modalInfo.mapy,
+    longitude: modalInfo.mapx,
+
   });
 
   return (
@@ -24,10 +25,11 @@ export default function TourInfoModal(props) {
       <Background>
         <StyledTabs defaultActiveKey="common" className="mb-3" justify>
           <Tab eventKey="common" title="공통 정보">
-            <TourCommon modalInfo={modalInfo} />
+            <TourCommon modalInfo={modalInfo}/>
+
           </Tab>
           <Tab eventKey="detail" title="소개 정보">
-            <TourDetail />
+            <TourDetail modalInfo={modalInfo}/>
           </Tab>
         </StyledTabs>
       </Background>
@@ -49,7 +51,7 @@ const StyledTabs = styled(Tabs)`
 const Background = styled.div`
   height: 66%;
   align-items: center;
-  box-shadow: 3px 3px 70px rgba(0, 128, 0, 0.1);
+  box-shadow: 3px 3px 11px rgba(0, 128, 0, 0.2);
   margin:0.4rem;
   border-radius:1%
   display:flex;
