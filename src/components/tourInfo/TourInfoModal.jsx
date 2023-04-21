@@ -104,7 +104,7 @@ const RootPage = styled.section`
   z-index: 1100;
 
   position: absolute;
-  top: 6%;
+  top: 0;
   translate: translate(-50%, -50%);
   animation: slide-up 0.8s ease;
 

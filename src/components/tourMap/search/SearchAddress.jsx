@@ -7,7 +7,7 @@ export default function SearchAddress(props) {
   const { handleSearchedPositions } = props;
 
   const [searchAddress, setSearchAddress] = useState("");
-  const [isProper, setIsProper] = useState(false);
+  const [isProper, setIsProper] = useState(true);
 
   const getTourSearched = useCallback(async (key, searchLocation, token) => {
     try {
@@ -47,8 +47,10 @@ export default function SearchAddress(props) {
               location
             );
           }
+          return;
         } else {
           // 잘못된 주소를 입력하여 status == ZERO_RESULT인 경우
+          console.log("??");
           setIsProper(false);
         }
       });
@@ -58,6 +60,13 @@ export default function SearchAddress(props) {
     }
   };
 
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onAddressSearch();
+    }
+  };
+  console.log(isProper);
+
   return (
     <>
       <SearchOverlay>
@@ -66,6 +75,7 @@ export default function SearchAddress(props) {
           value={searchAddress}
           placeholder={isProper ? "지역을 입력하세요." : "잘못된 검색입니다."}
           onChange={onSearchInputChange}
+          onKeyPress={onKeyPress}
         />
         <StButton onClick={onAddressSearch}>검색</StButton>
       </SearchOverlay>
@@ -82,7 +92,7 @@ export const SearchOverlay = styled.div`
   border-radius: 10px;
   z-index: 1000;
 
-  top: 6rem;
+  top: 3rem;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
