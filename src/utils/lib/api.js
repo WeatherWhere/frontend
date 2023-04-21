@@ -15,3 +15,7 @@ export const getAirRealtime = (key, token) => {
 export const getAirForecast = (key, token) => {
   return client(token).get(key);
 };
+
+export const getTourInfo = (key, token) => {
+  return client(token).get(key);
+};

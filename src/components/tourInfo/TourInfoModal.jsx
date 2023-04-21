@@ -12,16 +12,11 @@ import { Icon } from "@iconify/react";
 export default function TourInfoModal(props) {
   const { isOpen, setModalOpen, modalInfo } = props;
   console.log(modalInfo);
-  //const { lat, lng } = useParams();
-
-  // const [location] = useState({
-  //     latitude: parseFloat(lat),
-  //     longitude: parseFloat(lng),
-  //   });
 
   const [location] = useState({
     latitude: modalInfo.mapy,
     longitude: modalInfo.mapx,
+
   });
 
   return (
@@ -31,6 +26,7 @@ export default function TourInfoModal(props) {
         <StyledTabs defaultActiveKey="common" className="mb-3" justify>
           <Tab eventKey="common" title="공통 정보">
             <TourCommon modalInfo={modalInfo}/>
+
           </Tab>
           <Tab eventKey="detail" title="소개 정보">
             <TourDetail modalInfo={modalInfo}/>
@@ -71,7 +67,7 @@ const RootPage = styled.section`
   border-radius: 10px;
 
   background-color: white;
-  z-index: 999;
+  z-index: 1000;
 
   position: absolute;
   top: 6%;

@@ -8,6 +8,7 @@ import ImgNotFound from "../../styles/img/ImgNotFound.png";
 export default function TourCommon({ modalInfo }) {
   const [commonData, setCommonData] = useState(null);
 
+
   //관광 공통정보 받아오는 api
   const getWeatherMidForecast = async (key, token) => {
     try {
@@ -34,6 +35,7 @@ export default function TourCommon({ modalInfo }) {
             <thead>
               <TR>
                 <TH >{modalInfo.title}</TH>
+
               </TR>
             </thead>
             <tbody>
@@ -51,6 +53,7 @@ export default function TourCommon({ modalInfo }) {
                   <Scroll>
                     {commonData.overView}
                   </Scroll>
+
                 </TD>
               </TR>
             </tbody>
@@ -67,27 +70,23 @@ export const CommonWrap = styled.div`
   flex-direction: column;
   display: flex;
   align-items: center;
-  height:auto;
-  justify-content:center;
-`
+  height: auto;
+  justify-content: center;
+`;
 
 export const StyledImage = styled(Image)`
   height:60%;
   width:70%;
 `;
 
-
-
 export const Table = styled.table`
-    display: flex;
-    align-items: center;
-    color:#969696;
-    font-size:0.8rem;
-    padding: 0.2rem 0;
-    flex-direction: column;
-    margin:0.2rem;
-
-
+  display: flex;
+  align-items: center;
+  color: #969696;
+  font-size: 0.8rem;
+  padding: 0.2rem 0;
+  flex-direction: column;
+  margin: 0.2rem;
 `;
 
 export const TD = styled.td`
@@ -110,10 +109,11 @@ const Scroll = styled.div`
   justify-content:center;
 
 `
+
 const TR = styled.tr`
-border: 1px solid white;
-color:#69765F;
-`
+  border: 1px solid white;
+  color: #69765f;
+`;
 const TH = styled.th`
 padding:0.5rem;
 font-size:1.3rem;
@@ -123,3 +123,4 @@ text-decoration-thickness: 6px;
 
 
 `
+
