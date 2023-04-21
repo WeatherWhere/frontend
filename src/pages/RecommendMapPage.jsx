@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Temp from "../components/tourMap/recommend/Ranking";
 import RecommendMap from "../components/tourMap/recommend/RecommendMap";
 import { PageWrap } from "./WeatherShortMainPage";
 import TourInfoModal from "../components/tourInfo/TourInfoModal";
@@ -30,17 +29,6 @@ export default function RecommendMapPage() {
       if (data.resultCode === 200) {
         const rankingArr = data.data;
         setAllRank(rankingArr);
-
-        /*
-        const allData = [];
-        rankingArr.forEach((data) => {
-          allData.push(...data.spots);
-        });
-        */
-
-        // 지도에 띄울 장소들을 배열로 저장.
-        // 초기화는 allPositions로 할 예정이었는데 데이터의 양이 많아 성능 이슈
-        // 따라서 우선 1등 지역의 장소들로 진행.
         setSelectedPositions(rankingArr[0].spots);
       } else {
         // 에러가 발생했을 경우
