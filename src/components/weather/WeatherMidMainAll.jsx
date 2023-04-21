@@ -52,7 +52,12 @@ export default function WeatherMidMainAll({ address }) {
 
     useEffect(() => {
         if (address) {
-            var region2 = address.region2.substring(0, address.region2.indexOf(' '));
+            var region2 ;
+            if(address.region1 === '서울'){
+               region2 = address.region2
+            }else{
+                region2 = address.region2.substring(0, address.region2.indexOf(' '));
+            }
             getMidData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/mid?region1=${address.region1}&region2=${region2}`);
         }
     }, [address, getMidData]);

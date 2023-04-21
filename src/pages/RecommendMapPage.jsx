@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Temp from "../components/tourMap/recommend/Ranking";
 import RecommendMap from "../components/tourMap/recommend/RecommendMap";
 import { PageWrap } from "./WeatherShortMainPage";
 import TourInfoModal from "../components/tourInfo/TourInfoModal";
@@ -54,7 +53,7 @@ export default function RecommendMapPage() {
 
   useEffect(() => {
     getTourRecommend(`${process.env.REACT_APP_BASE_URL}/tour/recommend`);
-  }, []);
+  }, [getTourRecommend]);
   console.log(selectedPositions);
 
   return (
