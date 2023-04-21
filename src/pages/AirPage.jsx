@@ -81,7 +81,7 @@ export default function AirPage({ location }) {
       <AirRealTime location={location} airRealtimeData={airRealtimeData} address={address} setNowOrMid={setNowOrMid} nowOrMid ={nowOrMid} />
 
       {nowOrMid ? (
-        <AirSubBottom airRealtimeData={airRealtimeData} />
+        <AirSubBottom location={location} airRealtimeData={airRealtimeData} />
       ) : (
         <AirMidBottom location={location} address={address}/>
       )}
