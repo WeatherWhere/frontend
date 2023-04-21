@@ -7,12 +7,15 @@ export default function SearchAddress(props) {
   const { handleSearchedPositions } = props;
 
   const [searchAddress, setSearchAddress] = useState("");
+  const [isProper, setIsProper] = useState(false);
 
   const getTourSearched = useCallback(async (key, searchLocation, token) => {
     try {
       const { data } = await getTourInfo(key);
+      console.log(data);
       if (data.resultCode === 200) {
         handleSearchedPositions(data.data, searchLocation);
+        setIsProper(true);
       } else {
         // 에러가 발생했을 경우
         console.log(data);
@@ -25,9 +28,15 @@ export default function SearchAddress(props) {
 
   const onSearchInputChange = (event) => {
     setSearchAddress(event.target.value);
+    setIsProper(true);
   };
 
   const onAddressSearch = async () => {
+    // 입력된 정보가 없을 경우에는 요청을 처리하지 않도록 예외처리
+    if (searchAddress === "") {
+      setIsProper(false);
+      return;
+    }
     try {
       const geocoder = new window.kakao.maps.services.Geocoder();
       await geocoder.addressSearch(searchAddress, function (result, status) {
@@ -41,7 +50,8 @@ export default function SearchAddress(props) {
             );
           }
         } else {
-          console.log(result);
+          // 잘못된 주소를 입력하여 status == ZERO_RESULT인 경우
+          setIsProper(false);
         }
       });
       setSearchAddress("");
@@ -51,15 +61,17 @@ export default function SearchAddress(props) {
   };
 
   return (
-    <SearchOverlay>
-      <StInput
-        type="text"
-        value={searchAddress}
-        placeholder="지역을 입력하세요."
-        onChange={onSearchInputChange}
-      />
-      <StButton onClick={onAddressSearch}>검색</StButton>
-    </SearchOverlay>
+    <>
+      <SearchOverlay>
+        <StInput
+          type="text"
+          value={searchAddress}
+          placeholder={isProper ? "지역을 입력하세요." : "잘못된 검색입니다."}
+          onChange={onSearchInputChange}
+        />
+        <StButton onClick={onAddressSearch}>검색</StButton>
+      </SearchOverlay>
+    </>
   );
 }
 
@@ -81,6 +93,7 @@ const StInput = styled.input`
   width: 80%;
   outline: none;
 `;
+
 const StButton = styled.button`
   width: 20%;
   border: 0.01rem solid;
