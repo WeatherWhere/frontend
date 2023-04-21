@@ -17,7 +17,6 @@ export default function TourInfoModal(props) {
   const [location] = useState({
     latitude: modalInfo.latitude,
     longitude: modalInfo.longitude,
-
   });
   const [weatherOrAir, setWeatherOrAir] = useState(true);
 
@@ -27,18 +26,25 @@ export default function TourInfoModal(props) {
       <Background>
         <StyledTabs defaultActiveKey="common" className="mb-3" justify>
           <Tab eventKey="common" title="공통 정보">
-            <TourCommon modalInfo={modalInfo} setWeatherOrAir={setWeatherOrAir} weatherOrAir={weatherOrAir}/>
-
+            <TourCommon
+              modalInfo={modalInfo}
+              setWeatherOrAir={setWeatherOrAir}
+              weatherOrAir={weatherOrAir}
+            />
           </Tab>
           <Tab eventKey="detail" title="소개 정보">
-            <TourDetail modalInfo={modalInfo} setWeatherOrAir={setWeatherOrAir} weatherOrAir={weatherOrAir}/>
+            <TourDetail
+              modalInfo={modalInfo}
+              setWeatherOrAir={setWeatherOrAir}
+              weatherOrAir={weatherOrAir}
+            />
           </Tab>
         </StyledTabs>
       </Background>
       {weatherOrAir ? (
         <WeatherShortMainAll location={location} />
       ) : (
-        <AirSubBottom location={location}/>
+        <AirSubBottom location={location} />
       )}
       <StClose name={CLOSE_ICON.name} onClick={() => setModalOpen(false)} />
     </RootPage>
@@ -73,7 +79,7 @@ const RootPage = styled.section`
   border-radius: 10px;
 
   background-color: white;
-  z-index: 1000;
+  z-index: 1100;
 
   position: absolute;
   top: 6%;

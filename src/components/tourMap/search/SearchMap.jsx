@@ -1,11 +1,10 @@
 import { Map, MapMarker, useMap, CustomOverlayMap } from "react-kakao-maps-sdk";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MARKER } from "../../../utils/const/marker";
 import LogoGroup from "../../../styles/img/LogoGroup.svg";
 import SearchAddress from "./SearchAddress";
 import styled from "styled-components";
 import CustomOverlayBox from "../common/CustomOverlayBox";
-import { useParams } from "react-router-dom";
 
 const SearchMap = (props) => {
   const { location, showModal } = props;

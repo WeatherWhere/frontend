@@ -44,6 +44,7 @@ export default function SearchAddress(props) {
           console.log(result);
         }
       });
+      setSearchAddress("");
     } catch (e) {
       console.log(e);
     }
@@ -51,16 +52,38 @@ export default function SearchAddress(props) {
 
   return (
     <SearchOverlay>
-      <input type="text" value={searchAddress} onChange={onSearchInputChange} />
-      <button onClick={onAddressSearch}>검색</button>
+      <StInput
+        type="text"
+        value={searchAddress}
+        placeholder="지역을 입력하세요."
+        onChange={onSearchInputChange}
+      />
+      <StButton onClick={onAddressSearch}>검색</StButton>
     </SearchOverlay>
   );
 }
 
 export const SearchOverlay = styled.div`
+  display: flex;
+  justify-content: space-between;
   position: absolute;
+  width: 18rem;
+  height: 2rem;
   border-radius: 10px;
   z-index: 1000;
-  padding: 4rem;
-  top: 12px;
+
+  top: 6rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const StInput = styled.input`
+  width: 80%;
+  outline: none;
+`;
+const StButton = styled.button`
+  width: 20%;
+  border: 0.01rem solid;
+  background-color: white;
+  border-radius: 0 10px 10px 0;
 `;
