@@ -8,16 +8,18 @@ import Tabs from "react-bootstrap/Tabs";
 import TourDetail from "./TourDetail";
 import { CLOSE_ICON } from "../../utils/const/icon";
 import { Icon } from "@iconify/react";
+import AirSubBottom from "../airRealTime/AirSubBottom";
 
 export default function TourInfoModal(props) {
   const { isOpen, setModalOpen, modalInfo } = props;
   console.log(modalInfo);
 
   const [location] = useState({
-    latitude: modalInfo.mapy,
-    longitude: modalInfo.mapx,
+    latitude: modalInfo.latitude,
+    longitude: modalInfo.longitude,
 
   });
+  const [weatherOrAir, setWeatherOrAir] = useState(true);
 
   return (
     <RootPage isOpen={isOpen}>
@@ -25,15 +27,19 @@ export default function TourInfoModal(props) {
       <Background>
         <StyledTabs defaultActiveKey="common" className="mb-3" justify>
           <Tab eventKey="common" title="공통 정보">
-            <TourCommon modalInfo={modalInfo}/>
+            <TourCommon modalInfo={modalInfo} setWeatherOrAir={setWeatherOrAir} weatherOrAir={weatherOrAir}/>
 
           </Tab>
           <Tab eventKey="detail" title="소개 정보">
-            <TourDetail modalInfo={modalInfo}/>
+            <TourDetail modalInfo={modalInfo} setWeatherOrAir={setWeatherOrAir} weatherOrAir={weatherOrAir}/>
           </Tab>
         </StyledTabs>
       </Background>
-      <WeatherShortMainAll location={location} />
+      {weatherOrAir ? (
+        <WeatherShortMainAll location={location} />
+      ) : (
+        <AirSubBottom location={location}/>
+      )}
       <StClose name={CLOSE_ICON.name} onClick={() => setModalOpen(false)} />
     </RootPage>
   );

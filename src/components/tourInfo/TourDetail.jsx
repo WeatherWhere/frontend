@@ -4,10 +4,18 @@ import Image from "react-bootstrap/Image";
 import GlobalStyle from "../../styles/fonts/fonts";
 import axios from "axios";
 import ImgNotFound from "../../styles/img/ImgNotFound.png";
+import { TourButtonWrap, TourButton } from "./TourCommon";
 
-export default function TourDetail({ modalInfo }) {
+export default function TourDetail({ modalInfo, setWeatherOrAir, weatherOrAir }) {
 
+  const handleWeatherClick = () => {
+    setWeatherOrAir(true);
+  };
 
+  const handleAirClick = () => {
+    setWeatherOrAir(false);
+  };
+  
   const checkContentType = useCallback((response) => {
     switch (modalInfo.contentTypeId) {
       case 12:
@@ -170,7 +178,7 @@ export default function TourDetail({ modalInfo }) {
                     <TD space="nowrap" color="#BEE1A7" fontColor="white">{value.label}</TD>
                     <TD color="#F9FFF5">
                       <Scroll>
-                        {value.value}
+                      <div dangerouslySetInnerHTML={{ __html: value.value }}></div>
                       </Scroll>
                     </TD>
                   </TR>
@@ -178,6 +186,10 @@ export default function TourDetail({ modalInfo }) {
               })}
             </Tbody>
           </Table>
+          <TourButtonWrap>
+            <TourButton onClick={handleWeatherClick} color={weatherOrAir? "#BEE1A7" : "#969696"}>날씨</TourButton>
+            <TourButton onClick={handleAirClick} color={weatherOrAir? "#969696" : "#BEE1A7"}>대기</TourButton>
+          </TourButtonWrap>
         </CommonWrap>
       ) : (
         <div>Loading</div>

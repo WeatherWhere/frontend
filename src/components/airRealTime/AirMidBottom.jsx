@@ -5,8 +5,11 @@ import { getWeatherShortMain } from "../../utils/lib/api";
 import { TableWrap } from "../weather/weatherShortSub/ShortSub";
 import styled from "styled-components";
 
-export default function AirMidBottom({ location, address }) {
+export default function AirMidBottom({ address }) {
 
+    const today = new Date();  // 현재 날짜 및 시간을 가져옴
+    const formattedDate = today.toISOString().substr(0, 10);  // yyyy-MM-dd 형식으로 변환
+  
 
     const [airMidData, setAirMidData] = useState([]);
 
@@ -39,10 +42,10 @@ export default function AirMidBottom({ location, address }) {
     }, []);
 
     useEffect(() => {
-        if (location && address) {
-            getShortMainData(`${process.env.REACT_APP_BASE_URL}/air/forecast/data?addr=경기 성남시&baseDate=2023-04-20`);
+        if (address) {
+            getShortMainData(`${process.env.REACT_APP_BASE_URL}/air/forecast/data?addr=${address.address_name}&baseDate=${formattedDate}`);
         }
-    }, [location, address, getShortMainData]);
+    }, [address, getShortMainData, formattedDate]);
 
 
     return (
@@ -85,7 +88,7 @@ export default function AirMidBottom({ location, address }) {
                         </tbody>
                     </Table>
                 </TableWrap>
-
+                
             </Background>
         </>
     );

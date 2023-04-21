@@ -4,9 +4,35 @@ import GlobalStyle from "./../../styles/fonts/fonts";
 import { Icon } from '@iconify/react';
 import { TableWrap } from "../weather/weatherShortSub/ShortSub";
 import { Text } from "../weather/weatherShortMainNow/WeatherShortMainNow";
+import { useCallback, useEffect, useState } from "react";
+import { getAirRealtime } from "../../utils/lib/api";
 
 
-export default function AirSubBottom({ airRealtimeData }) {
+export default function AirSubBottom({ location }) {
+
+    const [airRealtimeData, setAirRealtimeData] = useState(null);
+
+    const getAirRealtimeData = useCallback(async (key, token) => {
+      try {
+        const data = await getAirRealtime(key);
+        console.log("data.data" + data.data.data);
+        setAirRealtimeData(data.data.data[0]);
+      } catch (e) {
+        console.log(e);
+      }
+    }, []);
+  
+    
+  useEffect(() => {
+    if (location.latitude && location.longitude) {
+      getAirRealtimeData(
+        `${process.env.REACT_APP_BASE_URL}/air/realtime/data?x=${location.longitude}&y=${location.latitude}`
+      );
+    }
+  }, [location.latitude, location.longitude, getAirRealtimeData]);
+
+
+
 
     return (
         <>
@@ -87,7 +113,7 @@ export default function AirSubBottom({ airRealtimeData }) {
     );
 
 
-}
+};
 
 const getAirQuality = (grade) => {
     switch (grade) {

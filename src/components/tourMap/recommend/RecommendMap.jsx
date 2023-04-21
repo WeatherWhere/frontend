@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { KAKAO_MAP_DATA } from "../../../utils/const/position";
 import { MARKER } from "../../../utils/const/marker";
 import LogoGroup from "../..//../styles/img/LogoGroup.svg";
