@@ -5,6 +5,11 @@ import { PageWrap } from "./WeatherShortMainPage";
 import TourInfoModal from "../components/tourInfo/TourInfoModal";
 
 export default function SearchMapPage({ location }) {
+  const [searchLocation, setSearchLocation] = useState({
+    latitude: location.latitude,
+    longitude: location.longitude,
+  });
+
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
 
@@ -13,10 +18,16 @@ export default function SearchMapPage({ location }) {
     setModalOpen(true);
   };
 
+  console.log(searchLocation);
+
   return (
     <PageWrap>
-      <SearchMap showModal={showModal} location={location} />
-      <WeatherShortMainAll location={location} />
+      <SearchMap
+        showModal={showModal}
+        searchLocation={searchLocation}
+        setSearchLocation={setSearchLocation}
+      />
+      <WeatherShortMainAll location={searchLocation} />
       {modalOpen && (
         <TourInfoModal
           setModalOpen={setModalOpen}

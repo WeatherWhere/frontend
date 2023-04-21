@@ -7,12 +7,7 @@ import styled from "styled-components";
 import CustomOverlayBox from "../common/CustomOverlayBox";
 
 const SearchMap = (props) => {
-  const { location, showModal } = props;
-
-  const [searchLocation, setSearchLocation] = useState({
-    lat: location.latitude,
-    lng: location.longitude,
-  });
+  const { searchLocation, setSearchLocation, showModal } = props;
 
   const [searchedPositions, setSearchedPositions] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState();
@@ -28,8 +23,8 @@ const SearchMap = (props) => {
     setSearchedPositions(data);
     setSearchLocation((prev) => ({
       ...prev,
-      lat: location.y,
-      lng: location.x,
+      latitude: location.y,
+      longitude: location.x,
     }));
   };
 
@@ -103,7 +98,7 @@ const SearchMap = (props) => {
 
   return (
     <Map
-      center={{ lat: searchLocation.lat, lng: searchLocation.lng }}
+      center={{ lat: searchLocation.latitude, lng: searchLocation.longitude }}
       isPanto={true}
       style={{
         width: "100%",
