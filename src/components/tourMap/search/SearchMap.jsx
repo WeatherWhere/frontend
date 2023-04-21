@@ -1,23 +1,19 @@
-import { useParams } from "react-router-dom";
-import {
-  Map,
-  MapMarker,
-  MarkerClusterer,
-  useMap,
-  CustomOverlayMap,
-} from "react-kakao-maps-sdk";
+import { Map, MapMarker, useMap, CustomOverlayMap } from "react-kakao-maps-sdk";
 import { useEffect, useState } from "react";
 import { MARKER } from "../../../utils/const/marker";
 import LogoGroup from "../../../styles/img/LogoGroup.svg";
 import SearchAddress from "./SearchAddress";
 import styled from "styled-components";
 import CustomOverlayBox from "../common/CustomOverlayBox";
+import { useParams } from "react-router-dom";
 
 const SearchMap = (props) => {
-  const { location } = props;
+  const { location, showModal } = props;
 
-  const firstLatitude = location.latitude;
-  const firstLongitude = location.longitude;
+  const [searchLocation, setSearchLocation] = useState({
+    lat: location.latitude,
+    lng: location.longitude,
+  });
 
   const [searchedPositions, setSearchedPositions] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState();
@@ -29,12 +25,22 @@ const SearchMap = (props) => {
     y: 0,
   }; // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
+  const handleSearchedPositions = (data, location) => {
+    setSearchedPositions(data);
+    setSearchLocation((prev) => ({
+      ...prev,
+      lat: location.y,
+      lng: location.x,
+    }));
+  };
+
   const EventMarkerContainer = ({
     tourInfo,
     index,
     handleClick,
     isClicked,
   }) => {
+    // 검색했을 시 위,경도는 mapx, mapy로 주고 있음.
     const { mapx, mapy } = tourInfo;
     const [isOver, setIsOver] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(isClicked);
@@ -78,9 +84,9 @@ const SearchMap = (props) => {
           onMouseOver={() => setIsOver(true)}
           onMouseOut={() => setIsOver(false)}
         />
-        {/* {isModalOpen && (
+        {isModalOpen && (
           <CustomOverlayMap
-            position={{ lat: latitude, lng: longitude }}
+            position={{ lat: mapy, lng: mapx }}
             xAnchor={0.38}
             yAnchor={1.5}
             zIndex={999}
@@ -91,15 +97,14 @@ const SearchMap = (props) => {
               showModal={showModal}
             />
           </CustomOverlayMap>
-        )} */}
+        )}
       </>
     );
   };
-  console.log(`searchPositions`, searchedPositions);
 
   return (
     <Map
-      center={{ lat: firstLatitude, lng: firstLongitude }}
+      center={{ lat: searchLocation.lat, lng: searchLocation.lng }}
       isPanto={true}
       style={{
         width: "100%",
@@ -118,7 +123,7 @@ const SearchMap = (props) => {
           isClicked={selectedMarker === index}
         />
       ))}
-      <SearchAddress setSearchedPositions={setSearchedPositions} />
+      <SearchAddress handleSearchedPositions={handleSearchedPositions} />
     </Map>
   );
 };

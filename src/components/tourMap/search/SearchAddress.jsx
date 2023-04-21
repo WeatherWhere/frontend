@@ -1,18 +1,18 @@
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import styled from "styled-components";
 import { getTourInfo } from "../../../utils/lib/api";
 
 export default function SearchAddress(props) {
-  const { setSearchedPositions } = props;
+  const { handleSearchedPositions } = props;
 
   const [searchAddress, setSearchAddress] = useState("");
 
-  const getTourSearched = useCallback(async (key, token) => {
+  const getTourSearched = useCallback(async (key, searchLocation, token) => {
     try {
       const { data } = await getTourInfo(key);
       if (data.resultCode === 200) {
-        setSearchedPositions(data.data);
+        handleSearchedPositions(data.data, searchLocation);
       } else {
         // 에러가 발생했을 경우
         console.log(data);
@@ -34,8 +34,10 @@ export default function SearchAddress(props) {
         if (status === window.kakao.maps.services.Status.OK) {
           const location = result[0];
           if (location) {
+            console.log(location);
             getTourSearched(
-              `${process.env.REACT_APP_BASE_URL}/tour/search?contentTypeId=12&x=${location.x}&y=${location.y}`
+              `${process.env.REACT_APP_BASE_URL}/tour/search?contentTypeId=12&x=${location.x}&y=${location.y}`,
+              location
             );
           }
         } else {
