@@ -116,7 +116,7 @@ export const Background = styled.div`
     overflow-y: auto;
     overflow-y: hidden;.
     overflow-x: auto;
-    justify-content: center; 
+    overflow-y: scroll;
 
 `;
 
@@ -132,7 +132,6 @@ export const Table = styled.table`
     display: flex;
     align-items: center;
     position: relative;
-    overflowY: scroll;
     color:#969696;
     font-size:0.9rem;
     padding: 0.5rem 0;

@@ -42,7 +42,7 @@ export default function RecommendMapPage() {
 
   useEffect(() => {
     getTourRecommend(`${process.env.REACT_APP_BASE_URL}/tour/recommend`);
-  }, []);
+  }, [getTourRecommend]);
   console.log(selectedPositions);
 
   return (
