@@ -23,6 +23,7 @@ export default function SearchAddress(props) {
       // api 호출에 실패했을 경우
       console.log(e);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSearchInputChange = (event) => {
