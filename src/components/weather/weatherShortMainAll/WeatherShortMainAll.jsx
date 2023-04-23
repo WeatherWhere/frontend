@@ -32,6 +32,7 @@ export default function WeatherShortMainAll({ location }) {
   const getShortMainData = useCallback(async (key, token) => {
     await getWeatherShortMain(key)
       .then((res) => {
+        console.log(res.data);
         if (res.data.statusCode === 200) {
           const data = res.data.data;
           setShortMainData([...data]);
