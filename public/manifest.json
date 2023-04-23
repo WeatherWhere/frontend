@@ -115,7 +115,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "",
+  "start_url": "https://m.weatherwhere.link",
   "display": "standalone",
   "theme_color": "#031230",
   "background_color": "#031230"
