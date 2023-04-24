@@ -1,6 +1,6 @@
 //단기예보(12시간) 컴포넌트
 import styled from "styled-components";
-import GlobalStyle from "./../../styles/fonts/fonts";
+
 import { Icon } from "@iconify/react";
 import { TableWrap } from "../weather/weatherShortSub/ShortSub";
 import { Text } from "../weather/weatherShortMainNow/WeatherShortMainNow";
@@ -31,7 +31,6 @@ export default function AirSubBottom({ location }) {
     <>
       {airRealtimeData ? (
         <Background>
-          <GlobalStyle />
           <TableWrap>
             <Table>
               <tbody>
@@ -113,7 +112,6 @@ export default function AirSubBottom({ location }) {
         </Background>
       ) : (
         <Background>
-          <GlobalStyle />
           <Text>Loading...</Text>
         </Background>
       )}

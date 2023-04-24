@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import WeatherShortMainAll from "../weather/weatherShortMainAll/WeatherShortMainAll";
 import styled from "styled-components";
 import TourCommon from "./TourCommon";
-import GlobalStyle from "../../styles/fonts/fonts";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import TourDetail from "./TourDetail";
@@ -44,7 +43,6 @@ export default function TourInfoModal(props) {
 
   return (
     <RootPage ref={modalRef} isOpen={isOpen}>
-      <GlobalStyle />
       <Background>
         <StyledTabs defaultActiveKey="common" className="mb-3" justify>
           <Tab eventKey="common" title="공통 정보">

@@ -15,6 +15,7 @@ const Container = styled.header`
   padding: 0.1rem;
   background-color: #fff;
   height: 3.6rem;
+  width: calc(var(--vw, 1vh) * 100);
   z-index: 6;
 `;
 

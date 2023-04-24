@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Image from "react-bootstrap/Image";
-import GlobalStyle from "../../styles/fonts/fonts";
 import axios from "axios";
 import ImgNotFound from "../../styles/img/ImgNotFound.png";
 
-export default function TourCommon({ modalInfo, setWeatherOrAir, weatherOrAir}) {
+export default function TourCommon({
+  modalInfo,
+  setWeatherOrAir,
+  weatherOrAir,
+}) {
   const [commonData, setCommonData] = useState(null);
 
   const handleWeatherClick = () => {
@@ -25,49 +28,70 @@ export default function TourCommon({ modalInfo, setWeatherOrAir, weatherOrAir}) 
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
     if (modalInfo) {
-      getWeatherMidForecast(`${process.env.REACT_APP_BASE_URL}/tour/common?contentId=${modalInfo.contentId}&contentTypeId=${modalInfo.contentTypeId}`);
+      getWeatherMidForecast(
+        `${process.env.REACT_APP_BASE_URL}/tour/common?contentId=${modalInfo.contentId}&contentTypeId=${modalInfo.contentTypeId}`
+      );
     }
   }, [modalInfo]);
 
   return (
     <>
-      <GlobalStyle />
-      {modalInfo &&commonData ? (
+      {modalInfo && commonData ? (
         <CommonWrap>
-          {modalInfo.firstImage? <StyledImage thumbnail="true" src={modalInfo.firstImage} /> : <StyledImage thumbnail="true" src={ImgNotFound}/>}
+          {modalInfo.firstImage ? (
+            <StyledImage thumbnail="true" src={modalInfo.firstImage} />
+          ) : (
+            <StyledImage thumbnail="true" src={ImgNotFound} />
+          )}
           <Table>
             <thead>
               <TR>
-                <TH >{modalInfo.title}</TH>
-
+                <TH>{modalInfo.title}</TH>
               </TR>
             </thead>
             <tbody>
               <TR>
-                <TD space="nowrap" color="#BEE1A7" fontColor="white">우편번호</TD>
+                <TD space="nowrap" color="#BEE1A7" fontColor="white">
+                  우편번호
+                </TD>
                 <TD color="#F9FFF5">{modalInfo.zipcode}</TD>
               </TR>
               <TR>
-                <TD color="#BEE1A7" fontColor="white">주소</TD>
+                <TD color="#BEE1A7" fontColor="white">
+                  주소
+                </TD>
                 <TD color="#F9FFF5">{modalInfo.addr}</TD>
               </TR>
               <TR>
-                <TD color="#BEE1A7" fontColor="white">개요</TD>
+                <TD color="#BEE1A7" fontColor="white">
+                  개요
+                </TD>
                 <TD color="#F9FFF5">
                   <Scroll>
-                  <div dangerouslySetInnerHTML={{ __html: commonData.overView }}></div>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: commonData.overView }}
+                    ></div>
                   </Scroll>
-
                 </TD>
               </TR>
             </tbody>
           </Table>
           <TourButtonWrap>
-            <TourButton onClick={handleWeatherClick} color={weatherOrAir? "#BEE1A7" : "#969696"}>날씨</TourButton>
-            <TourButton onClick={handleAirClick} color={weatherOrAir? "#969696" : "#BEE1A7"}>대기</TourButton>
+            <TourButton
+              onClick={handleWeatherClick}
+              color={weatherOrAir ? "#BEE1A7" : "#969696"}
+            >
+              날씨
+            </TourButton>
+            <TourButton
+              onClick={handleAirClick}
+              color={weatherOrAir ? "#969696" : "#BEE1A7"}
+            >
+              대기
+            </TourButton>
           </TourButtonWrap>
         </CommonWrap>
       ) : (
@@ -86,8 +110,8 @@ export const CommonWrap = styled.div`
 `;
 
 export const StyledImage = styled(Image)`
-  height:60%;
-  width:70%;
+  height: 60%;
+  width: 70%;
 `;
 
 export const Table = styled.table`
@@ -101,39 +125,36 @@ export const Table = styled.table`
 `;
 
 export const TD = styled.td`
-    text-align: center;
-    padding: 0 0.3rem 0rem 0.3rem;
-    overflow-y: scroll;
-    align-items: center;
-    white-space: ${(props) => props.space} ;
-    padding:0.4rem;
-    border-top: 0px;
-    border-bottom: 0px;
-    background-color: ${(props) => props.color} ;
-    color:${(props) => props.fontColor || '#69765F'};
+  text-align: center;
+  padding: 0 0.3rem 0rem 0.3rem;
+  overflow-y: scroll;
+  align-items: center;
+  white-space: ${(props) => props.space};
+  padding: 0.4rem;
+  border-top: 0px;
+  border-bottom: 0px;
+  background-color: ${(props) => props.color};
+  color: ${(props) => props.fontColor || "#69765F"};
 `;
 
 const Scroll = styled.div`
   overflow-y: scroll;
-  height:8rem;
+  height: 8rem;
   display: flex;
-  justify-content:center;
-
-`
+  justify-content: center;
+`;
 
 const TR = styled.tr`
   border: 1px solid white;
   color: #69765f;
 `;
 const TH = styled.th`
-padding:0.5rem;
-font-size:1.3rem;
-text-decoration: underline;
-text-decoration-color:#BEE1A7;
-text-decoration-thickness: 6px;
-
-
-`
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  text-decoration: underline;
+  text-decoration-color: #bee1a7;
+  text-decoration-thickness: 6px;
+`;
 
 export const TourButton = styled.button`
   background-color: #F9FFF5;
@@ -147,11 +168,11 @@ export const TourButton = styled.button`
   border: none;
   margin:0.2rem;
 }
-`
+`;
 
 export const TourButtonWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-right:auto;
+  margin-right: auto;
 `;

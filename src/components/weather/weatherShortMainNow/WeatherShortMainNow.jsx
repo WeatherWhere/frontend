@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import ThreeSubData from "./ThreeSubData";
 import axios from "axios";
-import GlobalStyle from "../../../styles/fonts/fonts";
+
 import AddressIconText from "../../common/AddressIconText";
 import { Button } from "../../airRealTime/AirRealTime";
 
@@ -45,7 +45,6 @@ export default function WeatherShortMainNow({
     <>
       {shortMainNowData ? (
         <Background sky={shortMainNowData.sky} pty={shortMainNowData.pty}>
-          <GlobalStyle />
           <AddressIconText address={address} />
 
           <Container marginTop="0.1rem" padding="0.1rem">
@@ -96,7 +95,6 @@ export default function WeatherShortMainNow({
         </Background>
       ) : (
         <Background>
-          <GlobalStyle />
           <Text>Loading...</Text>
         </Background>
       )}

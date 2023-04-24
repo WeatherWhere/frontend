@@ -2,7 +2,6 @@
 import styled from "styled-components";
 import { useCallback, useEffect, useState } from "react";
 import { LineChart, Line } from "recharts";
-import GlobalStyle from "../../../styles/fonts/fonts";
 import { getWeatherShortMain } from "../../../utils/lib/api";
 import { Icon } from "@iconify/react";
 
@@ -69,7 +68,6 @@ export default function ShortSub({ location }) {
   return (
     <>
       <Background>
-        <GlobalStyle />
         <TableWrap>
           <Table>
             <thead>

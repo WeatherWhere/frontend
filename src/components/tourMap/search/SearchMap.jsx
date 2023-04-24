@@ -154,7 +154,7 @@ const ButtonWrapper = styled.div`
   display: flex;
   position: absolute;
   right: 0;
-  bottom: 28%;
+  bottom: 28₩%;
 
   z-index: 1000;
 `;

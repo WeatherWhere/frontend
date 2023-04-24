@@ -8,6 +8,7 @@ import axios from "axios";
 
 export const PageWrap = styled.section`
   height: calc(var(--vh, 1vh) * 100 - 3.6rem);
+  width: calc(var(--vw, 1vh) * 100);
   position: relative;
 `;
 

@@ -3,8 +3,13 @@ import MapoDPP from "./MapoDPP.woff2";
 
 //전역 스타일 설정(styled-component)
 const GlobalStyle = createGlobalStyle`
+  #root {
+    display:flex;
+    justify-content: center;
+  }
   :root {
        --vh: 100%;
+       --vw: 100%;
    }
 
     @font-face {

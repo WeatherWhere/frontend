@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import GlobalStyle from "../../styles/fonts/fonts";
 import AddressIconText from "../common/AddressIconText";
 import AirThreeSubData from "./AirThreeSubData";
 import {
@@ -26,7 +25,6 @@ export default function AirRealTime({
     <>
       {airRealtimeData ? (
         <Background pm10Grade={airRealtimeData.pm10Grade}>
-          <GlobalStyle />
           <AddressIconText address={address} />
           <Container marginTop="0.1rem" padding="0.1rem">
             <Text fontSize="2.4rem">
@@ -68,7 +66,6 @@ export default function AirRealTime({
         </Background>
       ) : (
         <Background>
-          <GlobalStyle />
           <Text>Loading...</Text>
         </Background>
       )}

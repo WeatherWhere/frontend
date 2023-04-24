@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import GlobalStyle from "../../../styles/fonts/fonts";
 
 export default function Ranking(props) {
   const { allRank, handleSelected } = props;
   return (
     <CommonWrap>
-      <GlobalStyle />
       <Table>
         <thead>
           <TR>
@@ -137,6 +135,7 @@ export const Table = styled.table`
   display: flex;
   color: #969696;
   font-size: 0.8rem;
+  width: 100%;
   padding: 0.2rem 0;
   flex-direction: column;
   margin: 0.2rem;
@@ -161,7 +160,7 @@ const TR = styled.tr`
 `;
 const TH = styled.th`
   padding: 0.5rem;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   text-decoration: underline;
   text-decoration-color: #bee1a7;
   text-decoration-thickness: 6px;

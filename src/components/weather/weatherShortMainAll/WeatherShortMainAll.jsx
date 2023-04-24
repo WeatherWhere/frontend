@@ -2,7 +2,6 @@
 import styled from "styled-components";
 import { useCallback, useEffect, useState } from "react";
 import { LineChart, Line } from "recharts";
-import GlobalStyle from "../../../styles/fonts/fonts";
 import { getWeatherShortMain } from "../../../utils/lib/api";
 import { getSkyStatus } from "../weatherShortMainNow/WeatherShortMainNow";
 import { Icon } from "@iconify/react";
@@ -54,7 +53,6 @@ export default function WeatherShortMainAll({ location }) {
   return (
     <>
       <Background>
-        <GlobalStyle />
         <TableWrap>
           <Table>
             <tbody>
