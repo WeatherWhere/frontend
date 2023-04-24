@@ -110,7 +110,7 @@ const Background = styled.div`
     return color;
   }};
   flex-direction: column;
-  height: 66%;
+  height: 72%;
   flex-wrap: wrap;
   display: flex;
   align-items: center;

@@ -112,7 +112,7 @@ export default function RecommendMap(props) {
         isPanto={true}
         style={{
           width: "100%",
-          height: "66%",
+          height: "72%",
           borderRadius: "10px",
           position: "relative",
         }}

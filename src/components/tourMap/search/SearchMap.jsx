@@ -104,7 +104,7 @@ const SearchMap = (props) => {
       isPanto={true}
       style={{
         width: "100%",
-        height: "66%",
+        height: "72%",
         borderRadius: "10px",
         position: "relative",
       }}
@@ -154,7 +154,7 @@ const ButtonWrapper = styled.div`
   display: flex;
   position: absolute;
   right: 0;
-  bottom: 34%;
+  bottom: 28%;
 
   z-index: 1000;
 `;

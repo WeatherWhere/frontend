@@ -136,6 +136,7 @@ const getAirQuality = (grade) => {
 
 const Background = styled.div`
     border-radius: 10px;
+    height: 30%;
     display: flex;
     align-items: center;
     overflow-y: auto;

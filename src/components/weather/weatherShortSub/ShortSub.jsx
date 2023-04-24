@@ -286,6 +286,7 @@ export const TableWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
   align-items: center;
   padding: 0.3rem;
   overflow-x: auto;
@@ -308,7 +309,7 @@ const Table = styled.table`
   display: flex;
   align-items: center;
   position: relative;
-  overflowy: scroll;
+  overflow-y: scroll;
   color: #969696;
   font-size: 0.7rem;
   margin: 0 auto;

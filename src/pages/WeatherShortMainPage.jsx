@@ -7,7 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export const PageWrap = styled.section`
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100 - 3.6rem);
   position: relative;
 `;
 

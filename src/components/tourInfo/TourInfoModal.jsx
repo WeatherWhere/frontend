@@ -83,7 +83,7 @@ const StyledTabs = styled(Tabs)`
 `;
 
 const Background = styled.div`
-  height: 66%;
+  height: 72%;
   align-items: center;
   box-shadow: 3px 3px 11px rgba(0, 128, 0, 0.2);
   margin:0.4rem;

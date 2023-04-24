@@ -120,12 +120,12 @@ export default function WeatherShortMainAll({ location }) {
 export const Background = styled.div`
     border-radius: 10px;
     display: flex;
+    height: 28%;
     align-items: center;
     overflow-y: auto;
     overflow-y: hidden;.
     overflow-x: auto;
     overflow-y: scroll;
-
 `;
 
 const ChartContainer = styled.div`
@@ -137,6 +137,7 @@ export const Table = styled.table`
   display: flex;
   align-items: center;
   position: relative;
+  height: 100%;
   color: #969696;
   font-size: 0.9rem;
   padding: 0.5rem 0;

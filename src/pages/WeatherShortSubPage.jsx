@@ -1,10 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import ShortSub from "../components/weather/weatherShortSub/ShortSub";
+import { PageWrap } from "./WeatherShortMainPage";
 
-const PageWrap = styled.section`
-  height: 100vh;
-`;
 export default function WeatherShortSubPage({ location }) {
   return (
     <PageWrap>

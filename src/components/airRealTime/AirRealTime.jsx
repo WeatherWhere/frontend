@@ -80,14 +80,13 @@ export const Button = styled.button`
   background-color: white;
   color: ${(props) => props.color};
 
-  &:active{
+  &:active {
     background: ${(props) => props.color};
   }
   font-size: 0.9rem;
-  border-radius:4px;
+  border-radius: 4px;
   border: none;
-  margin:0.2rem;
-}
+  margin: 0.2rem;
 `;
 
 const Background = styled.div`
@@ -97,7 +96,7 @@ const Background = styled.div`
   }};
 
   flex-direction: column;
-  height: 66%;
+  height: 70%;
   flex-wrap: wrap;
   display: flex;
   align-items: center;

@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import AirRealTime from "../components/airRealTime/AirRealTime";
 import { useState } from "react";
 import { getAirRealtime } from "../utils/lib/api";
@@ -8,10 +7,7 @@ import { useEffect } from "react";
 import AirSubBottom from "../components/airRealTime/AirSubBottom";
 import axios from "axios";
 import AirMidBottom from "../components/airRealTime/AirMidBottom";
-
-const PageWrap = styled.div`
-  height: 100vh;
-`;
+import { PageWrap } from "./WeatherShortMainPage";
 
 export default function AirPage({ location }) {
   const [nowOrMid, setNowOrMid] = useState(true);

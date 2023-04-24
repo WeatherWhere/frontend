@@ -3,6 +3,10 @@ import MapoDPP from "./MapoDPP.woff2";
 
 //전역 스타일 설정(styled-component)
 const GlobalStyle = createGlobalStyle`
+  :root {
+       --vh: 100%;
+   }
+
     @font-face {
         font-family: "MapoDPP";
         src: local("MapoDPP"),
