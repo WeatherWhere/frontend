@@ -145,7 +145,7 @@ const Background = styled.div`
 
 const Table = styled.table`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   overflowy: scroll;
   color: #969696;

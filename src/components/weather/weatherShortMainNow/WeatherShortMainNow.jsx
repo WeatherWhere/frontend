@@ -81,10 +81,10 @@ export default function WeatherShortMainNow({
           <Container>
             <StyledIcon
               name={getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[0]}
-              size="14rem"
+              size="28vh"
             />
           </Container>
-          <ThreeSubData value={shortMainNowData} />
+            <ThreeSubData value={shortMainNowData} />
           <ButtonWrap>
             <Button
               onClick={handleNowClick}
@@ -135,16 +135,17 @@ export const Container = styled.div`
   margin-bottom:${(props) => props.marginBottom};
   padding:${(props) => props.paddingLeft};
   padding-left:${(props) => props.paddingLeft}
-  height:6%;
-  margin: auto 0;
+  height:10%;
+  margin: auto 0 ;
 
 `;
 
 export const ButtonWrap = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-right: auto;
+  position: absolute;
+  left: 0;
+  bottom: 28%;
+  z-index: 100;
 `;
 
 export const Text = styled(Container)`
