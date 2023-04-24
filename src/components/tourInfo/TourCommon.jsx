@@ -5,19 +5,10 @@ import axios from "axios";
 import ImgNotFound from "../../styles/img/ImgNotFound.png";
 
 export default function TourCommon({
-  modalInfo,
-  setWeatherOrAir,
-  weatherOrAir,
+  modalInfo
 }) {
   const [commonData, setCommonData] = useState(null);
 
-  const handleWeatherClick = () => {
-    setWeatherOrAir(true);
-  };
-
-  const handleAirClick = () => {
-    setWeatherOrAir(false);
-  };
 
   //관광 공통정보 받아오는 api
   const getWeatherMidForecast = async (key, token) => {
@@ -79,20 +70,6 @@ export default function TourCommon({
               </TR>
             </tbody>
           </Table>
-          <TourButtonWrap>
-            <TourButton
-              onClick={handleWeatherClick}
-              color={weatherOrAir ? "#BEE1A7" : "#969696"}
-            >
-              날씨
-            </TourButton>
-            <TourButton
-              onClick={handleAirClick}
-              color={weatherOrAir ? "#969696" : "#BEE1A7"}
-            >
-              대기
-            </TourButton>
-          </TourButtonWrap>
         </CommonWrap>
       ) : (
         <div>Loading</div>
@@ -156,24 +133,4 @@ const TH = styled.th`
   text-decoration-thickness: 6px;
 `;
 
-export const TourButton = styled.button`
-  background-color: #F9FFF5;
-  color: ${(props) => props.color};
-
-  &:active{
-    background: ${(props) => props.color};
-  }
-  font-size: 0.9rem;
-  border-radius:4px;
-  border: none;
-  margin:0.2rem;
-}
-`;
-
-export const TourButtonWrap = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-right: auto;
-`;
 
