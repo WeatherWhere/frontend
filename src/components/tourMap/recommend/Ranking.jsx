@@ -52,8 +52,19 @@ export default function Ranking(props) {
             </TD>
 
             {allRank.map((rankData, idx) => (
-              <TD space="nowrap" key={idx}>
+              <TD space="nowrap" key={idx} color="#F8F8FF" fontColor="#5F6176">
                 {rankData.rankValue.tcigrade}
+              </TD>
+            ))}
+          </TR>
+          <TR>
+            <TD space="nowrap" color="#E89495" fontColor="white" borderLeft="0">
+              미세먼지
+            </TD>
+
+            {allRank.map((rankData, idx) => (
+              <TD space="nowrap" key={idx} color="#FFF8F8" fontColor="#5F6176">
+                {rankData.rankValue.pm10Grade}
               </TD>
             ))}
           </TR>
@@ -121,9 +132,8 @@ export default function Ranking(props) {
 export const CommonWrap = styled.div`
   border-radius: 10px;
   display: flex;
-  align-items: center;
-  overflow-y: auto;
-  overflow-y: scroll;
+  align-items: flex-start;
+  height:28%
 `;
 
 export const StyledImage = styled(Image)`
@@ -177,5 +187,5 @@ const TH2 = styled.th`
 
 const Tbody = styled.tbody`
   overflow-y: scroll;
-  height: 11rem;
+  height: 9rem;
 `;

@@ -9,42 +9,9 @@ import {
   SEARCH_MAP_ICON,
   WEATHER_ICON,
 } from "../utils/const/icon";
+import SideBar from "./SideBar";
 
-const Container = styled.header`
-  display: flex;
-  padding: 0.1rem;
-  background-color: #fff;
-  height: 3.6rem;
-  width: calc(var(--vw, 1vh) * 100);
-  z-index: 6;
-`;
-
-const Logo = styled.img`
-  height: 3rem;
-`;
-
-const LogoWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-`;
-
-const IconWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex: 1;
-`;
-
-const LeftWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex: 1;
-`;
-
-function Header() {
+export default function Header() {
   const [infoIcon, setInfoIcon] = useState(AIR_ICON);
   const [mapIcon, setMapIcon] = useState(SEARCH_MAP_ICON);
 
@@ -64,6 +31,12 @@ function Header() {
     }
   };
 
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+
   return (
     <>
       <Container>
@@ -72,8 +45,10 @@ function Header() {
             name="material-symbols:menu-rounded"
             color="B4B4B4"
             size="2rem"
-          />
+          onClick={toggleSidebar}/>
         </LeftWrapper>
+        {showSidebar && <SideBar setShowSidebar={setShowSidebar}/>}
+
         <LogoWrapper>
           <Logo
             src={WeatherWhereLogoText}
@@ -110,4 +85,38 @@ function Header() {
   );
 }
 
-export default Header;
+
+
+const Container = styled.header`
+  display: flex;
+  padding: 0.1rem;
+  background-color: #fff;
+  height: 3.6rem;
+  width: calc(var(--vw, 1vh) * 100);
+  z-index: 6;
+`;
+
+export const Logo = styled.img`
+  height: 3rem;
+`;
+
+const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+`;
+
+const LeftWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+`;

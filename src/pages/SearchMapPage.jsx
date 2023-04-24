@@ -31,6 +31,7 @@ export default function SearchMapPage({ location }) {
         searchLocation={searchLocation}
         setSearchLocation={setSearchLocation}
         handleCategory={handleCategory}
+        category={category}
       />
       {category === "weather" ? (
         <WeatherShortMainAll location={searchLocation} />

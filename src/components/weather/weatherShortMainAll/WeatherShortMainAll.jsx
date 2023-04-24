@@ -133,7 +133,7 @@ const ChartContainer = styled.div`
 
 export const Table = styled.table`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   height: 100%;
   color: #969696;

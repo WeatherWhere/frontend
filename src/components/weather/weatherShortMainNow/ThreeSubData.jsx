@@ -39,7 +39,7 @@ export default function ThreeSubData(props) {
 
     return (
 
-        <Container marginBottom="0.8rem" onClick={handleDetailClick}>
+        <Container marginBottom="1rem" onClick={handleDetailClick}>
             <MinMaxText padding="0.1rem">
                 <IconWrap>
                 <StyledIcon name="iwwa:humidity" size="3rem" />

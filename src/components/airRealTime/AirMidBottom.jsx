@@ -97,6 +97,7 @@ export default function AirMidBottom({ address }) {
 
 const Background = styled.div`
     border-radius: 10px;
+    height: 28%;
     display: flex;
     align-items: center;
     overflow-y: auto;
@@ -137,14 +138,12 @@ export const StyledIcon = styled(Icon).attrs((props) => ({
 }))``;
 
 const getAirQuality = (grade) => {
-  switch (grade) {
-    case "좋음":
-      return ["ri:emotion-happy-line", "#273BBC"];
-    case "보통":
-      return ["ri:emotion-normal-line", "#179501"];
-    case "나쁨":
-      return ["mdi:emoticon-dead-outline", "#6E6E6E"];
-    default:
-      return ["mdi:emoticon-devil-outline", "#D65A5D"];
-  }
+    switch (grade) {
+        case '낮음':
+            return ["ri:emotion-happy-line", "#273BBC"];
+        case '높음':
+            return ["mdi:emoticon-dead-outline", "#6E6E6E"];
+        default:
+            return ["", "#D65A5D"];
+    }
 };
