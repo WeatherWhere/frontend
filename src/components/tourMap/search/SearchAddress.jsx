@@ -2,6 +2,8 @@ import { useCallback, useState } from "react";
 
 import styled from "styled-components";
 import { getTourInfo } from "../../../utils/lib/api";
+import GlobalStyle from "../../../styles/fonts/fonts";
+import { StyledIcon } from "../../airRealTime/AirSubBottom";
 
 export default function SearchAddress(props) {
   const { handleSearchedPositions } = props;
@@ -74,11 +76,14 @@ export default function SearchAddress(props) {
         <StInput
           type="text"
           value={searchAddress}
-          placeholder={isProper ? "지역을 입력하세요." : "잘못된 검색입니다."}
+          placeholder={isProper ? "      지역을 입력해주세요!" : "      잘못된 검색입니다."}
           onChange={onSearchInputChange}
           onKeyPress={onKeyPress}
         />
-        <StButton onClick={onAddressSearch}>검색</StButton>
+        <StButton onClick={onAddressSearch}>
+        <StyledIcon name="ic:baseline-search" size="1.7rem" color="#8DAD7C"/>
+
+        </StButton>
       </SearchOverlay>
     </>
   );
@@ -90,22 +95,39 @@ export const SearchOverlay = styled.div`
   position: absolute;
   width: 18rem;
   height: 2rem;
-  border-radius: 10px;
+  border-radius: 20px;
   z-index: 1000;
-
   top: 3rem;
   left: 50%;
   transform: translate(-50%, -50%);
-`;
+  background: rgba(243, 245, 242, 0.8);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  border-radius: 15.5px;
+  border: 1px solid #8DAD7C;
+  height:2.4rem;
+  `;
 
 const StInput = styled.input`
-  width: 80%;
-  outline: none;
+  width: 100%;
+  border-radius:10px;
+  border: none;
+  text-align:center;
+  background-color: rgba(232, 250, 235, 0);
+  color:#728D64;
+  &:focus {
+    outline: none;     
+  }
+  ::placeholder {
+    color: #A3AE9D;
+    letter-spacing: 0.1em;
+    font-size:medium;
+  }
 `;
 
 const StButton = styled.button`
-  width: 20%;
   border: 0.01rem solid;
-  background-color: white;
-  border-radius: 0 10px 10px 0;
+  border-radius:10px;
+  border:0px;
+  background-color: rgba(232, 250, 235, 0);
+
 `;

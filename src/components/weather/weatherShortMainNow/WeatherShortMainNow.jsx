@@ -23,6 +23,21 @@ export default function WeatherShortMainNow({
 
   const [shortMainNowData, setShortMainNowData] = useState(null);
 
+
+  const minusTmx = () => {
+    const minusTmx = shortMainNowData.tmx - shortMainNowData.beforeTmx;
+    if (minusTmx > 0) {
+      return "어제보다 " + minusTmx + "° 높아요!";
+    } else if (minusTmx === 0) {
+      return "어제와 기온이 같아요!";
+    } else if (minusTmx < 0) {
+      return "어제보다 " + Math.abs(minusTmx) + "° 낮아요!";
+    } else{
+      return "정보가 없습니다!";
+    }
+  };
+
+
   //메인 (현재 시간) 받아올 api
   const getShortMainData = useCallback(async (key, token) => {
     try {
@@ -54,15 +69,15 @@ export default function WeatherShortMainNow({
             <MinMaxText>
               <IconContainer>
                 <StyledIcon name="ph:arrow-circle-up" size="1rem" />
-                {shortMainNowData.tmn}°
+                {shortMainNowData.tmx}°
               </IconContainer>
               <IconContainer>
                 <StyledIcon name="ph:arrow-circle-down" size="1rem" />
-                {shortMainNowData.tmx}°
+                {shortMainNowData.tmn}°
               </IconContainer>
             </MinMaxText>
           </Container>
-          <Text fontSize="1rem">어제보다 ?° 낮아요</Text>
+          <Text fontSize="1rem">{minusTmx()}</Text>
           <Container>
             <StyledIcon
               name={getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[0]}
@@ -109,7 +124,6 @@ const Background = styled.div`
   }};
   flex-direction: column;
   height: 72%;
-  flex-wrap: wrap;
   display: flex;
   align-items: center;
 `;
@@ -121,8 +135,7 @@ export const Container = styled.div`
   margin-bottom:${(props) => props.marginBottom};
   padding:${(props) => props.paddingLeft};
   padding-left:${(props) => props.paddingLeft}
-  height:10%;
-  flex-grow:0.05;
+  height:6%;
   margin: auto 0;
 
 `;

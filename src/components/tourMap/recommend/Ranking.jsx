@@ -52,7 +52,7 @@ export default function Ranking(props) {
             </TD>
 
             {allRank.map((rankData, idx) => (
-              <TD space="nowrap" key={idx}>
+              <TD space="nowrap" key={idx} color="#F8F8FF" fontColor="#5F6176">
                 {rankData.rankValue.tcigrade}
               </TD>
             ))}

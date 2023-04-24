@@ -10,12 +10,25 @@ import { Icon } from "@iconify/react";
 import AirSubBottom from "../airRealTime/AirSubBottom";
 
 export default function TourInfoModal(props) {
+
+  const handleWeatherClick = () => {
+    setWeatherOrAir(true);
+  };
+
+  const handleAirClick = () => {
+    setWeatherOrAir(false);
+  };
+
+
   const { isOpen, setModalOpen, modalInfo } = props;
 
+
   const [location] = useState({
-    latitude: modalInfo.latitude,
-    longitude: modalInfo.longitude,
+    latitude: modalInfo.latitude ? modalInfo.latitude : modalInfo.mapy,
+    longitude: modalInfo.longitude ? modalInfo.longitude : modalInfo.mapx
   });
+
+
   const [weatherOrAir, setWeatherOrAir] = useState(true);
 
   const modalRef = useRef(null);
@@ -51,6 +64,10 @@ export default function TourInfoModal(props) {
               setWeatherOrAir={setWeatherOrAir}
               weatherOrAir={weatherOrAir}
             />
+            <TourButtonWrap>
+              <TourButton onClick={handleWeatherClick} color={weatherOrAir ? "#BEE1A7" : "#969696"}>날씨</TourButton>
+              <TourButton onClick={handleAirClick} color={weatherOrAir ? "#969696" : "#BEE1A7"}>대기</TourButton>
+            </TourButtonWrap>
           </Tab>
           <Tab eventKey="detail" title="소개 정보">
             <TourDetail
@@ -58,14 +75,22 @@ export default function TourInfoModal(props) {
               setWeatherOrAir={setWeatherOrAir}
               weatherOrAir={weatherOrAir}
             />
+            <TourButtonWrap>
+              <TourButton onClick={handleWeatherClick} color={weatherOrAir ? "#BEE1A7" : "#969696"}>날씨</TourButton>
+              <TourButton onClick={handleAirClick} color={weatherOrAir ? "#969696" : "#BEE1A7"}>대기</TourButton>
+            </TourButtonWrap>
           </Tab>
         </StyledTabs>
       </Background>
-      {weatherOrAir ? (
-        <WeatherShortMainAll location={location} />
-      ) : (
-        <AirSubBottom location={location} />
-      )}
+
+        {weatherOrAir ? (
+          <WeatherAirWrap>
+          <WeatherShortMainAll location={location} />
+          </WeatherAirWrap>
+        ) : (
+          <AirSubBottom location={location} />
+        )}
+
       <StClose name={CLOSE_ICON.name} onClick={() => setModalOpen(false)} />
     </RootPage>
   );
@@ -86,8 +111,6 @@ const Background = styled.div`
   box-shadow: 3px 3px 11px rgba(0, 128, 0, 0.2);
   margin:0.4rem;
   border-radius:1%
-  display:flex;
-  flex-direction: column;
 
 `;
 
@@ -123,3 +146,29 @@ const StClose = styled(Icon).attrs((props) => ({
   right: 10px;
   top: 10px;
 `;
+
+
+export const TourButton = styled.button`
+  background-color: #F9FFF5;
+  color: ${(props) => props.color};
+
+  &:active{
+    background: ${(props) => props.color};
+  }
+  font-size: 0.9rem;
+  border-radius:4px;
+  border: none;
+  margin:0.2rem;
+}
+`
+
+export const TourButtonWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right:auto;
+  margin-top: auto;
+`;
+
+const WeatherAirWrap = styled.div`
+`

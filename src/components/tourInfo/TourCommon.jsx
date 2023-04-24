@@ -110,8 +110,7 @@ export const CommonWrap = styled.div`
 `;
 
 export const StyledImage = styled(Image)`
-  height: 60%;
-  width: 70%;
+  height:12rem;
 `;
 
 export const Table = styled.table`
@@ -148,6 +147,7 @@ const TR = styled.tr`
   border: 1px solid white;
   color: #69765f;
 `;
+
 const TH = styled.th`
   padding: 0.5rem;
   font-size: 1.3rem;
@@ -176,3 +176,4 @@ export const TourButtonWrap = styled.div`
   justify-content: flex-start;
   margin-right: auto;
 `;
+

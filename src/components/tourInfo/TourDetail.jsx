@@ -212,6 +212,7 @@ export default function TourDetail({
               대기
             </TourButton>
           </TourButtonWrap>
+
         </CommonWrap>
       ) : (
         <div>Loading</div>
@@ -224,13 +225,12 @@ export const CommonWrap = styled.div`
   flex-direction: column;
   display: flex;
   align-items: center;
-  height: auto;
-  justify-content: center;
-`;
+  height:auto;
+  justify-content:center;
+`
 
 export const StyledImage = styled(Image)`
-  height: 60%;
-  width: 70%;
+  height:12rem;
 `;
 
 export const Table = styled.table`
@@ -270,5 +270,5 @@ const TH = styled.th`
 `;
 const Tbody = styled.tbody`
   overflow-y: scroll;
-  height: 11rem;
-`;
+  height:11rem;
+`
