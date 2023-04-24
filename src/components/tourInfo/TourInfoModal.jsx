@@ -84,9 +84,7 @@ export default function TourInfoModal(props) {
       </Background>
 
         {weatherOrAir ? (
-          <WeatherAirWrap>
           <WeatherShortMainAll location={location} />
-          </WeatherAirWrap>
         ) : (
           <AirSubBottom location={location} />
         )}
@@ -110,7 +108,6 @@ const Background = styled.div`
   align-items: center;
   box-shadow: 3px 3px 11px rgba(0, 128, 0, 0.2);
   margin:0.4rem;
-  border-radius:1%
 
 `;
 
@@ -119,7 +116,6 @@ const RootPage = styled.section`
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  border-radius: 10px;
 
   background-color: white;
   z-index: 1100;
@@ -164,11 +160,8 @@ export const TourButton = styled.button`
 
 export const TourButtonWrap = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-right:auto;
-  margin-top: auto;
+  position: absolute;
+  left: 0.7rem;
+  bottom: 29%;
+  z-index: 100;
 `;
-
-const WeatherAirWrap = styled.div`
-`

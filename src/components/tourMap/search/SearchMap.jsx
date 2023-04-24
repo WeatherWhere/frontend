@@ -8,7 +8,8 @@ import CustomOverlayBox from "../common/CustomOverlayBox";
 import { Button } from "../../airRealTime/AirRealTime";
 
 const SearchMap = (props) => {
-  const { searchLocation, setSearchLocation, showModal, handleCategory } =
+
+  const { searchLocation, setSearchLocation, showModal, handleCategory, category } =
     props;
 
   const [searchedPositions, setSearchedPositions] = useState([]);
@@ -105,7 +106,6 @@ const SearchMap = (props) => {
       style={{
         width: "100%",
         height: "72%",
-        borderRadius: "10px",
         position: "relative",
       }}
       level={9}
@@ -120,8 +120,8 @@ const SearchMap = (props) => {
         />
       ))}
       <ButtonWrapper>
-        <Button onClick={() => handleCategory("weather")}>날씨</Button>
-        <Button onClick={() => handleCategory("air")}>대기</Button>
+        <Button onClick={() => handleCategory("weather")} color={category === "weather" ? "#BEE1A7" : "#969696"}>날씨</Button>
+        <Button onClick={() => handleCategory("air")} color={category === "weather" ? "#969696" : "#BEE1A7"}>대기</Button>
       </ButtonWrapper>
       <SearchAddress handleSearchedPositions={handleSearchedPositions} />
     </Map>
@@ -137,11 +137,11 @@ export const Text = styled.div`
 `;
 
 export const InfoWrap = styled.div`
-display:flex
-justify-content:center;
-align-items:center;
-width:100px;
-height:100px;
+  display:flex
+  justify-content:center;
+  align-items:center;
+  width:100px;
+  height:100px;
 `;
 
 export const Img = styled.img`
@@ -154,7 +154,13 @@ const ButtonWrapper = styled.div`
   display: flex;
   position: absolute;
   right: 0;
-  bottom: 28₩%;
-
+  bottom: 28%;
   z-index: 1000;
+
+  color: ${(props) => props.color};
+
+  &:active{
+    background: ${(props) => props.color};
+  }
+
 `;

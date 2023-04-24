@@ -113,7 +113,6 @@ export default function RecommendMap(props) {
         style={{
           width: "100%",
           height: "72%",
-          borderRadius: "10px",
           position: "relative",
         }}
         level={level}

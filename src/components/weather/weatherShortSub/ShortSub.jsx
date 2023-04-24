@@ -293,9 +293,7 @@ export const TableWrap = styled.div`
 const Background = styled.div`
   display: flex;
   align-items: center;
-  overflow-y: auto;
   justify-content: center;
-  overflow-x: auto;
 `;
 
 const ChartContainer = styled.div`
@@ -318,14 +316,14 @@ const Table = styled.table`
 
 const TD = styled.td`
   text-align: center;
-  padding: 0 0.7rem 0.2rem 0.7rem;
-  height: 1rem;
+  padding: 0.2rem 0.7rem 0.2rem 0.7rem;
   white-space: nowrap;
   border-left: ${(props) => props.borderLeft || "1px dashed #CDCDCD"};
 `;
 
 const TH = styled.th`
   text-align: center;
+  padding-left:1rem;
 `;
 
 //아이콘 컴포넌트

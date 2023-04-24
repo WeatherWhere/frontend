@@ -26,21 +26,23 @@ export default function AirRealTime({
       {airRealtimeData ? (
         <Background pm10Grade={airRealtimeData.pm10Grade}>
           <AddressIconText address={address} />
-          <Container marginTop="0.1rem" padding="0.1rem">
+          <Container padding="0.1rem">
             <Text fontSize="2.4rem">
               {getPm10Grade(airRealtimeData.pm10Grade)[0]}
             </Text>
           </Container>
-          <Text fontSize="1rem" padding="0.5rem">
+          <Text fontSize="1rem" padding="0.3rem">
             {getPm10Grade(airRealtimeData.pm10Grade)[1]}
           </Text>
-          <Container padding="1rem">
+          <Container>
             <StyledIcon
               name={getPm10Grade(airRealtimeData.pm10Grade)[2]}
-              size="12rem"
+              size="23vh"
             />
           </Container>
+          <Container marginBottom="1rem">
           <AirThreeSubData airRealtimeData={airRealtimeData} />
+          </Container>
           <ButtonWrap>
             <Button
               color={
@@ -93,8 +95,7 @@ const Background = styled.div`
   }};
 
   flex-direction: column;
-  height: 70%;
-  flex-wrap: wrap;
+  height: 72%;
   display: flex;
   align-items: center;
 `;

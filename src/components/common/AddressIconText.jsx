@@ -29,8 +29,7 @@ export default function AddressIconText({address}) {
         <>
         <Container marginTop="0.8rem" padding="1rem">
             <StyledIcon name="ri:map-pin-2-line" size="1.7rem" />
-            <Text fontSize="1.2rem" padding="0.8rem">{address.region2 + ` ` +address.region3} </Text>
-            <StyledIcon name="ic:baseline-search" size="1.7rem" />
+            <Text fontSize="1.2rem" padding="0.5rem">{address.region2 + ` ` +address.region3} </Text>
         </Container>
         </>
 
