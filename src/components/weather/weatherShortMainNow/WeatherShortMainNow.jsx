@@ -23,7 +23,6 @@ export default function WeatherShortMainNow({
 
   const [shortMainNowData, setShortMainNowData] = useState(null);
 
-
   const minusTmx = () => {
     const minusTmx = shortMainNowData.tmx - shortMainNowData.beforeTmx;
     if (minusTmx > 0) {
@@ -32,11 +31,10 @@ export default function WeatherShortMainNow({
       return "어제와 기온이 같아요!";
     } else if (minusTmx < 0) {
       return "어제보다 " + Math.abs(minusTmx) + "° 낮아요!";
-    } else{
+    } else {
       return "정보가 없습니다!";
     }
   };
-
 
   //메인 (현재 시간) 받아올 api
   const getShortMainData = useCallback(async (key, token) => {
@@ -62,7 +60,7 @@ export default function WeatherShortMainNow({
         <Background sky={shortMainNowData.sky} pty={shortMainNowData.pty}>
           <AddressIconText address={address} />
 
-          <Container marginTop="0.1rem" padding="0.1rem">
+          <Container marginTop="0.1rem" padding="0.1rem" height={"20%"}>
             <Text fontSize="3.2rem" marginLeft="5rem" marginRight="auto">
               {shortMainNowData.tmp}°
             </Text>
@@ -77,15 +75,17 @@ export default function WeatherShortMainNow({
               </IconContainer>
             </MinMaxText>
           </Container>
-          <Text fontSize="1rem">{minusTmx()}</Text>
-          <Container>
+          <Text fontSize="1rem" height={"10%"}>
+            {minusTmx()}
+          </Text>
+          <Container height={"30%"}>
             <StyledIcon
               name={getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[0]}
               size="28vh"
             />
           </Container>
-            <ThreeSubData value={shortMainNowData} />
-          <ButtonWrap>
+          <ThreeSubData value={shortMainNowData} />
+          <ButtonWrap height={"10%"}>
             <Button
               onClick={handleNowClick}
               color={
@@ -131,21 +131,23 @@ const Background = styled.div`
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  margin-top:${(props) => props.marginTop};
-  margin-bottom:${(props) => props.marginBottom};
-  padding:${(props) => props.paddingLeft};
-  padding-left:${(props) => props.paddingLeft}
-  height:10%;
-  margin: auto 0 ;
-
+  margin-top: ${(props) => props.marginTop};
+  margin-bottom: ${(props) => props.marginBottom};
+  padding: ${(props) => props.paddingLeft};
+  padding-left: ${(props) => props.paddingLeft};
+  height: ${(props) => props.height};
+  margin: auto 0;
 `;
 
 export const ButtonWrap = styled.div`
   display: flex;
-  position: absolute;
-  left: 0;
-  bottom: 28%;
-  z-index: 100;
+  height: ${(props) => props.height};
+  align-items: center;
+  width: 100%;
+  /* position: absolute; */
+  /* left: 0; */
+  /* bottom: 28%; */
+  /* z-index: 100; */
 `;
 
 export const Text = styled(Container)`
@@ -157,6 +159,7 @@ export const Text = styled(Container)`
   padding: ${(props) => props.padding};
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
+  height: ${(props) => props.height};
 `;
 
 //수평정렬

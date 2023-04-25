@@ -41,9 +41,9 @@ export default function AirRealTime({
             />
           </Container>
           <Container marginBottom="1rem">
-          <AirThreeSubData airRealtimeData={airRealtimeData} />
+            <AirThreeSubData airRealtimeData={airRealtimeData} />
           </Container>
-          <ButtonWrap>
+          <ButtonWrap height={"10%"}>
             <Button
               color={
                 nowOrMid
@@ -86,6 +86,7 @@ export const Button = styled.button`
   border-radius: 4px;
   border: none;
   margin: 0.2rem;
+  height: 60%;
 `;
 
 const Background = styled.div`
