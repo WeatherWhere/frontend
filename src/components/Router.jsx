@@ -47,10 +47,7 @@ export default function Router() {
             path="air/realtime"
             element={<AirPage location={location} />}
           />
-          <Route
-            path="tour/search"
-            element={<SearchMapPage location={location} />}
-          />
+          <Route path="tour/search" element={<SearchMapPage />} />
           <Route path="tour/recommend" element={<RecommendMapPage />} />
         </Route>
       </Routes>

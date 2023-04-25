@@ -1,19 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchMap from "../components/tourMap/search/SearchMap";
 import WeatherShortMainAll from "../components/weather/weatherShortMainAll/WeatherShortMainAll";
 import { PageWrap } from "./WeatherShortMainPage";
 import TourInfoModal from "../components/tourInfo/TourInfoModal";
 import AirSubBottom from "../components/airRealTime/AirSubBottom";
 
-export default function SearchMapPage({ location }) {
+export default function SearchMapPage() {
   const [searchLocation, setSearchLocation] = useState({
-    latitude: location.latitude,
-    longitude: location.longitude,
+    latitude: null,
+    longitude: null,
   });
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
   const [category, setCategory] = useState("weather");
+
+  const getLocation = async () => {
+    await navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setSearchLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   const handleCategory = (category) => {
     setCategory(category);
