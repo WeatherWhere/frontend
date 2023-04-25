@@ -19,11 +19,11 @@ export default function TourInfoModal(props) {
   };
 
   const { isOpen, setModalOpen, modalInfo } = props;
-  console.log(modalInfo);
+  console.log(`modalInfo`, modalInfo);
 
   const location = {
-    latitude: modalInfo.latitude,
-    longitude: modalInfo.longitude,
+    latitude: modalInfo.latitude ? modalInfo.latitude : modalInfo.mapy,
+    longitude: modalInfo.longitude ? modalInfo.longitude : modalInfo.mapx,
   };
 
   const [weatherOrAir, setWeatherOrAir] = useState(true);
