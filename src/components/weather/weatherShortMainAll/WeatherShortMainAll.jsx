@@ -8,6 +8,7 @@ import { Icon } from "@iconify/react";
 import { TableWrap } from "../weatherShortSub/ShortSub";
 
 export default function WeatherShortMainAll({ location }) {
+  console.log(location);
   const [shortMainData, setShortMainData] = useState([]);
 
   const data = shortMainData.map((value, index) => {

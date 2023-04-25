@@ -86,7 +86,7 @@ export const Button = styled.button`
   border-radius: 4px;
   border: none;
   margin: 0.2rem;
-  height: 60%;
+  height: 50%;
 `;
 
 const Background = styled.div`

@@ -142,7 +142,7 @@ export const Container = styled.div`
 export const ButtonWrap = styled.div`
   display: flex;
   height: ${(props) => props.height};
-  align-items: center;
+  align-items: end;
   width: 100%;
   /* position: absolute; */
   /* left: 0; */
