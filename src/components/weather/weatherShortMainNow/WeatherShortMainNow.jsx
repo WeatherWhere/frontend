@@ -61,21 +61,21 @@ export default function WeatherShortMainNow({
           <AddressIconText address={address} />
 
           <Container marginTop="0.1rem" padding="0.1rem" height={"20%"}>
-            <Text fontSize="3.2rem" marginLeft="5rem" marginRight="auto">
+            <Text fontSize="8vh" marginLeft="5rem" marginRight="auto">
               {shortMainNowData.tmp}°
             </Text>
             <MinMaxText>
               <IconContainer>
-                <StyledIcon name="ph:arrow-circle-up" size="1rem" />
+                <StyledIcon name="ph:arrow-circle-up" size="3vh" />
                 {shortMainNowData.tmx}°
               </IconContainer>
               <IconContainer>
-                <StyledIcon name="ph:arrow-circle-down" size="1rem" />
+                <StyledIcon name="ph:arrow-circle-down" size="3vh" />
                 {shortMainNowData.tmn}°
               </IconContainer>
             </MinMaxText>
           </Container>
-          <Text fontSize="1rem" height={"10%"}>
+          <Text fontSize="2vh" height={"10%"}>
             {minusTmx()}
           </Text>
           <Container height={"30%"}>
@@ -85,7 +85,7 @@ export default function WeatherShortMainNow({
             />
           </Container>
           <ThreeSubData value={shortMainNowData} />
-          <ButtonWrap height={"10%"}>
+          <ButtonWrap height={"5%"}>
             <Button
               onClick={handleNowClick}
               color={
@@ -168,7 +168,7 @@ const IconContainer = styled(Container)``;
 //최저 최고기온 수직정렬
 export const MinMaxText = styled.div`
   color: white;
-  font-size: 1.1rem;
+  font-size: 2vh;
   padding: ${(props) => props.padding};
 `;
 

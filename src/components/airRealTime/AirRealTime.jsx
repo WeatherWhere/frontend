@@ -82,11 +82,11 @@ export const Button = styled.button`
   &:active {
     background: ${(props) => props.color};
   }
-  font-size: 0.9rem;
+  font-size: 2vh;
   border-radius: 4px;
   border: none;
   margin: 0.2rem;
-  height: 50%;
+  height: 100%;
 `;
 
 const Background = styled.div`

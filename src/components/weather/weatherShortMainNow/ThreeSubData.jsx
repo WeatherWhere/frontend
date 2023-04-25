@@ -36,29 +36,29 @@ export default function ThreeSubData(props) {
   };
 
   return (
-    <Container marginBottom="1rem" onClick={handleDetailClick} height={"20%"}>
+    <Container marginBottom="1rem" onClick={handleDetailClick} height={"25%"}>
       <MinMaxText padding="0.1rem">
         <IconWrap>
-          <StyledIcon name="iwwa:humidity" size="3rem" />
+          <StyledIcon name="iwwa:humidity" size="7vh" />
         </IconWrap>
-        <Text fontSize="0.8rem">{props.value.reh}%</Text>
-        <Text fontSize="0.7rem">습도</Text>
+        <Text fontSize="2vh">{props.value.reh}%</Text>
+        <Text fontSize="1.8vh">습도</Text>
       </MinMaxText>
       <Line />
       <MinMaxText padding="0.1rem">
         <IconWrap>
-          <StyledIcon name="wi:umbrella" size="3rem" />
+          <StyledIcon name="wi:umbrella" size="7vh" />
         </IconWrap>
-        <Text fontSize="0.8rem">{props.value.pop}%</Text>
-        <Text fontSize="0.7rem">강수확률</Text>
+        <Text fontSize="2vh">{props.value.pop}%</Text>
+        <Text fontSize="1.8vh">강수확률</Text>
       </MinMaxText>
       <Line />
       <MinMaxText padding="0.1rem">
         <IconWrap>
-          <StyledIcon name="fluent:weather-squalls-20-regular" size="3rem" />
+          <StyledIcon name="fluent:weather-squalls-20-regular" size="7vh" />
         </IconWrap>
-        <Text fontSize="0.8rem">{getWsdStatus(props.value.wsd)}</Text>
-        <Text fontSize="0.7rem">바람</Text>
+        <Text fontSize="2vh">{getWsdStatus(props.value.wsd)}</Text>
+        <Text fontSize="1.8vh">바람</Text>
       </MinMaxText>
     </Container>
   );
