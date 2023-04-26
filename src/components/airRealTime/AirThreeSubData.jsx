@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { IconWrap } from "../weather/weatherShortMainNow/ThreeSubData";
-import { Container, MinMaxText, StyledIcon, Text } from "../weather/weatherShortMainNow/WeatherShortMainNow";
+import {
+  Container,
+  MinMaxText,
+  StyledIcon,
+  Text,
+} from "../weather/weatherShortMainNow/WeatherShortMainNow";
 
 const Line = styled.div`
   border: 1px solid white;
@@ -9,9 +14,7 @@ const Line = styled.div`
 `;
 
 export default function AirThreeSubData(props) {
-
   const getKhaiGrade = (khaiGrade) => {
-
     switch (khaiGrade) {
       case 1:
         return "좋음";
@@ -24,47 +27,45 @@ export default function AirThreeSubData(props) {
       default:
         return "알수 없음";
     }
+  };
 
-  }
-
+  const infoSize = {
+    iconSize: "4.5vh",
+    dataSize: "1.6vh",
+    titleSize: "1.4vh",
+  };
 
   return (
-
-    <Container >
-      <MinMaxText padding="0.1rem">
+    <Container>
+      <MinMaxText padding="0.1rem" height={"25%"}>
         <IconWrap>
-          <StyledIcon name="fa-solid:virus" size="2rem" />
+          <StyledIcon name="fa-solid:virus" size={infoSize.iconSize} />
         </IconWrap>
-        <Text fontSize="0.7rem">{props.airRealtimeData.pm10Value}㎍/㎥</Text>
-        <Text fontSize="0.1rem">미세먼지</Text>
+        <Text fontSize={infoSize.dataSize}>
+          {props.airRealtimeData.pm10Value}㎍/㎥
+        </Text>
+        <Text fontSize={infoSize.titleSize}>미세먼지</Text>
       </MinMaxText>
       <Line />
       <MinMaxText padding="0.1rem">
         <IconWrap>
-          <StyledIcon name="fa-solid:viruses" size="2rem" />
+          <StyledIcon name="fa-solid:viruses" size={infoSize.iconSize} />
         </IconWrap>
-        <Text fontSize="0.7rem">{props.airRealtimeData.pm25Value}㎍/㎥</Text>
-        <Text fontSize="0.1rem">초미세먼지</Text>
+        <Text fontSize={infoSize.dataSize}>
+          {props.airRealtimeData.pm25Value}㎍/㎥
+        </Text>
+        <Text fontSize={infoSize.titleSize}>초미세먼지</Text>
       </MinMaxText>
       <Line />
       <MinMaxText padding="0.1rem">
         <IconWrap>
-          <StyledIcon name="jam:airbnb" size="2rem" />
+          <StyledIcon name="jam:airbnb" size={infoSize.iconSize} />
         </IconWrap>
-        <Text fontSize="0.7rem">{getKhaiGrade(props.airRealtimeData.khaiGrade)}</Text>
-        <Text fontSize="0.1rem">통합대기지수</Text>
-
+        <Text fontSize={infoSize.dataSize}>
+          {getKhaiGrade(props.airRealtimeData.khaiGrade)}
+        </Text>
+        <Text fontSize={infoSize.titleSize}>통합대기지수</Text>
       </MinMaxText>
     </Container>
-
-
-  )
-
-
-
-
-
-
-
+  );
 }
-

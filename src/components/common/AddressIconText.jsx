@@ -30,7 +30,7 @@ export default function AddressIconText({ address }) {
     <>
       <Container marginTop="0.8rem" padding="1rem" height={"10%"}>
         <StyledIcon name="ri:map-pin-2-line" size="3vh" />
-        <Text fontSize="3vh" padding="0.5rem">
+        <Text fontSize="2.8vh" padding="0.5rem">
           {address.region2 + ` ` + address.region3}{" "}
         </Text>
       </Container>

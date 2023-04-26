@@ -75,16 +75,20 @@ export default function WeatherShortMainNow({
               </IconContainer>
             </MinMaxText>
           </Container>
+
           <Text fontSize="2vh" height={"10%"}>
             {minusTmx()}
           </Text>
+
           <Container height={"30%"}>
             <StyledIcon
               name={getSkyStatus(shortMainNowData.sky, shortMainNowData.pty)[0]}
               size="28vh"
             />
           </Container>
+
           <ThreeSubData value={shortMainNowData} />
+
           <ButtonWrap height={"5%"}>
             <Button
               onClick={handleNowClick}
@@ -144,10 +148,6 @@ export const ButtonWrap = styled.div`
   height: ${(props) => props.height};
   align-items: end;
   width: 100%;
-  /* position: absolute; */
-  /* left: 0; */
-  /* bottom: 28%; */
-  /* z-index: 100; */
 `;
 
 export const Text = styled(Container)`

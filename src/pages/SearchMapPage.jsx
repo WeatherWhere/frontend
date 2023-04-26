@@ -18,10 +18,11 @@ export default function SearchMapPage() {
   const getLocation = async () => {
     await navigator.geolocation.getCurrentPosition(
       (position) => {
-        setSearchLocation({
+        setSearchLocation((prev) => ({
+          ...prev,
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-        });
+        }));
       },
       (error) => {
         console.log(error);

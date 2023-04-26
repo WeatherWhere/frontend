@@ -26,24 +26,27 @@ export default function AirRealTime({
       {airRealtimeData ? (
         <Background pm10Grade={airRealtimeData.pm10Grade}>
           <AddressIconText address={address} />
-          <Container padding="0.1rem">
-            <Text fontSize="2.4rem">
+
+          <Container marginTop="0.1rem" padding="0.1rem" height={"20%"}>
+            <Text fontSize="6vh">
               {getPm10Grade(airRealtimeData.pm10Grade)[0]}
             </Text>
           </Container>
-          <Text fontSize="1rem" padding="0.3rem">
+
+          <Text fontSize="2vh" padding="0.3rem" height={"10%"}>
             {getPm10Grade(airRealtimeData.pm10Grade)[1]}
           </Text>
-          <Container>
+
+          <Container height={"30%"}>
             <StyledIcon
               name={getPm10Grade(airRealtimeData.pm10Grade)[2]}
               size="23vh"
             />
           </Container>
-          <Container marginBottom="1rem">
-            <AirThreeSubData airRealtimeData={airRealtimeData} />
-          </Container>
-          <ButtonWrap height={"10%"}>
+
+          <AirThreeSubData airRealtimeData={airRealtimeData} />
+
+          <ButtonWrap height={"5%"}>
             <Button
               color={
                 nowOrMid
@@ -82,11 +85,11 @@ export const Button = styled.button`
   &:active {
     background: ${(props) => props.color};
   }
-  font-size: 2vh;
+  font-size: 1.7vh;
   border-radius: 4px;
   border: none;
   margin: 0.2rem;
-  height: 100%;
+  height: 80%;
 `;
 
 const Background = styled.div`
@@ -101,15 +104,15 @@ const Background = styled.div`
   align-items: center;
 `;
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
-  margin-top:${(props) => props.marginTop};
-  margin-bottom:${(props) => props.marginBottom};
-  padding:${(props) => props.padding}
-  padding-left:${(props) => props.paddingLeft}
-  height:10%;
-  flex-grow:0.15;
+  margin-top: ${(props) => props.marginTop};
+  margin-bottom: ${(props) => props.marginBottom};
+  padding: ${(props) => props.padding};
+  padding-left: ${(props) => props.paddingLeft};
+  height: ${(props) => props.height};
+  flex-grow: 0.15;
 `;
 
 export const Text = styled(Container)`

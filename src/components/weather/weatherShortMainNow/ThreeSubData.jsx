@@ -35,30 +35,41 @@ export default function ThreeSubData(props) {
     navigate("weather/sub", { state: props.value });
   };
 
+  const infoSize = {
+    iconSize: "6vh",
+    dataSize: "1.7vh",
+    titleSize: "1.5vh",
+  };
+
   return (
     <Container marginBottom="1rem" onClick={handleDetailClick} height={"25%"}>
       <MinMaxText padding="0.1rem">
         <IconWrap>
-          <StyledIcon name="iwwa:humidity" size="7vh" />
+          <StyledIcon name="iwwa:humidity" size={infoSize.iconSize} />
         </IconWrap>
-        <Text fontSize="2vh">{props.value.reh}%</Text>
-        <Text fontSize="1.8vh">습도</Text>
+        <Text fontSize={infoSize.dataSize}>{props.value.reh}%</Text>
+        <Text fontSize={infoSize.titleSize}>습도</Text>
       </MinMaxText>
       <Line />
       <MinMaxText padding="0.1rem">
         <IconWrap>
-          <StyledIcon name="wi:umbrella" size="7vh" />
+          <StyledIcon name="wi:umbrella" size={infoSize.iconSize} />
         </IconWrap>
-        <Text fontSize="2vh">{props.value.pop}%</Text>
-        <Text fontSize="1.8vh">강수확률</Text>
+        <Text fontSize={infoSize.dataSize}>{props.value.pop}%</Text>
+        <Text fontSize={infoSize.titleSize}>강수확률</Text>
       </MinMaxText>
       <Line />
       <MinMaxText padding="0.1rem">
         <IconWrap>
-          <StyledIcon name="fluent:weather-squalls-20-regular" size="7vh" />
+          <StyledIcon
+            name="fluent:weather-squalls-20-regular"
+            size={infoSize.iconSize}
+          />
         </IconWrap>
-        <Text fontSize="2vh">{getWsdStatus(props.value.wsd)}</Text>
-        <Text fontSize="1.8vh">바람</Text>
+        <Text fontSize={infoSize.dataSize}>
+          {getWsdStatus(props.value.wsd)}
+        </Text>
+        <Text fontSize={infoSize.titleSize}>바람</Text>
       </MinMaxText>
     </Container>
   );

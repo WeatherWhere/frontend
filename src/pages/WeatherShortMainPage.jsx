@@ -12,7 +12,31 @@ export const PageWrap = styled.section`
   position: relative;
 `;
 
-export default function WeatherShortMainPage({ location }) {
+export default function WeatherShortMainPage() {
+  const [location, setLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
+
+  const getLocation = async () => {
+    await navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocation((prev) => ({
+          ...prev,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
   const [nowOrMid, setNowOrMid] = useState(true);
 
   const apiKey = "ddf617232a0fd602e925eb2a96c61c74";
