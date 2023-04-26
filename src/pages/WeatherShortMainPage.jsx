@@ -14,8 +14,8 @@ export const PageWrap = styled.section`
 
 export default function WeatherShortMainPage() {
   const [location, setLocation] = useState({
-    latitude: null,
-    longitude: null,
+    latitude: "",
+    longitude: "",
   });
 
   const getLocation = async () => {

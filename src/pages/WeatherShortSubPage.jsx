@@ -4,8 +4,8 @@ import { PageWrap } from "./WeatherShortMainPage";
 
 export default function WeatherShortSubPage() {
   const [location, setLocation] = useState({
-    latitude: null,
-    longitude: null,
+    latitude: "",
+    longitude: "",
   });
 
   const getLocation = async () => {

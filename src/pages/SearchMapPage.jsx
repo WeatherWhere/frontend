@@ -7,8 +7,8 @@ import AirSubBottom from "../components/airRealTime/AirSubBottom";
 
 export default function SearchMapPage() {
   const [searchLocation, setSearchLocation] = useState({
-    latitude: null,
-    longitude: null,
+    latitude: "",
+    longitude: "",
   });
 
   const [modalOpen, setModalOpen] = useState(false);
