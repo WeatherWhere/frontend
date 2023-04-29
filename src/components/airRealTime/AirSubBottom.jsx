@@ -25,7 +25,7 @@ export default function AirSubBottom({ location }) {
         `${process.env.REACT_APP_BASE_URL}/air/realtime/data?x=${location.longitude}&y=${location.latitude}`
       );
     }
-  });
+  }, [location.latitude, location.longitude, getAirRealtimeData]);
 
   return (
     <>
@@ -127,8 +127,10 @@ const getAirQuality = (grade) => {
       return ["ri:emotion-normal-line", "#179501"];
     case 3:
       return ["mdi:emoticon-dead-outline", "#6E6E6E"];
-    default:
+      case 4:
       return ["mdi:emoticon-devil-outline", "#D65A5D"];
+      default:
+        return ["", ""];
   }
 };
 
