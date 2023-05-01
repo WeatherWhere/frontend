@@ -25,7 +25,7 @@ export default function WeatherShortMainNow({
 
   const minusTmx = () => {
     const minusTmx = shortMainNowData.tmx - shortMainNowData.beforeTmx;
-    if (minusTmx > 0) {
+    if (minusTmx > 0 && shortMainNowData.beforeTmx) {
       return "어제보다 " + minusTmx + "° 높아요!";
     } else if (minusTmx === 0) {
       return "어제와 기온이 같아요!";

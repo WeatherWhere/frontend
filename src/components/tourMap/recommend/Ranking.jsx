@@ -9,7 +9,7 @@ export default function Ranking(props) {
         <thead>
           <TR>
             <TH space="nowrap">오늘의 추천 관광지는?</TH>
-            <TH2 space="nowrap">각 순위를 누르고 지도를 확대해보세요!</TH2>
+            <TH2 space="nowrap">순위를 누르고 지도를 확대해보세요!</TH2>
           </TR>
         </thead>
         <Tbody>
@@ -177,12 +177,12 @@ const TH = styled.th`
 `;
 
 const TH2 = styled.th`
-  padding-left: 2rem;
+  padding-left: 0.5rem;
   padding-top: 0.5rem;
   font-size: 0.6rem;
   text-decoration: underline;
-  text-decoration-color: #bee1a7;
-  text-decoration-thickness: 6px;
+  text-decoration-color: #E1A7A8;
+  text-decoration-thickness: 5px;
 `;
 
 const Tbody = styled.tbody`
