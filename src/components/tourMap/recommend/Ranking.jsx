@@ -69,6 +69,17 @@ export default function Ranking(props) {
             ))}
           </TR>
           <TR>
+            <TD space="nowrap" color="#E89495" fontColor="white" borderLeft="0">
+              초미세먼지
+            </TD>
+
+            {allRank.map((rankData, idx) => (
+              <TD space="nowrap" key={idx} color="#FFF8F8" fontColor="#5F6176">
+                {rankData.rankValue.pm25Grade}
+              </TD>
+            ))}
+          </TR>
+          <TR>
             <TD space="nowrap" color="#BEE1A7" fontColor="white" borderLeft="0">
               일평균열쾌적성지수
             </TD>
@@ -132,7 +143,6 @@ export default function Ranking(props) {
 export const CommonWrap = styled.div`
   border-radius: 10px;
   display: flex;
-  align-items: flex-start;
   height:28%
 `;
 
@@ -149,6 +159,7 @@ export const Table = styled.table`
   padding: 0.2rem 0;
   flex-direction: column;
   margin: 0.2rem;
+  height:90%;
 `;
 
 export const TD = styled.td`
@@ -181,11 +192,11 @@ const TH2 = styled.th`
   padding-top: 0.5rem;
   font-size: 0.6rem;
   text-decoration: underline;
-  text-decoration-color: #E1A7A8;
+  text-decoration-color: #bee1a7;
   text-decoration-thickness: 5px;
 `;
 
 const Tbody = styled.tbody`
+  display: block;
   overflow-y: scroll;
-  height: 9rem;
 `;
