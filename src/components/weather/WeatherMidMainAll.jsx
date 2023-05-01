@@ -44,11 +44,6 @@ export default function WeatherMidMainAll({ address }) {
 
     }, []);
 
-    // useEffect(() => {
-    //     if (address) {
-    //         getMidData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/week?regionCode=${mockRegionCode}&`);
-    //     }
-    // }, [address, getMidData]);
 
     useEffect(() => {
         if (address) {
@@ -56,7 +51,12 @@ export default function WeatherMidMainAll({ address }) {
             if(address.region1 === '서울'){
                region2 = address.region2
             }else{
-                region2 = address.region2.substring(0, address.region2.indexOf(' '));
+                const spaceIndex = address.region2.indexOf(' ');
+                if (spaceIndex !== -1) {
+                  region2 = address.region2.substring(0, spaceIndex);
+                } else {
+                  region2 = address.region2;
+                }
             }
             getMidData(`${process.env.REACT_APP_BASE_URL}/weather/forecast/mid?region1=${address.region1}&region2=${region2}`);
         }

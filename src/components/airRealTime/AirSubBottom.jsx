@@ -45,12 +45,12 @@ export default function AirSubBottom({ location }) {
                 </tr>
                 <tr>
                   <TD borderLeft="0">지수</TD>
-                  <TD>{airRealtimeData.pm10Grade}</TD>
-                  <TD>{airRealtimeData.pm25Grade}</TD>
-                  <TD>{airRealtimeData.khaiGrade}</TD>
-                  <TD>{airRealtimeData.coGrade}</TD>
-                  <TD>{airRealtimeData.o3Grade}</TD>
-                  <TD>{airRealtimeData.so2Grade}</TD>
+                  <TD>{getAirQuality(airRealtimeData.pm10Grade)[2]}</TD>
+                  <TD>{getAirQuality(airRealtimeData.pm25Grade)[2]}</TD>
+                  <TD>{getAirQuality(airRealtimeData.khaiGrade)[2]}</TD>
+                  <TD>{getAirQuality(airRealtimeData.coGrade)[2]}</TD>
+                  <TD>{getAirQuality(airRealtimeData.o3Grade)[2]}</TD>
+                  <TD>{getAirQuality(airRealtimeData.so2Grade)[2]}</TD>
                 </tr>
                 <tr>
                   <TD borderLeft="0">농도</TD>
@@ -122,13 +122,13 @@ export default function AirSubBottom({ location }) {
 const getAirQuality = (grade) => {
   switch (grade) {
     case 1:
-      return ["ri:emotion-happy-line", "#273BBC"];
+      return ["ri:emotion-happy-line", "#273BBC","좋음"];
     case 2:
-      return ["ri:emotion-normal-line", "#179501"];
+      return ["ri:emotion-normal-line", "#179501","보통"];
     case 3:
-      return ["mdi:emoticon-dead-outline", "#6E6E6E"];
+      return ["mdi:emoticon-dead-outline", "#6E6E6E","나쁨"];
     default:
-      return ["mdi:emoticon-devil-outline", "#D65A5D"];
+      return ["mdi:emoticon-devil-outline", "#D65A5D","매우나쁨"];
   }
 };
 
