@@ -10,6 +10,7 @@ import {
   useMap,
 } from "react-kakao-maps-sdk";
 import CustomOverlayBox from "../common/CustomOverlayBox";
+import styled from "styled-components";
 
 export default function RecommendMap(props) {
   const { showModal, selectedPositions } = props;
@@ -104,38 +105,43 @@ export default function RecommendMap(props) {
 
   return (
     <>
-      <Map
-        center={{
-          lat: KAKAO_MAP_DATA.CENTER_LAT,
-          lng: KAKAO_MAP_DATA.CENTER_LNG,
-        }}
-        isPanto={true}
-        style={{
-          width: "100%",
-          height: "72%",
-          position: "relative",
-        }}
-        level={level}
-        ref={mapRef}
-        onZoomChanged={(map) => setLevel(map.getLevel())}
-      >
-        <MarkerClusterer
-          averageCenter={true}
-          minLevel={10}
-          disableClickZoom={true}
-          onClusterclick={onClusterclick}
+      <MapWrapper>
+        <Map
+          center={{
+            lat: KAKAO_MAP_DATA.CENTER_LAT,
+            lng: KAKAO_MAP_DATA.CENTER_LNG,
+          }}
+          isPanto={true}
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "relative",
+          }}
+          level={level}
+          ref={mapRef}
+          onZoomChanged={(map) => setLevel(map.getLevel())}
         >
-          {selectedPositions.map((tourInfo, index) => (
-            <EventMarkerContainer
-              key={`EventMarkerContainer-${tourInfo.contentId}-${index}`}
-              index={index}
-              tourInfo={tourInfo}
-              handleClick={() => setSelectedMarker(index)}
-              isClicked={selectedMarker === index}
-            />
-          ))}
-        </MarkerClusterer>
-      </Map>
+          <MarkerClusterer
+            averageCenter={true}
+            minLevel={10}
+            disableClickZoom={true}
+            onClusterclick={onClusterclick}
+          >
+            {selectedPositions.map((tourInfo, index) => (
+              <EventMarkerContainer
+                key={`EventMarkerContainer-${tourInfo.contentId}-${index}`}
+                index={index}
+                tourInfo={tourInfo}
+                handleClick={() => setSelectedMarker(index)}
+                isClicked={selectedMarker === index}
+              />
+            ))}
+          </MarkerClusterer>
+        </Map>
+      </MapWrapper>
     </>
   );
 }
+const MapWrapper = styled.div`
+    height: 72%;
+`;

@@ -128,11 +128,11 @@ const Background = styled.div`
 `;
 
 const RootPage = styled.section`
+
+  height: calc(var(--vh, 1vh) * 100 - 3.6rem);
+  width: calc(var(--vw, 1vh) * 100);
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100%;
-
   background-color: white;
   z-index: 1100;
 
@@ -177,6 +177,6 @@ export const TourButtonWrap = styled.div`
   display: flex;
   position: absolute;
   left: 0.7rem;
-  bottom: 29%;
+  bottom: 28.5%;
   z-index: 100;
 `;

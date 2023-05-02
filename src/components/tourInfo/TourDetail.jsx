@@ -173,7 +173,7 @@ export default function TourDetail({
 
                 return (
                   <TR key={key}>
-                    <TD space="nowrap" color="#BEE1A7" fontColor="white">
+                    <TD space="nowrap" color="#BEE1A7" fontColor="white" width="40%">
                       {value.label}
                     </TD>
                     <TD color="#F9FFF5">
@@ -205,7 +205,7 @@ export const CommonWrap = styled.div`
 `
 
 export const StyledImage = styled(Image)`
-  height:12rem;
+  width:70%;
 `;
 
 export const Table = styled.table`
@@ -216,6 +216,7 @@ export const Table = styled.table`
   padding: 0.2rem 0;
   flex-direction: column;
   margin: 0.2rem;
+  width: 100%;
 `;
 
 export const TD = styled.td`
@@ -229,6 +230,7 @@ export const TD = styled.td`
   border-bottom: 0px;
   background-color: ${(props) => props.color};
   color: ${(props) => props.fontColor || "#69765F"};
+  width: ${(props) => props.width}
 `;
 
 const Scroll = styled.div``;
@@ -245,5 +247,6 @@ const TH = styled.th`
 `;
 const Tbody = styled.tbody`
   overflow-y: scroll;
-  height:11rem;
+  height:22vh;
+  width: 90%;
 `

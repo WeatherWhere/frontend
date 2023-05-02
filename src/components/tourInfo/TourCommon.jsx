@@ -43,7 +43,7 @@ export default function TourCommon({
                 <TH>{modalInfo.title}</TH>
               </TR>
             </thead>
-            <tbody>
+            <Tbody>
               <TR>
                 <TD space="nowrap" color="#BEE1A7" fontColor="white">
                   우편번호
@@ -68,7 +68,7 @@ export default function TourCommon({
                   </Scroll>
                 </TD>
               </TR>
-            </tbody>
+            </Tbody>
           </Table>
         </CommonWrap>
       ) : (
@@ -78,16 +78,17 @@ export default function TourCommon({
   );
 }
 
+
 export const CommonWrap = styled.div`
   flex-direction: column;
   display: flex;
   align-items: center;
-  height: auto;
-  justify-content: center;
-`;
+  height:auto;
+  justify-content:center;
+`
 
 export const StyledImage = styled(Image)`
-  height:12rem;
+  width:70%;
 `;
 
 export const Table = styled.table`
@@ -98,6 +99,7 @@ export const Table = styled.table`
   padding: 0.2rem 0;
   flex-direction: column;
   margin: 0.2rem;
+  width: 100%;
 `;
 
 export const TD = styled.td`
@@ -111,20 +113,14 @@ export const TD = styled.td`
   border-bottom: 0px;
   background-color: ${(props) => props.color};
   color: ${(props) => props.fontColor || "#69765F"};
+  width: ${(props) => props.width}
 `;
 
-const Scroll = styled.div`
-  overflow-y: scroll;
-  height: 8rem;
-  display: flex;
-  justify-content: center;
-`;
-
+const Scroll = styled.div``;
 const TR = styled.tr`
   border: 1px solid white;
   color: #69765f;
 `;
-
 const TH = styled.th`
   padding: 0.5rem;
   font-size: 1.3rem;
@@ -132,5 +128,8 @@ const TH = styled.th`
   text-decoration-color: #bee1a7;
   text-decoration-thickness: 6px;
 `;
-
-
+const Tbody = styled.tbody`
+  overflow-y: scroll;
+  height:22vh;
+  width: 90%;
+`
