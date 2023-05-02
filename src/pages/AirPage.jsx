@@ -33,6 +33,7 @@ export default function AirPage() {
   useEffect(() => {
     getLocation();
   }, []);
+  
   const [nowOrMid, setNowOrMid] = useState(true);
   const [airRealtimeData, setAirRealtimeData] = useState(null);
 

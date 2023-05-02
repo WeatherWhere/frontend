@@ -25,7 +25,7 @@ export default function AirSubBottom({ location }) {
         `${process.env.REACT_APP_BASE_URL}/air/realtime/data?x=${location.longitude}&y=${location.latitude}`
       );
     }
-  });
+  }, [location.latitude, location.longitude, getAirRealtimeData]);
 
   return (
     <>
